@@ -6,15 +6,19 @@ public class Bullet : MonoBehaviour
 {
     private float destoryTime = 1f;
     private float startTime;
+
     public float force = 20f;
+    public GameObject hitEffect;
     private Rigidbody2D rb;
 
     // Start is called before the first frame update
     void Awake()
     {
         startTime = Time.time;
+
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = PlayerController.instance.flag*transform.right * force;
+
         Physics2D.IgnoreLayerCollision(8, 9);
     }
 
@@ -33,6 +37,7 @@ public class Bullet : MonoBehaviour
         string colname = collision.gameObject.name;
         if (!colname.Equals("bullet(Clone)") && !colname.Equals("Player"))
         {
+            Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
         
