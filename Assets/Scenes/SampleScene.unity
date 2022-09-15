@@ -680,6 +680,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: -9210636968287553181, guid: f86b00746b4c12644a596bbfcefa4be0, type: 3}
   muzzle: {fileID: 61334556}
+  isColldown: 1
+  timeToColldown: 0.3
 --- !u!1 &1235530724
 GameObject:
   m_ObjectHideFlags: 0
