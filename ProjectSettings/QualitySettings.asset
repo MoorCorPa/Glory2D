@@ -224,14 +224,6 @@ QualitySettings:
     excludedTargetPlatforms: []
   m_PerPlatformDefaultQuality:
     Android: 2
-<<<<<<< Updated upstream
-    Lumin: 5
-    GameCoreScarlett: 5
-    GameCoreXboxOne: 5
-    Nintendo Switch: 5
-    PS4: 5
-    PS5: 5
-=======
     CloudRendering: 5
     EmbeddedLinux: 5
     GameCoreScarlett: 5
@@ -241,7 +233,6 @@ QualitySettings:
     PS4: 5
     PS5: 5
     Server: 5
->>>>>>> Stashed changes
     Stadia: 5
     Standalone: 5
     WebGL: 3

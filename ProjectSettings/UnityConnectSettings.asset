@@ -22,11 +22,7 @@ UnityConnectSettings:
     m_Enabled: 0
     m_TestMode: 0
   UnityAnalyticsSettings:
-<<<<<<< Updated upstream
-    m_Enabled: 1
-=======
     m_Enabled: 0
->>>>>>> Stashed changes
     m_TestMode: 0
     m_InitializeOnStartup: 1
   UnityAdsSettings:
