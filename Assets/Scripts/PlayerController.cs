@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
     public void Movement(InputAction.CallbackContext context)
     {
         direction = context.ReadValue<float>();
+        Debug.Log(direction);
         plRigi.velocity = new Vector2(direction * speedX, plRigi.velocity.y);
 
         //if (direction != 0) transform.localScale = new Vector3(direction, 1, 1);
