@@ -12,8 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D plRigi;
     public Animator animator;
 
-    private float moveX, moveY;
-    private float speedX, speedY, jumpForce;
+    private float speedX, jumpForce;
 
     private bool isOnGround;
     public bool isAttacking;
@@ -43,18 +42,15 @@ public class PlayerController : MonoBehaviour
     {
         followMouse();
         Jump();
+
+        plRigi.velocity = new Vector2(direction * speedX, plRigi.velocity.y);
+        animator.SetBool("isMove", plRigi.velocity.x != 0 ? true : false);
     }
 
     public void Movement(InputAction.CallbackContext context)
     {
-        direction = context.ReadValue<float>();
-        Debug.Log(direction);
-        plRigi.velocity = new Vector2(direction * speedX, plRigi.velocity.y);
-
-        //if (direction != 0) transform.localScale = new Vector3(direction, 1, 1);
-
-        animator.SetBool("isMove", direction != 0 ? true : false);
-
+        Vector2 val = context.ReadValue<Vector2>();
+        direction = val.x;
     }
 
     private void followMouse()
@@ -80,7 +76,7 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isOnGround)
+        if (Input.GetButtonDown("Jump") )
         {
             animator.SetTrigger("jump");
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
