@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Bullet : MonoBehaviour
 {
@@ -14,6 +15,14 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        var flag = FindObjectOfType<PlayerController>().flag;
+        if (flag<0)
+        {
+            float scaleX = transform.localScale.x;
+            float scaleY = transform.localScale.y;
+            float scaleZ = transform.localScale.z;
+            transform.localScale = new Vector3(-scaleX, scaleY, scaleZ);
+        }
         startTime = Time.time;
 
         rb = GetComponent<Rigidbody2D>();
