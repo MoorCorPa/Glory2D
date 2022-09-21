@@ -10,12 +10,13 @@ public class Gun : MonoBehaviour
     public Transform muzzle;
 
     public bool isColldown = true;
-    public float timeToColldown = 0.1f;
+    public float timeToColldown = 21f;
     private float startTime;
+    private float timeCount = 0;
 
     private void Awake()
     {
-        startTime = Time.time;
+        //startTime = Time.time;
     }
 
     // Start is called before the first frame update
@@ -34,7 +35,7 @@ public class Gun : MonoBehaviour
         if (Input.GetMouseButton(0) && isColldown) 
         {
             isColldown = false;
-            startTime = Time.time;
+            //startTime = Time.time;
             Instantiate(bullet, muzzle.position, muzzle.rotation);
         } 
     }
@@ -43,8 +44,14 @@ public class Gun : MonoBehaviour
     {
         if (!isColldown)
         {
-            if (Time.time - startTime > timeToColldown)
+            /*if (Time.time - startTime > timeToColldown)
             {
+                isColldown = true;
+            }*/
+            timeCount += Time.deltaTime;
+            if (timeCount > timeToColldown)
+            {
+                timeCount = 0;
                 isColldown = true;
             }
         }
