@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     private float destoryTime = 1f;
     private float startTime;
 
-    public float force = 20f;
+    public float force = 15f;
     public GameObject hitEffect;
     private Rigidbody2D rb;
 

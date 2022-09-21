@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
     public Transform muzzle;
 
     public bool isColldown = true;
-    public float timeToColldown = 21f;
+    public float timeToColldown = 0.15f;
     private float startTime;
     private float timeCount = 0;
 
