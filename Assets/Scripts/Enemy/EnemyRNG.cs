@@ -17,12 +17,13 @@ public class EnemyRNG : Enemy
 
     public void attackAnim()
     {
+        transform.localScale = new Vector3(getFaceAt()?1:-1, 1, 1);
         animator.SetTrigger("Attack");
     }
 
     public void resetAnim()
     {
-        animator.ResetTrigger("attack");
+        animator.ResetTrigger("Attack");
     }
 
     public void takeDamage()

@@ -76,7 +76,7 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") )
+        if (Input.GetButtonDown("Jump") && isOnGround)
         {
             animator.SetTrigger("jump");
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);

@@ -32,7 +32,10 @@ public abstract class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
 
-
+    public bool getFaceAt()
+    {
+        return transform.position.x>PlayerController.instance.transform.position.x ? true:false;
     }
 }
