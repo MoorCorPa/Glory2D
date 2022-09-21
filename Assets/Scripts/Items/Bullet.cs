@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         rb.gravityScale = 1;
 
@@ -40,6 +40,5 @@ public class Bullet : MonoBehaviour
             Instantiate(hitEffect, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
         }
-        
     }
 }
