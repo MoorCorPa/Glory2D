@@ -20,6 +20,9 @@ public class PlayerController : MonoBehaviour
     private GameObject[] arms;
     public int flag;
 
+    // ÑªÁ¿
+    public int health = 10000000;
+
     private void Awake()
     {
         instance = this; 
@@ -122,5 +125,13 @@ public class PlayerController : MonoBehaviour
             }
         }
         animator.SetBool("isOnGround", isOnGround);
+    }
+
+    // ÊÜµ½ÉËº¦µôÑª
+    public void takeDamage(int damage)
+    {
+        Debug.Log(damage);
+        health -= damage;
+        Debug.Log(health);
     }
 }
