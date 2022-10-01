@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: fd352832e318aa14581cc44e57c4671b
+guid: 32faf348483449945b5419f410fc0d32
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -44,7 +44,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 64
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 64
     resizeAlgorithm: 0
     textureFormat: 4
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -105,13 +105,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: dirtCube 1_0
+      name: HP_21x5_2
       rect:
         serializedVersion: 2
-        x: 59
-        y: 58
+        x: 0
+        y: 0
         width: 5
-        height: 6
+        height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -119,20 +119,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9658ce19f00d4564a9ba9be09619aaa3
-      internalID: 2038054273
+      spriteID: a638c10d43992544f9dd3a3d8eb1ed68
+      internalID: -16322907
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: dirtCube 1_1
+      name: HP_21x5_3
       rect:
         serializedVersion: 2
-        x: 17
-        y: 6
-        width: 30
-        height: 28
+        x: 9
+        y: 0
+        width: 5
+        height: 5
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -140,8 +140,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 312670e76fad7034e98256b6cd1b0a7a
-      internalID: 346659115
+      spriteID: f98e7145f07af774ebc9195901dcd884
+      internalID: -582587334
       vertices: []
       indices: 
       edges: []
@@ -150,15 +150,17 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      dirtCube 1_1: 346659115
-      dirtCube 1_0: 2038054273
+      HP_21x5_0: -1870650237
+      HP_21x5_1: -204694843
+      HP_21x5_2: -16322907
+      HP_21x5_3: -582587334
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
