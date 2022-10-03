@@ -15,14 +15,9 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-        var flag = FindObjectOfType<PlayerController>().flag;
-        if (flag<0)
-        {
-            float scaleX = transform.localScale.x;
-            float scaleY = transform.localScale.y;
-            float scaleZ = transform.localScale.z;
-            transform.localScale = new Vector3(-scaleX, scaleY, scaleZ);
-        }
+        var scale = transform.localScale;
+        transform.localScale = new Vector3(PlayerController.instance.flag*scale.x, scale.y, scale.z);
+
         startTime = Time.time;
 
         rb = GetComponent<Rigidbody2D>();
