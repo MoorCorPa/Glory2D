@@ -24,22 +24,38 @@ public class EnemyRNG : Enemy
         animator.SetTrigger("Attack");
         
     }
+
     //µôÑª
     public void cause()
     {
         PlayerController.instance.takeDamage(damage);
     }
+    
+    public void activeAttack()
+    {
+        isAttacked = false;
+    }
+
     public void resetAnim()
     {
         animator.ResetTrigger("Attack");
+        isAttacked = true;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    /*private void OnTriggerStay2D(Collider2D collision)
     {
+        
        // Debug.Log(collision.gameObject.tag + collision.gameObject.tag.Equals("Player"));
-        if (collision.gameObject.tag.Equals("Player"))
+        if (collision.CompareTag("Player"))
         {
             attackAnim();
+        }
+    }*/
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") && !isAttacked)
+        {
+            cause();
         }
     }
 }

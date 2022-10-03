@@ -29,9 +29,11 @@ public abstract class Enemy : MonoBehaviour
     //Ë÷µĞ°ë¾¶
     public float perceptionRadius;
 
-    public Collider2D triggerColl;
+    public Collider2D attackTriggerColl;
     // Ëæ»úÒÆ¶¯¾àÀë
     private float moveX;
+
+    public bool isAttacked = true;
 
     // Start is called before the first frame update
     public void Start()

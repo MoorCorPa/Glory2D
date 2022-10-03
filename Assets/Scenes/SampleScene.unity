@@ -1125,11 +1125,11 @@ GameObject:
   - component: {fileID: 990614615}
   - component: {fileID: 990614614}
   - component: {fileID: 990614618}
-  - component: {fileID: 990614620}
   - component: {fileID: 990614619}
+  - component: {fileID: 990614620}
   m_Layer: 0
   m_Name: EnemyRNG
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1235,7 +1235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990614613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.149, y: 0.533, z: 0}
+  m_LocalPosition: {x: -2.141, y: 0.598, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1279,9 +1279,9 @@ MonoBehaviour:
   attackTime: 2
   attackColldown: 1
   perceptionRadius: 7
-  triggerColl: {fileID: 990614620}
---- !u!61 &990614620
-BoxCollider2D:
+  attackTriggerColl: {fileID: 990614620}
+--- !u!60 &990614620
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1293,7 +1293,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.047368288, y: -0.07894704}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1303,9 +1303,12 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.1684203, y: 0.35789746}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.024532676, y: 0.05069834}
+      - {x: -0.40396428, y: 0.3057772}
+      - {x: -0.42506456, y: 0.28113562}
+      - {x: -0.19495702, y: 0.047109574}
 --- !u!1 &1235530724
 GameObject:
   m_ObjectHideFlags: 0

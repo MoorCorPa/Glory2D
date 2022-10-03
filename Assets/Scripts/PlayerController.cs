@@ -48,6 +48,7 @@ public class PlayerController : MonoBehaviour
 
         plRigi.velocity = new Vector2(direction * speedX, plRigi.velocity.y);
         animator.SetBool("isMove", plRigi.velocity.x != 0 ? true : false);
+        if (health < 0) health = 0;
     }
 
     public void Movement(InputAction.CallbackContext context)
