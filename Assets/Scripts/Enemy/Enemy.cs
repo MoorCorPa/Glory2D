@@ -9,62 +9,88 @@ public abstract class Enemy : MonoBehaviour
 {
     public Animator animator;
 
-    // ÑªÁ¿
+    // è¡€é‡
     public int health;
-    // ¹¥»÷Á¦
+
+    // æ”»å‡»åŠ›
     public int damage;
 
-    // ÒÆ¶¯ËÙ¶È
+    // ç§»åŠ¨é€Ÿåº¦
     public float moveSpeed;
-    // ÒÆ¶¯¼ÆÊ±
+
+    // ç§»åŠ¨è®¡æ—¶
     public float moveTimeCount = 0;
-    // ÒÆ¶¯¼ä¸ô
+
+    // ç§»åŠ¨é—´éš”
     public float moveColldownTime;
 
-    // ¹¥»÷Ê±¼ä
-    public float attackTime;
-    // ¹¥»÷¼ä¸ô
+    // æ”»å‡»è®¡æ—¶
+    public float attackTime = 0;
+
+    // æ”»å‡»é—´éš”
     public float attackColldown;
 
-    //Ë÷µĞ°ë¾¶
+    //ç´¢æ•ŒåŠå¾„
     public float perceptionRadius;
 
     public Collider2D attackTriggerColl;
-    // Ëæ»úÒÆ¶¯¾àÀë
-    private float moveX;
 
+    // éšæœºç§»åŠ¨è·ç¦»
+    public float moveX;
+
+    // æ˜¯å¦å¯æ”»å‡»
     public bool isAttacked = true;
 
-    // Start is called before the first frame update
+    // æ˜¯å¦å·²æ¥è¿‘ç©å®¶
+    public bool isNearPlayer = false;
+    
+    // ç©å®¶æ˜¯å¦åœ¨æ”»å‡»å‘½ä¸­èŒƒå›´
+    public bool isAttackHitRange = false;
+
     public void Start()
     {
         //transform.position = Vector2.MoveTowards(transform.position, -transform.position, moveSpeed * Time.deltaTime);
     }
 
-    // Update is called once per frame
     public void Update()
     {
-        // ÑªÁ¿Îª0ÏûÊ§
+        // è¡€é‡ä¸º0æ¶ˆå¤±
         if (health <= 0)
         {
             Destroy(gameObject);
         }
-        moveColldown();
     }
 
-    // Ëæ»úÒÆ¶¯
-    public void moveColldown()
+    public void FixedUpdate()
     {
-        
+        MoveController();
+    }
+
+    // éšæœºç§»åŠ¨ ç§»åŠ¨æ§åˆ¶å™¨
+    private void MoveController()
+    {
         if (perceptionRadius > (transform.position - PlayerController.instance.transform.position).sqrMagnitude)
         {
-
-            //Debug.Log("ÒÑ½øÈë¹¥»÷·¶Î§");
-            transform.localScale = new Vector3(getFaceAt()? 1 : -1, 1, 1);
-            transform.position = Vector2.MoveTowards(transform.position, new Vector3(PlayerController.instance.transform.position.x, transform.position.y, transform.position.z), moveSpeed* Time.deltaTime);
+            if (!isNearPlayer)
+            {   
+                // è¿›å…¥é”å®šèŒƒå›´
+                Debug.Log("è¿›å…¥é”å®šèŒƒå›´");
+                transform.localScale = new Vector3(getFaceAt() ? 1 : -1, 1, 1);
+                transform.position = Vector2.MoveTowards(transform.position,
+                    new Vector3(PlayerController.instance.transform.position.x, transform.position.y,
+                        transform.position.z), moveSpeed*0.02f);
+            }
+            else
+            {
+                if (!isAttacked)
+                {
+                    animator.SetTrigger("Static");
+                }
+            }
         }
         else
         {
+            //éšæœºç§»åŠ¨
             moveTimeCount += Time.deltaTime;
             if (moveTimeCount > moveColldownTime)
             {
@@ -73,18 +99,20 @@ public abstract class Enemy : MonoBehaviour
             }
 
             transform.localScale = new Vector3(moveX < transform.position.x ? 1 : -1, 1, 1);
-            transform.position = Vector2.MoveTowards(transform.position, new Vector3(moveX, transform.position.y, transform.position.z), moveSpeed * Time.deltaTime);
+            transform.position = Vector2.MoveTowards(transform.position,
+                new Vector3(moveX, transform.position.y, transform.position.z), moveSpeed *0.02f);
         }
     }
 
+    // æ€ªç‰©æ‰è¡€
     public void takeDamage(int damage)
     {
         health -= damage;
     }
 
-    // »ñÈ¡Íæ¼Ò
+    // è·å–ç©å®¶
     public bool getFaceAt()
     {
-        return transform.position.x>PlayerController.instance.transform.position.x ? true:false;
+        return transform.position.x > PlayerController.instance.transform.position.x ? true : false;
     }
 }

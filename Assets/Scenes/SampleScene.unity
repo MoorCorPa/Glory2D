@@ -398,7 +398,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.25, y: 1.51, z: -10}
+  m_LocalPosition: {x: 1.6, y: 1.08, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1125,8 +1125,8 @@ GameObject:
   - component: {fileID: 990614615}
   - component: {fileID: 990614614}
   - component: {fileID: 990614618}
-  - component: {fileID: 990614619}
   - component: {fileID: 990614620}
+  - component: {fileID: 990614619}
   m_Layer: 0
   m_Name: EnemyRNG
   m_TagString: Enemy
@@ -1146,9 +1146,9 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 10
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -1235,7 +1235,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990614613}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.141, y: 0.598, z: 0}
+  m_LocalPosition: {x: -2.36, y: 0.12, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1255,8 +1255,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.039472207, y: -0.07894773}
-  m_Size: {x: 0.5947432, y: 0.34737566}
+  m_Offset: {x: -0.04822631, y: -0.07894772}
+  m_Size: {x: 0.61225146, y: 0.34737566}
   m_Direction: 1
 --- !u!114 &990614619
 MonoBehaviour:
@@ -1273,13 +1273,20 @@ MonoBehaviour:
   animator: {fileID: 990614615}
   health: 10
   damage: 1
-  moveSpeed: 0.6
+  moveSpeed: 0.5
   moveTimeCount: 0
   moveColldownTime: 2
-  attackTime: 2
-  attackColldown: 1
+  attackTime: 0
+  attackColldown: 2
   perceptionRadius: 7
   attackTriggerColl: {fileID: 990614620}
+  moveX: 0
+  isAttacked: 1
+  isNearPlayer: 0
+  isAttackHitRange: 0
+  viewDirection: 325
+  viewFov: 49
+  viewDistance: 0.6
 --- !u!60 &990614620
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -1404,7 +1411,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364219516}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.25, y: 1.51, z: -10}
+  m_LocalPosition: {x: 1.6, y: 1.08, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1838,17 +1845,33 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4352549605983397336, guid: 760c707353bcb994bbd7b318d222d4ab, type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4352549605983397336, guid: 760c707353bcb994bbd7b318d222d4ab, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4352549605983397337, guid: 760c707353bcb994bbd7b318d222d4ab, type: 3}
+      propertyPath: m_Size.y
+      value: 0.6907401
+      objectReference: {fileID: 0}
+    - target: {fileID: 4352549605983397337, guid: 760c707353bcb994bbd7b318d222d4ab, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.13826513
+      objectReference: {fileID: 0}
     - target: {fileID: 4352549605983397338, guid: 760c707353bcb994bbd7b318d222d4ab, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4352549605983397338, guid: 760c707353bcb994bbd7b318d222d4ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.25
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 4352549605983397338, guid: 760c707353bcb994bbd7b318d222d4ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.51
+      value: 1.08
       objectReference: {fileID: 0}
     - target: {fileID: 4352549605983397338, guid: 760c707353bcb994bbd7b318d222d4ab, type: 3}
       propertyPath: m_LocalPosition.z
