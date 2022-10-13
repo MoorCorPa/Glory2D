@@ -137,4 +137,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 15
-  hitEffect: {fileID: 7018653112111489467, guid: 398c2c787e588834f86eaa94a3a184ee, type: 3}
+  hitEffect: {fileID: 5362875135589811972, guid: 129c3ea27d23a8f4aa6d5ef2226b13a0, type: 3}

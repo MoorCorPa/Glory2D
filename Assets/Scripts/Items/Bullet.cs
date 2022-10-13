@@ -41,7 +41,7 @@ public class Bullet : MonoBehaviour
         string colname = collision.gameObject.name;
         if (!colname.Equals("bullet(Clone)") && !colname.Equals("Player"))
         {
-            Instantiate(hitEffect, transform.position, Quaternion.identity);
+            Instantiate(hitEffect, collision.bounds.ClosestPoint(transform.position), Quaternion.identity);
             Destroy(this.gameObject);
         }
     }
