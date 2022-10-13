@@ -34,7 +34,6 @@ public class PlayerController : MonoBehaviour
         plRigi = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         arms = GameObject.FindGameObjectsWithTag("arms");
-
         speedX = 5f;
         jumpForce = 5f;
 
@@ -61,6 +60,7 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         flag = mosPos.x > plRigi.position.x ? 1 : -1;
+        transform.localScale = new Vector3(flag, 1, 1);
         foreach (var a in arms)
         {
             Vector3 drc = (mosPos - a.transform.position).normalized;
@@ -68,7 +68,6 @@ public class PlayerController : MonoBehaviour
             a.transform.eulerAngles = new Vector3(0, 0, angle);
         }
 
-        transform.localScale = new Vector3(flag, 1, 1);
 
         /*foreach (var a in arms)
         {
@@ -132,5 +131,10 @@ public class PlayerController : MonoBehaviour
     public void takeDamage(int damage)
     {
         health -= damage;
+    }
+    
+    public void ¹Ø±Õ»»µ¯¶¯»­()
+    {
+        animator.ResetTrigger("»»µ¯");
     }
 }
