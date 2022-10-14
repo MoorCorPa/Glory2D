@@ -20,15 +20,17 @@ public class PlayerController : MonoBehaviour
     private GameObject[] arms;
     public int flag;
 
-    // ???
-    public int health = 10000000;
-
+    // 人物血量
+    [Min(0)]
+    public int health;
+    [Min(0)]
+    public float 受伤变色时间;
+    
     private void Awake()
     {
         instance = this; 
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         plRigi = GetComponent<Rigidbody2D>();
@@ -39,7 +41,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         followMouse();
@@ -60,6 +61,9 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         flag = mosPos.x > plRigi.position.x ? 1 : -1;
+        
+        Gun.instance.换弹进度条.transform.localScale = new Vector3(flag * Gun.instance.换弹进度条缩放.x,
+            Gun.instance.换弹进度条缩放.y, Gun.instance.换弹进度条缩放.z);
         transform.localScale = new Vector3(flag, 1, 1);
         foreach (var a in arms)
         {
@@ -127,14 +131,32 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("isOnGround", isOnGround);
     }
 
-    // ?????????
-    public void takeDamage(int damage)
+    // 人物掉血
+    public void TakeDamage(int damage)
     {
+        GetComponent<SpriteRenderer>().color = new Color(0.99f, 0.3f, 0.3f, 1f);
+        GameObject.FindWithTag("Gun").GetComponent<SpriteRenderer>().color = new Color(0.99f, 0.3f, 0.3f, 1f);
+        foreach (var a in arms)
+        {
+            a.GetComponent<SpriteRenderer>().color = new Color(0.99f, 0.3f, 0.3f, 1f);
+        }
         health -= damage;
+        Invoke("恢复颜色",受伤变色时间);
     }
     
-    public void �رջ�������()
+    public void 恢复颜色()
     {
-        animator.ResetTrigger("����");
+        GetComponent<SpriteRenderer>().color = Color.white;
+        GameObject.FindWithTag("Gun").GetComponent<SpriteRenderer>().color = Color.white;
+        foreach (var a in arms)
+        {
+            a.GetComponent<SpriteRenderer>().color = Color.white;
+        }
+    }
+    
+    
+    public void 关闭换弹动画()
+    {
+        animator.ResetTrigger("换弹");
     }
 }

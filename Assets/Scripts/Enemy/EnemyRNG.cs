@@ -104,7 +104,7 @@ public class EnemyRNG : Enemy
     {
         if (isAttackHitRange)
         {
-            PlayerController.instance.takeDamage(damage);
+            PlayerController.instance.TakeDamage(damage);
         }
         else
         {

@@ -8,11 +8,14 @@ public class Bullet : MonoBehaviour
     private float destoryTime = 1f;
     private float startTime;
 
+    [Min(0)]
     public float force = 15f;
+    [Min(1)]
+    public int 子弹伤害;
+    
     public GameObject hitEffect;
     private Rigidbody2D rb;
 
-    // Start is called before the first frame update
     void Awake()
     {
         var scale = transform.localScale;
@@ -41,8 +44,15 @@ public class Bullet : MonoBehaviour
         string colname = collision.gameObject.name;
         if (!colname.Equals("bullet(Clone)") && !colname.Equals("Player"))
         {
+            if (collision.GetComponent<Enemy>())
+            {
+                if (collision.GetComponent<Enemy>().是否正在死亡) return;
+                collision.GetComponent<Enemy>().TakeDamage(子弹伤害);
+            }
+            
             Instantiate(hitEffect, collision.bounds.ClosestPoint(transform.position), Quaternion.identity);
             Destroy(this.gameObject);
         }
+        
     }
 }

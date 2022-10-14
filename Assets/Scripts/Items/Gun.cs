@@ -25,6 +25,9 @@ public class Gun : MonoBehaviour
     
     public GameObject 换弹进度条;
     public Animator animator;
+
+    public Vector3 换弹进度条缩放;
+    
     private void Awake()
     {
         instance = this;
@@ -34,6 +37,7 @@ public class Gun : MonoBehaviour
     void Start()
     {
         当前子弹数量 = 最大子弹数量;
+        换弹进度条缩放 = 换弹进度条.transform.localScale;
     }
 
     void Update()
@@ -97,6 +101,7 @@ public class Gun : MonoBehaviour
 
     public void 换弹()
     {
+        
         if (是否正在换弹 == false)
         {
             animator.SetLayerWeight (1,1);
@@ -112,7 +117,7 @@ public class Gun : MonoBehaviour
             当前子弹数量 = 最大子弹数量;
             是否正在换弹 = false;
             主动换弹 = false;
-            animator.SetLayerWeight (1,0);
+            animator.SetLayerWeight (1,0); 
             换弹进度条.SetActive(false);
         }
     }

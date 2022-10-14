@@ -8,6 +8,7 @@ TagManager:
   - muzzle
   - attack
   - Enemy
+  - Gun
   layers:
   - Default
   - TransparentFX

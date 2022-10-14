@@ -47,18 +47,20 @@ public abstract class Enemy : MonoBehaviour
     // 玩家是否在攻击命中范围
     public bool isAttackHitRange = false;
 
+    [Min(0)]
+    public float 受伤变色时间;
+    
+    
+    public bool 是否正在死亡 = false;
     public void Start()
     {
+        animator = GetComponent<Animator>();
         //transform.position = Vector2.MoveTowards(transform.position, -transform.position, moveSpeed * Time.deltaTime);
     }
 
     public void Update()
     {
-        // 血量为0消失
-        if (health <= 0)
-        {
-            Destroy(gameObject);
-        }
+
     }
 
     public void FixedUpdate()
@@ -105,11 +107,37 @@ public abstract class Enemy : MonoBehaviour
     }
 
     // 怪物掉血
-    public void takeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         health -= damage;
+        // 血量为0消失
+        if (health <= 0)
+        {
+            if (!是否正在死亡)
+            {
+                是否正在死亡 = true;
+                animator.SetTrigger("死亡");
+            }
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().color = new Color(0.99f, 0.3f, 0.3f, 1f);
+            Invoke("恢复颜色",受伤变色时间);
+        }
+        
     }
 
+    public void 怪物死亡()
+    {
+        animator.ResetTrigger("死亡");
+        Destroy(gameObject);
+    }
+
+    public void 恢复颜色()
+    {
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
+    
     // 获取玩家
     public bool getFaceAt()
     {
