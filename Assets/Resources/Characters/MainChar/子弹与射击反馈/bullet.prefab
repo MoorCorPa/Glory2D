@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40165789147364471}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.124, y: 0.242, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.8, y: 1.8, z: 1.8}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -95,7 +95,7 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40165789147364471}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 1
+  m_CollisionDetection: 0
   m_Constraints: 4
 --- !u!70 &40165789147364363
 CapsuleCollider2D:
@@ -121,8 +121,8 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.038348358, y: 0.0005464919}
-  m_Size: {x: 0.1046969, y: 0.046101745}
+  m_Offset: {x: 0.04, y: 0}
+  m_Size: {x: 0.094, y: 0.031}
   m_Direction: 1
 --- !u!114 &-9210636968287553181
 MonoBehaviour:
@@ -136,6 +136,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72045a343a75c0243b1f4709c95cb407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  force: 15
+  "\u5B50\u5F39\u98DE\u884C\u901F\u5EA6": 15
   "\u5B50\u5F39\u4F24\u5BB3": 1
+  "\u5B50\u5F39\u9500\u6BC1\u65F6\u95F4": 1
   hitEffect: {fileID: 5362875135589811972, guid: 129c3ea27d23a8f4aa6d5ef2226b13a0, type: 3}

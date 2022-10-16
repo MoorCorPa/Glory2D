@@ -1,58 +1,64 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 public class Bullet : MonoBehaviour
 {
-    private float destoryTime = 1f;
-    private float startTime;
+    [Min(0)] public float 子弹飞行速度 = 15f;
+    [Min(1)] public int 子弹伤害;
+    [Min(0)] public float 子弹销毁时间;
 
-    [Min(0)]
-    public float force = 15f;
-    [Min(1)]
-    public int 子弹伤害;
-    
+    private float 子弹生成时的游戏时间;
+
     public GameObject hitEffect;
-    private Rigidbody2D rb;
 
-    void Awake()
+    private Rigidbody2D 子弹刚体;
+    private bool 是否触发 = false;
+
+    private void Awake()
     {
+        子弹刚体 = GetComponent<Rigidbody2D>();
         var scale = transform.localScale;
-        transform.localScale = new Vector3(PlayerController.instance.flag*scale.x, scale.y, scale.z);
+        transform.localScale = new Vector3(PlayerController.instance.flag * scale.x, scale.y, scale.z);
 
-        startTime = Time.time;
-
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = PlayerController.instance.flag*transform.right * force;
+        子弹生成时的游戏时间 = Time.time;
+        子弹刚体.velocity = PlayerController.instance.flag * transform.right * 子弹飞行速度;
 
         Physics2D.IgnoreLayerCollision(8, 9);
     }
 
-    void Update()
+    private void Update()
     {
-        if (Time.time - startTime > destoryTime)
+        if (Time.time - 子弹生成时的游戏时间 > 子弹销毁时间)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        rb.gravityScale = 1;
+        
+        //rb.gravityScale = 1;
+        var colname = collision.name;
 
-        string colname = collision.gameObject.name;
         if (!colname.Equals("bullet(Clone)") && !colname.Equals("Player"))
         {
-            if (collision.GetComponent<Enemy>())
+            if (!是否触发)
             {
-                if (collision.GetComponent<Enemy>().是否正在死亡) return;
-                collision.GetComponent<Enemy>().TakeDamage(子弹伤害);
+                是否触发 = true;
+                //Physics2D.IgnoreCollision(collision, GetComponent<Collider2D>());
+                if (collision.GetComponent<Enemy>())
+                {
+                    if (collision.GetComponent<Enemy>().是否正在死亡) return;
+                    collision.GetComponent<Enemy>().TakeDamage(子弹伤害);
+                } 
+                
+                Instantiate(hitEffect, collision.bounds.ClosestPoint(transform.position), Quaternion.identity);
+                Destroy(gameObject);
             }
-            
-            Instantiate(hitEffect, collision.bounds.ClosestPoint(transform.position), Quaternion.identity);
-            Destroy(this.gameObject);
         }
-        
     }
 }

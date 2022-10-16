@@ -28,6 +28,10 @@ public class Gun : MonoBehaviour
 
     public Vector3 换弹进度条缩放;
     
+    public AudioSource 开枪音效;
+    public AudioSource 换弹音效;
+    
+    private Ray2D ray;
     private void Awake()
     {
         instance = this;
@@ -49,14 +53,13 @@ public class Gun : MonoBehaviour
         {
             主动换弹 = true;
         }
-
-        
     }
 
     public void Fire()
     {
-        if (Input.GetMouseButton(0) && isColldown)
+        if (Input.GetMouseButton(0) && isColldown && !是否正在换弹)
         {
+            开枪音效.PlayOneShot(开枪音效.clip);
             当前子弹数量--;
             isColldown = false;
             //startTime = Time.time;
@@ -104,9 +107,9 @@ public class Gun : MonoBehaviour
         
         if (是否正在换弹 == false)
         {
-            animator.SetLayerWeight (1,1);
+            animator.SetLayerWeight(1,1);
+            换弹音效.Play();
             换弹进度条.SetActive(true);
-            
         }
         是否正在换弹 = true;
         换弹计时 += Time.deltaTime;
@@ -117,7 +120,7 @@ public class Gun : MonoBehaviour
             当前子弹数量 = 最大子弹数量;
             是否正在换弹 = false;
             主动换弹 = false;
-            animator.SetLayerWeight (1,0); 
+            animator.SetLayerWeight(1,0); 
             换弹进度条.SetActive(false);
         }
     }

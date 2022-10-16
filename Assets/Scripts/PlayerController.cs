@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D plRigi;
     public Animator animator;
 
-    private float speedX, jumpForce;
+    public float speedX, jumpForce;
 
     private bool isOnGround;
     public bool isAttacking;
@@ -48,15 +48,34 @@ public class PlayerController : MonoBehaviour
 
         plRigi.velocity = new Vector2(direction * speedX, plRigi.velocity.y);
         animator.SetBool("isMove", plRigi.velocity.x != 0 ? true : false);
+        
+        if (plRigi.velocity.x != 0 && isOnGround)
+        {
+            if (!GetComponent<AudioSource>().isPlaying)
+            {
+                GetComponent<AudioSource>().Play();
+            }
+        }
+        else
+        {
+            if (GetComponent<AudioSource>().isPlaying)
+            {
+                GetComponent<AudioSource>().Stop();
+            }
+        }
+        
         if (health < 0) health = 0;
     }
 
     public void Movement(InputAction.CallbackContext context)
     {
+        
         Vector2 val = context.ReadValue<Vector2>();
         direction = val.x;
     }
 
+
+    
     private void followMouse()
     {
         Vector3 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -84,7 +103,8 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
         if (Input.GetButtonDown("Jump") && isOnGround)
-        {
+        {   
+            
             animator.SetTrigger("jump");
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
@@ -134,13 +154,14 @@ public class PlayerController : MonoBehaviour
     // 人物掉血
     public void TakeDamage(int damage)
     {
+        health -= damage;
         GetComponent<SpriteRenderer>().color = new Color(0.99f, 0.3f, 0.3f, 1f);
         GameObject.FindWithTag("Gun").GetComponent<SpriteRenderer>().color = new Color(0.99f, 0.3f, 0.3f, 1f);
         foreach (var a in arms)
         {
             a.GetComponent<SpriteRenderer>().color = new Color(0.99f, 0.3f, 0.3f, 1f);
         }
-        health -= damage;
+        animator.SetTrigger("掉血");
         Invoke("恢复颜色",受伤变色时间);
     }
     
@@ -154,9 +175,12 @@ public class PlayerController : MonoBehaviour
         }
     }
     
-    
     public void 关闭换弹动画()
     {
         animator.ResetTrigger("换弹");
+    }
+    public void 关闭掉血动画()
+    {
+        animator.ResetTrigger("掉血");
     }
 }
