@@ -142,7 +142,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             Vector2 contact0 = col.GetContact(0).normal;
-            if (col.gameObject.layer == LayerMask.NameToLayer("Ground") && !isOnGround && contact0 == Vector2.up)
+            if (col.gameObject.layer.Equals(LayerMask.NameToLayer("Ground")) && !isOnGround && contact0 == Vector2.up)
             {
                 isOnGround = true;
                 animator.ResetTrigger("jump");
