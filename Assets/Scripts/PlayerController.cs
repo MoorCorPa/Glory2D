@@ -15,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public float speedX, jumpForce;
 
     private bool isOnGround;
+    public bool 是否触地 = false;
+    public float 触地射线检测长度 = 0.5f;
     public bool isAttacking;
 
     private GameObject[] arms;
@@ -65,6 +67,8 @@ public class PlayerController : MonoBehaviour
         }
         
         if (health < 0) health = 0;
+
+        触地检测();
     }
 
     public void Movement(InputAction.CallbackContext context)
@@ -102,9 +106,8 @@ public class PlayerController : MonoBehaviour
     }
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && isOnGround)
+        if (Input.GetButtonDown("Jump") && 是否触地)
         {   
-            
             animator.SetTrigger("jump");
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
         }
@@ -115,7 +118,22 @@ public class PlayerController : MonoBehaviour
         //if (context.started && !isAttacking) isAttacking = true;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    void 触地检测()
+    {
+        Vector3 终点 = new Vector3(0, -1, 0);
+        Debug.DrawLine(transform.position, transform.position + 终点 * 触地射线检测长度, Color.red);
+        if (Physics2D.Raycast(transform.position, 终点, 触地射线检测长度, LayerMask.GetMask("Ground")))
+        {
+            是否触地 = true;
+        }
+        else
+        {
+            是否触地 = false;
+        }
+        animator.SetBool("是否触地", 是否触地);
+    }
+
+/*    private void OnCollisionEnter2D(Collision2D collision)
     {
         Grounding(collision, false);
     }
@@ -128,9 +146,9 @@ public class PlayerController : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         Grounding(collision, true);
-    }
+    }*/
 
-    void Grounding(Collision2D col, bool exitState)
+/*    void Grounding(Collision2D col, bool exitState)
     {
         if (exitState)
         {
@@ -149,7 +167,7 @@ public class PlayerController : MonoBehaviour
             }
         }
         animator.SetBool("isOnGround", isOnGround);
-    }
+    }*/
 
     // 人物掉血
     public void TakeDamage(int damage)

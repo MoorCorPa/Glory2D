@@ -1162,7 +1162,9 @@ MonoBehaviour:
   moveTimeCount: 0
   moveColldownTime: 2
   "\u8DF3\u8DC3\u529B\u5EA6": 35
+  "\u8DF3\u8DC3\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.5
   "\u8DF3\u8DC3\u662F\u5426\u51B7\u5374": 1
+  "\u8DF3\u8DC3\u51B7\u5374\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.28
   attackTime: 0
   attackColldown: 2
   perceptionRadius: 7
@@ -1173,7 +1175,6 @@ MonoBehaviour:
   isAttackHitRange: 0
   "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4": 0.2
   "\u662F\u5426\u6B63\u5728\u6B7B\u4EA1": 0
-  "\u8DF3\u8DC3\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.5
   "\u521A\u4F53": {fileID: 990614614}
 --- !u!60 &990614620
 PolygonCollider2D:
@@ -4774,6 +4775,10 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 519420031}
+    - target: {fileID: 470229796104729249, guid: 760c707353bcb994bbd7b318d222d4ab, type: 3}
+      propertyPath: "\u89E6\u5730\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6"
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 470229796104729252, guid: 760c707353bcb994bbd7b318d222d4ab, type: 3}
       propertyPath: m_RootOrder
       value: 2
