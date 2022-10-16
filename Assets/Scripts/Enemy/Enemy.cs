@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
@@ -31,6 +32,14 @@ public abstract class Enemy : MonoBehaviour
     // 移动间隔
     public float moveColldownTime;
 
+    public float 跳跃力度 = 35f;
+
+    public float 跳跃射线检测长度 = 0.5f;
+
+    public bool 跳跃是否冷却 = true;
+
+    public float 跳跃冷却射线检测长度 = 0.28f;
+
     // 攻击计时
     public float attackTime = 0;
 
@@ -57,6 +66,8 @@ public abstract class Enemy : MonoBehaviour
     [Min(0)] public float 受伤变色时间;
 
     public bool 是否正在死亡 = false;
+
+    public Rigidbody2D 刚体;
 
     public void Start()
     {
@@ -144,6 +155,33 @@ public abstract class Enemy : MonoBehaviour
             transform.localScale = new Vector3(moveX < transform.position.x ? 1 : -1, 1, 1);
             transform.position = Vector2.MoveTowards(transform.position,
                 new Vector3(moveX, transform.position.y, transform.position.z), moveSpeed * 0.02f);
+        }
+
+        跳跃();
+    }
+
+    //射线检测实现的跳跃
+    void 跳跃()
+    {
+        Vector3 end = new Vector3(-transform.localScale.x, 0, 0);
+        Debug.DrawLine(transform.position, transform.position+end* 跳跃射线检测长度, Color.red);
+
+        if (Physics2D.Raycast(transform.position, end, 跳跃射线检测长度, LayerMask.GetMask("Ground")) && 跳跃是否冷却)
+        {
+            Debug.Log("跳跃射线测试");
+            刚体.AddForce(new Vector2(0, 跳跃力度), ForceMode2D.Impulse);
+            跳跃是否冷却 = false;
+        }
+        跳跃冷却();
+    }
+
+    void 跳跃冷却()
+    {
+        Vector3 downEnd = new Vector3(0, -1, 0);
+        Debug.DrawLine(transform.position, transform.position+downEnd* 跳跃冷却射线检测长度, Color.green);
+        if (Physics2D.Raycast(transform.position, downEnd, 跳跃冷却射线检测长度, LayerMask.GetMask("Ground")) && !跳跃是否冷却)
+        {
+            跳跃是否冷却 = true;
         }
     }
 

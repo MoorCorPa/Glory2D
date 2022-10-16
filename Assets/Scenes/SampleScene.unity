@@ -1029,7 +1029,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 10
-  m_LinearDrag: 0
+  m_LinearDrag: 1.5
   m_AngularDrag: 0
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -1161,6 +1161,8 @@ MonoBehaviour:
   moveSpeed: 0.5
   moveTimeCount: 0
   moveColldownTime: 2
+  "\u8DF3\u8DC3\u529B\u5EA6": 35
+  "\u8DF3\u8DC3\u662F\u5426\u51B7\u5374": 1
   attackTime: 0
   attackColldown: 2
   perceptionRadius: 7
@@ -1171,6 +1173,8 @@ MonoBehaviour:
   isAttackHitRange: 0
   "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4": 0.2
   "\u662F\u5426\u6B63\u5728\u6B7B\u4EA1": 0
+  "\u8DF3\u8DC3\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.5
+  "\u521A\u4F53": {fileID: 990614614}
 --- !u!60 &990614620
 PolygonCollider2D:
   m_ObjectHideFlags: 0
