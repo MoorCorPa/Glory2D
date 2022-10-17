@@ -20,7 +20,7 @@ TagManager:
   - Wall
   - Player
   - Attacker
-  - 
+  - "\u80CC\u666F"
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: "\u80CC\u666F"
+    uniqueID: 2359176833
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

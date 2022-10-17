@@ -30,7 +30,7 @@ public class Gun : MonoBehaviour
     
     public AudioSource 开枪音效;
     public AudioSource 换弹音效;
-    
+    public Vector3 碰撞坐标;
     private Ray2D ray;
     private void Awake()
     {
@@ -38,13 +38,14 @@ public class Gun : MonoBehaviour
         //startTime = Time.time;
     }
 
-    void Start()
+    private void Start()
     {
+        Physics2D.queriesStartInColliders = false;
         当前子弹数量 = 最大子弹数量;
         换弹进度条缩放 = 换弹进度条.transform.localScale;
     }
 
-    void Update()
+    private void Update()
     {
         Fire();
         检测子弹();
@@ -53,12 +54,23 @@ public class Gun : MonoBehaviour
         {
             主动换弹 = true;
         }
+
     }
 
     public void Fire()
     {
         if (Input.GetMouseButton(0) && isColldown && !是否正在换弹)
         {
+            RaycastHit2D 射线 = Physics2D.Raycast(muzzle.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position);
+
+            //Debug.DrawLine(muzzle.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition),Color.red);
+            if (射线.collider != null)
+            {
+                if (!射线.collider.name.Equals("bullet(Clone)") && !射线.collider.name.Equals("Player"))
+                {
+                    碰撞坐标 = 射线.point;
+                }
+            }
             开枪音效.PlayOneShot(开枪音效.clip);
             当前子弹数量--;
             isColldown = false;

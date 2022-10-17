@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
 
         子弹生成时的游戏时间 = Time.time;
         子弹刚体.velocity = PlayerController.instance.flag * transform.right * 子弹飞行速度;
-
+        
         Physics2D.IgnoreLayerCollision(8, 9);
     }
 
@@ -46,6 +46,8 @@ public class Bullet : MonoBehaviour
 
         if (!colname.Equals("bullet(Clone)") && !colname.Equals("Player"))
         {
+            Debug.Log("触发");
+    
             if (!是否触发)
             {
                 是否触发 = true;
@@ -56,7 +58,8 @@ public class Bullet : MonoBehaviour
                     collision.GetComponent<Enemy>().TakeDamage(子弹伤害);
                 } 
                 
-                Instantiate(hitEffect, collision.bounds.ClosestPoint(transform.position), Quaternion.identity);
+                //Instantiate(hitEffect, collision.bounds.ClosestPoint(transform.position), Quaternion.identity);
+                Instantiate(hitEffect, Gun.instance.碰撞坐标, Quaternion.identity);
                 Destroy(gameObject);
             }
         }
