@@ -30,8 +30,7 @@ public class Gun : MonoBehaviour
     
     public AudioSource 开枪音效;
     public AudioSource 换弹音效;
-    public Vector3 碰撞坐标;
-    private Ray2D ray;
+    
     private void Awake()
     {
         instance = this;
@@ -61,16 +60,6 @@ public class Gun : MonoBehaviour
     {
         if (Input.GetMouseButton(0) && isColldown && !是否正在换弹)
         {
-            RaycastHit2D 射线 = Physics2D.Raycast(muzzle.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition)-transform.position);
-
-            //Debug.DrawLine(muzzle.transform.position, Camera.main.ScreenToWorldPoint(Input.mousePosition),Color.red);
-            if (射线.collider != null)
-            {
-                if (!射线.collider.name.Equals("bullet(Clone)") && !射线.collider.name.Equals("Player"))
-                {
-                    碰撞坐标 = 射线.point;
-                }
-            }
             开枪音效.PlayOneShot(开枪音效.clip);
             当前子弹数量--;
             isColldown = false;

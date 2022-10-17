@@ -197,8 +197,4 @@ public class PlayerController : MonoBehaviour
     {
         animator.ResetTrigger("换弹");
     }
-    public void 关闭掉血动画()
-    {
-        animator.ResetTrigger("掉血");
-    }
 }
