@@ -31,7 +31,7 @@ public class EnemyRNG : Enemy
         {
             Debug.Log("没有碰撞任何对象");
         }*/
-
+        base.Start();
     }
 
     new void Update()

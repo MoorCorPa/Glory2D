@@ -69,8 +69,10 @@ public abstract class Enemy : MonoBehaviour
 
     public Rigidbody2D 刚体;
 
+    public Color 初始颜色;
     public void Start()
     {
+        初始颜色 = GetComponent<SpriteRenderer>().color;
         animator = GetComponent<Animator>();
         //transform.position = Vector2.MoveTowards(transform.position, -transform.position, moveSpeed * Time.deltaTime);
     }
@@ -220,7 +222,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void 恢复颜色()
     {
-        GetComponent<SpriteRenderer>().color = Color.white;
+        GetComponent<SpriteRenderer>().color = 初始颜色;
     }
 
     // 获取玩家

@@ -51,7 +51,11 @@ public class Bullet : MonoBehaviour
                 //Physics2D.IgnoreCollision(collision, GetComponent<Collider2D>());
                 if (collision.GetComponent<Enemy>())
                 {
-                    if (collision.GetComponent<Enemy>().是否正在死亡) return;
+                    if (collision.GetComponent<Enemy>().是否正在死亡)
+                    {
+                        是否触发 = false;
+                        return;
+                    }
                     collision.GetComponent<Enemy>().TakeDamage(子弹伤害);
                 }
 

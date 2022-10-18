@@ -82,7 +82,7 @@ public class PlayerController : MonoBehaviour
     
     private void followMouse()
     {
-        Vector3 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(0,-0.05f,0);
         flag = mosPos.x > plRigi.position.x ? 1 : -1;
         
         Gun.instance.换弹进度条.transform.localScale = new Vector3(flag * Gun.instance.换弹进度条缩放.x,

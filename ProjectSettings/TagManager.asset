@@ -21,8 +21,8 @@ TagManager:
   - Player
   - Attacker
   - "\u80CC\u666F"
-  - 
-  - 
+  - "\u524D\u666F"
+  - Enemy
   - 
   - 
   - 
@@ -48,4 +48,7 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: "\u524D\u666F"
+    uniqueID: 1214552893
     locked: 0
