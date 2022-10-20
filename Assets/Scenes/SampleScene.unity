@@ -14910,7 +14910,8 @@ MonoBehaviour:
   flag: 0
   health: 10
   "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4": 0.25
-  "\u9F20\u6807\u6307\u9488\u7EB9\u7406": {fileID: 2800000, guid: 9dc54d35dcadd6b4ebe905e195f92121, type: 3}
+  "\u9ED8\u8BA4\u9F20\u6807\u6307\u9488\u7EB9\u7406": {fileID: 2800000, guid: 095bf52624bc67348b6e38a9202522c2, type: 3}
+  "\u5C04\u51FB\u9F20\u6807\u6307\u9488\u7EB9\u7406": {fileID: 2800000, guid: 91e43606322968441a518b5ae1c97ae9, type: 3}
 --- !u!70 &1870509119
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

@@ -28,8 +28,6 @@ public class PlayerController : MonoBehaviour
     [Min(0)]
     public float 受伤变色时间;
     
-    [SerializeField]private Texture2D 默认鼠标指针纹理;
-    [SerializeField]private Texture2D 射击鼠标指针纹理;
     private void Awake()
     {
         instance = this; 
@@ -37,25 +35,16 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Cursor.SetCursor(默认鼠标指针纹理, new Vector2(32, 32), CursorMode.Auto);
         plRigi = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         arms = GameObject.FindGameObjectsWithTag("arms");
-        speedX = 5f;
-        jumpForce = 5f;
+        // speedX = 5f;
+        // jumpForce = 5f;
 
     }
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
-        {
-            Cursor.SetCursor(射击鼠标指针纹理, new Vector2(32, 32), CursorMode.Auto);
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
-            Cursor.SetCursor(默认鼠标指针纹理, new Vector2(32, 32), CursorMode.Auto);
-        }
         followMouse();
         Jump();
 
