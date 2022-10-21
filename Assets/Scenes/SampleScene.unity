@@ -1069,6 +1069,8 @@ MonoBehaviour:
   "\u6362\u5F39\u8FDB\u5EA6\u6761\u7F29\u653E": {x: 0, y: 0, z: 0}
   "\u5F00\u67AA\u97F3\u6548": {fileID: 393356512}
   "\u6362\u5F39\u97F3\u6548": {fileID: 393356513}
+  "\u9ED8\u8BA4\u9F20\u6807\u6307\u9488\u7EB9\u7406": {fileID: 0}
+  "\u5C04\u51FB\u9F20\u6807\u6307\u9488\u7EB9\u7406": {fileID: 0}
 --- !u!212 &393356511
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1526,7 +1528,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8604865, y: -0.18960595, z: -1}
+  m_LocalPosition: {x: -3.2296758, y: -0.10063028, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2122,6 +2124,7 @@ MonoBehaviour:
   "\u8DF3\u8DC3\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.5
   "\u8DF3\u8DC3\u662F\u5426\u51B7\u5374": 1
   "\u8DF3\u8DC3\u51B7\u5374\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.28
+  "\u7A7A\u8DEF\u6BB5\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.4
   attackTime: 0
   attackColldown: 2
   perceptionRadius: 7
@@ -14910,8 +14913,6 @@ MonoBehaviour:
   flag: 0
   health: 10
   "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4": 0.25
-  "\u9ED8\u8BA4\u9F20\u6807\u6307\u9488\u7EB9\u7406": {fileID: 2800000, guid: 095bf52624bc67348b6e38a9202522c2, type: 3}
-  "\u5C04\u51FB\u9F20\u6807\u6307\u9488\u7EB9\u7406": {fileID: 2800000, guid: 91e43606322968441a518b5ae1c97ae9, type: 3}
 --- !u!70 &1870509119
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

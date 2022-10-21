@@ -40,6 +40,8 @@ public abstract class Enemy : MonoBehaviour
 
     public float 跳跃冷却射线检测长度 = 0.28f;
 
+    public float 空路段射线检测长度 = 0.4f;
+
     // 攻击计时
     public float attackTime = 0;
 
@@ -148,7 +150,7 @@ public abstract class Enemy : MonoBehaviour
         {
             //随机移动
             moveTimeCount += Time.deltaTime;
-            if (moveTimeCount > moveColldownTime)
+            if (moveTimeCount > moveColldownTime || 前方路段为空())
             {
                 moveX = Random.Range(-3, 3f) + transform.position.x;
                 moveTimeCount = 0;
@@ -156,10 +158,22 @@ public abstract class Enemy : MonoBehaviour
 
             transform.localScale = new Vector3(moveX < transform.position.x ? 1 : -1, 1, 1);
             transform.position = Vector2.MoveTowards(transform.position,
-                new Vector3(moveX, transform.position.y, transform.position.z), moveSpeed * 0.02f);
+                new Vector2(moveX, transform.position.y), moveSpeed * 0.02f);
         }
 
-        跳跃();
+    }
+
+    bool 前方路段为空()
+    {
+        Vector3 方向 = new Vector3(-transform.localScale.x, -1, 0);
+        Debug.DrawLine(transform.position, transform.position + 方向.normalized * 空路段射线检测长度, Color.yellow);
+
+        if (Physics2D.Raycast(transform.position, 方向, 空路段射线检测长度, LayerMask.GetMask("Ground")))
+        {
+            Debug.Log("空路段射线测试");
+            return false;
+        }
+        return true;
     }
 
     //射线检测实现的跳跃
@@ -176,6 +190,7 @@ public abstract class Enemy : MonoBehaviour
         }
         跳跃冷却();
     }
+
 
     void 跳跃冷却()
     {
