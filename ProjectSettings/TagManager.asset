@@ -9,6 +9,8 @@ TagManager:
   - attack
   - Enemy
   - Gun
+  - Undefined
+  - "\u5B50\u5F39"
   layers:
   - Default
   - TransparentFX

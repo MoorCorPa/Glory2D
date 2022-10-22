@@ -127,9 +127,10 @@ public abstract class Enemy : MonoBehaviour
     // 随机移动 移动控制器
     private void MoveController()
     {
-        if (perceptionRadius > (transform.position - PlayerController.instance.transform.position).sqrMagnitude)
+        if (perceptionRadius > (transform.position - PlayerController.instance.transform.position).sqrMagnitude
+            && Mathf.Abs(transform.position.y - PlayerController.instance.transform.position.y) < 0.5f)
         {
-            if (!isNearPlayer)
+            if (!isNearPlayer && !前方路段为空())
             {
                 // 进入锁定范围
                 Debug.Log("进入锁定范围");
