@@ -28,6 +28,11 @@ public class PlayerController : MonoBehaviour
     [Min(0)]
     public float 受伤变色时间;
     
+    public GameObject 跳跃粒子;
+    public GameObject 落地粒子;
+
+    private RaycastHit2D info;
+    public bool 是否落地 => plRigi.velocity.y < 0f && 是否触地;
     private void Awake()
     {
         instance = this; 
@@ -110,6 +115,7 @@ public class PlayerController : MonoBehaviour
         {   
             animator.SetTrigger("jump");
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            Instantiate(跳跃粒子, info.point, Quaternion.identity);
         }
     }
 
@@ -122,17 +128,27 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 终点 = new Vector3(0, -1, 0);
         Debug.DrawLine(transform.position, transform.position + 终点 * 触地射线检测长度, Color.red);
-        if (Physics2D.Raycast(transform.position, 终点, 触地射线检测长度, LayerMask.GetMask("Ground")))
+        info = Physics2D.Raycast(transform.position, 终点, 触地射线检测长度, LayerMask.GetMask("Ground"));
+        if (info.collider != null)
         {
             是否触地 = true;
         }
         else
         {
             是否触地 = false;
-        }
+        }   
         animator.SetBool("是否触地", 是否触地);
+        if (plRigi.velocity.y < -6.7f && 是否触地)
+        {
+            Instantiate(落地粒子, info.point, Quaternion.identity);
+        }
+
     }
 
+    public void 落地()
+    {
+        Instantiate(落地粒子, info.point, Quaternion.identity);
+    }
 /*    private void OnCollisionEnter2D(Collision2D collision)
     {
         Grounding(collision, false);

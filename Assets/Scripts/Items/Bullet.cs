@@ -13,7 +13,7 @@ public class Bullet : MonoBehaviour
 
     private float 子弹生成时的游戏时间;
 
-    public GameObject hitEffect;
+    public GameObject 子弹反馈;
 
     private Rigidbody2D 子弹刚体;
     private bool 是否触发 = false;
@@ -42,7 +42,7 @@ public class Bullet : MonoBehaviour
     {
         var colname = collision.name;
 
-        if (!colname.Equals("bullet(Clone)") && !colname.Equals("Player"))
+        if (!collision.CompareTag("子弹") && !colname.Equals("Player"))
         {
 
             if (!是否触发)
@@ -60,9 +60,18 @@ public class Bullet : MonoBehaviour
                 }
 
                 子弹刚体.velocity = new Vector2();
-                Instantiate(hitEffect, collision.ClosestPoint(transform.position), Quaternion.identity);
-                Destroy(gameObject);
+                //transform.position = collision.ClosestPoint(transform.position - transform.right * 0.07f);
+                transform.position = collision.ClosestPoint(transform.position);
+                //transform.localScale *= 0.6f;
+                // Instantiate(子弹反馈, collision.ClosestPoint(transform.position), Quaternion.identity);
+                GetComponent<Animator>().SetTrigger("击中");
+                // Destroy(gameObject);
             }
         }
+    }
+
+    public void 子弹销毁()
+    {
+        Destroy(gameObject);
     }
 }

@@ -24,7 +24,7 @@ public class Gun : MonoBehaviour
     public bool 主动换弹 = false;
 
     public GameObject 换弹进度条;
-    public Animator animator;
+    public Animator 换弹动画;
 
     public Vector3 换弹进度条缩放;
 
@@ -117,7 +117,7 @@ public class Gun : MonoBehaviour
     {
         if (是否正在换弹 == false)
         {
-            animator.SetLayerWeight(1, 1);
+            换弹动画.SetLayerWeight(1, 1);
             换弹音效.Play();
             换弹进度条.SetActive(true);
         }
@@ -131,7 +131,7 @@ public class Gun : MonoBehaviour
             当前子弹数量 = 最大子弹数量;
             是否正在换弹 = false;
             主动换弹 = false;
-            animator.SetLayerWeight(1, 0);
+            换弹动画.SetLayerWeight(1, 0);
             换弹进度条.SetActive(false);
         }
     }
