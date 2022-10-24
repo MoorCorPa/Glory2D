@@ -125,7 +125,7 @@ public abstract class Enemy : MonoBehaviour
     }
 
     // 随机移动 移动控制器
-    private void MoveController()
+    public virtual void MoveController()
     {
         if (perceptionRadius > (transform.position - PlayerController.instance.transform.position).sqrMagnitude
             && Mathf.Abs(transform.position.y - PlayerController.instance.transform.position.y) < 0.5f)
@@ -149,22 +149,26 @@ public abstract class Enemy : MonoBehaviour
         }
         else
         {
-            //随机移动
-            moveTimeCount += Time.deltaTime;
-            if (moveTimeCount > moveColldownTime || 前方路段为空())
-            {
-                moveX = Random.Range(-3, 3f) + transform.position.x;
-                moveTimeCount = 0;
-            }
-
-            transform.localScale = new Vector3(moveX < transform.position.x ? 1 : -1, 1, 1);
-            transform.position = Vector2.MoveTowards(transform.position,
-                new Vector2(moveX, transform.position.y), moveSpeed * 0.02f);
+            随机移动();     
         }
 
     }
 
-    bool 前方路段为空()
+    public virtual void 随机移动()
+    {
+        moveTimeCount += Time.deltaTime;
+        if (moveTimeCount > moveColldownTime || 前方路段为空())
+        {
+            moveX = Random.Range(-3, 3f) + transform.position.x;
+            moveTimeCount = 0;
+        }
+
+        transform.localScale = new Vector3(moveX < transform.position.x ? 1 : -1, 1, 1);
+        transform.position = Vector2.MoveTowards(transform.position,
+            new Vector2(moveX, transform.position.y), moveSpeed * 0.02f);
+    }
+
+    public bool 前方路段为空()
     {
         Vector3 方向 = new Vector3(-transform.localScale.x, -1, 0);
         Debug.DrawLine(transform.position, transform.position + 方向.normalized * 空路段射线检测长度, Color.yellow);
