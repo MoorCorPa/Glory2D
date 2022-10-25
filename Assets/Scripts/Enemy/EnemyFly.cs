@@ -19,6 +19,8 @@ public abstract class EnemyFly : MonoBehaviour
     [Min(0f)] public float 索敌半径;
     [Min(0f)] public float 攻击间隔;
     [Min(0f)] public float 受伤变色时间;
+    [Min(0f)] public float 最大升力;
+    [Min(0f)] public float 最小升力;
 
     public bool 是否远程;
 
@@ -68,7 +70,8 @@ public abstract class EnemyFly : MonoBehaviour
     {
         if (当前血量 > 0)
         {
-            var 射线 = Physics2D.Raycast(当前位置, 玩家位置 - 当前位置);
+            刚体.AddForce(transform.up * Random.Range(最小升力, 最大升力), ForceMode2D.Force);
+            var 射线 = Physics2D.Raycast(当前位置, 玩家位置 - 当前位置, Vector2.Distance(当前位置, 玩家位置), ~LayerMask.GetMask("Enemy"));
             Debug.DrawLine(当前位置, 射线.point, Color.red);
 
             var 随机位置检测射线 = Physics2D.Raycast(当前位置, 随机位置 - 当前位置, Mathf.Sqrt((随机位置 - 当前位置).sqrMagnitude),
@@ -78,7 +81,7 @@ public abstract class EnemyFly : MonoBehaviour
             攻击间隔计时 += Time.deltaTime;
 
             var 与玩家的距离 = Vector2.Distance(当前位置, 玩家位置);
-            if (与玩家的距离 < 攻击半径)
+            if (与玩家的距离 < 攻击半径 && !射线.collider.CompareTag("地图碰撞区域"))
             {
                 if (攻击间隔 < 攻击间隔计时)
                 {
@@ -92,7 +95,12 @@ public abstract class EnemyFly : MonoBehaviour
                         else
                         {
                             //摁创
+                            if (!射线.collider.CompareTag("地图碰撞区域"))
+                            {
+                                刚体.AddForce((玩家位置 - 当前位置).normalized * 3f,ForceMode2D.Impulse);
+                            }
                         }
+                        随机位置 = 获取可移动范围内随机坐标();
                         攻击前摇计时 = 攻击间隔计时 = 0;
                     }
                 }
@@ -103,7 +111,7 @@ public abstract class EnemyFly : MonoBehaviour
             }
             else if (与玩家的距离 < 索敌半径 && !射线.collider.CompareTag("地图碰撞区域") && 攻击间隔 < 攻击间隔计时)
             {
-                当前位置 = Vector2.MoveTowards(当前位置, 玩家位置 - 当前位置 * (攻击半径 / 与玩家的距离) + 当前位置, 移动速度 * Time.deltaTime);
+                当前位置 = Vector2.MoveTowards(当前位置, (玩家位置 - 当前位置) * (攻击半径 / 与玩家的距离) + 当前位置, 移动速度 * Time.deltaTime);
             }
             else
             {
@@ -124,6 +132,7 @@ public abstract class EnemyFly : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+        //转向();
     }
 
     public void FixedUpdate()
@@ -133,15 +142,20 @@ public abstract class EnemyFly : MonoBehaviour
     public void 随机移动()
     {
         当前位置 = Vector2.MoveTowards(当前位置, 随机位置, 移动速度 * Time.deltaTime);
-        if ((Vector2.Distance(当前位置, 随机位置) < Mathf.Epsilon))
+        if ((Vector2.Distance(当前位置, 随机位置) < 0.3f))
         {
             随机位置 = 获取可移动范围内随机坐标();
         }
     }
 
+    public void 转向()
+    {
+        transform.localScale = new Vector3(当前位置.x > 随机位置.x?1:-1, 0, 0);
+    }
+
     public Vector2 获取可移动范围内随机坐标()
     {
-        var 随机坐标 = new Vector2(Random.Range(-可移动x轴, 可移动x轴), Random.Range(-可移动y轴, 可移动y轴));
+        var 随机坐标 = new Vector2(Random.Range(初始位置.x - 可移动x轴, 初始位置.x + 可移动x轴), Random.Range(初始位置.y - 可移动y轴, 初始位置.y + 可移动y轴));
         随机坐标 -= new Vector2(可移动x轴偏移, 可移动y轴偏移);
         return 随机坐标;
     }
