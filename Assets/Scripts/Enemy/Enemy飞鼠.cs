@@ -28,6 +28,7 @@ public class Enemy飞鼠 : EnemyFly
     {
         if (攻击成功)
         {
+            Debug.Log("攻击成功");
             PlayerController.instance.TakeDamage(攻击力);
             攻击成功 = false;
         }

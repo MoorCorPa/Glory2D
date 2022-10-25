@@ -42,6 +42,7 @@ public abstract class EnemyFly : MonoBehaviour
 
     private Vector3 随机位置;
     private Vector3 初始位置;
+    private Vector3 缓存位置;
 
     private Vector3 当前位置
     {
@@ -64,6 +65,7 @@ public abstract class EnemyFly : MonoBehaviour
         攻击间隔计时 = 0;
         攻击前摇计时 = 0;
         随机位置 = 获取可移动范围内随机坐标();
+        缓存位置 = 当前位置;
     }
 
     public void Update()
@@ -132,7 +134,7 @@ public abstract class EnemyFly : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        //转向();
+        转向();
     }
 
     public void FixedUpdate()
@@ -150,7 +152,11 @@ public abstract class EnemyFly : MonoBehaviour
 
     public void 转向()
     {
-        transform.localScale = new Vector3(当前位置.x > 随机位置.x?1:-1, 0, 0);
+        if (缓存位置.x-当前位置.x!=0)
+        {
+            transform.localScale = new Vector3(缓存位置.x > 当前位置.x ? 1 : -1, 1, 1);
+        }
+        缓存位置 = 当前位置;
     }
 
     public Vector2 获取可移动范围内随机坐标()
