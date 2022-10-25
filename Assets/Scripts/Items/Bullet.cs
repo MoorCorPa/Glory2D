@@ -10,11 +10,10 @@ public class Bullet : MonoBehaviour
     [Min(0)] public float 子弹飞行速度 = 15f;
     [Min(1)] public int 子弹伤害;
     [Min(0)] public float 子弹销毁时间;
+    
+    [SerializeField] private GameObject 子弹反馈粒子;
 
     private float 子弹生成时的游戏时间;
-
-    public GameObject 子弹反馈;
-
     private Rigidbody2D 子弹刚体;
     private bool 是否触发 = false;
 
@@ -58,6 +57,11 @@ public class Bullet : MonoBehaviour
                     }
                     collision.GetComponent<Enemy>().TakeDamage(子弹伤害);
                 }
+                else if (collision.GetComponent<EnemyFly>())
+                {
+                    collision.GetComponent<EnemyFly>().掉血(子弹伤害);
+                }
+                
 
                 子弹刚体.velocity = new Vector2();
                 //transform.position = collision.ClosestPoint(transform.position - transform.right * 0.07f);

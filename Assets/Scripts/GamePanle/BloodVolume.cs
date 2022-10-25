@@ -7,23 +7,38 @@ using UnityEngine.UI;
 
 public class BloodVolume : MonoBehaviour
 {
-    float maxHealth;
+    float 最大血量;
     float currentHealth;
     Image Image;
-    // Start is called before the first frame update
+    public float 像素长度;
+    public float 像素宽度;
+    public GameObject 血量头;
+    public GameObject 血量尾;
     void Start()
     {
-        maxHealth = (float)PlayerController.instance.health;
+        最大血量 = (float)PlayerController.instance.health;
         //GetComponent<Image>().preferredWidth(maxHealth * 5);
         Image = this.transform.GetComponent<Image>();
-        this.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(maxHealth * 5, Image.sprite.texture.height);
+        this.transform.GetComponent<RectTransform>().sizeDelta = new Vector2((最大血量-2) * 像素长度, 像素宽度);
     }
 
-    // Update is called once per frame
     void Update()
     {
+        
         currentHealth = (float)PlayerController.instance.health;
-        this.transform.GetComponent<RectTransform>().sizeDelta = new Vector2(currentHealth * 5, Image.sprite.texture.height);
+        if (currentHealth < 最大血量)
+        {
+            血量尾.SetActive(false);
+        }
+        if (currentHealth <= 0)
+        {
+            血量头.SetActive(false);
+        }
+
+        if (currentHealth < 最大血量 - 1)
+        {
+            this.transform.GetComponent<RectTransform>().sizeDelta = new Vector2((currentHealth-1) * 像素长度, 像素宽度);
+        }
     }
 
 }

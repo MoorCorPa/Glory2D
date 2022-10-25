@@ -137,10 +137,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72045a343a75c0243b1f4709c95cb407, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "\u5B50\u5F39\u98DE\u884C\u901F\u5EA6": 15
+  "\u5B50\u5F39\u98DE\u884C\u901F\u5EA6": 14.5
   "\u5B50\u5F39\u4F24\u5BB3": 1
   "\u5B50\u5F39\u9500\u6BC1\u65F6\u95F4": 1
-  hitEffect: {fileID: 8736170730626038700, guid: 889f53b417cd198429c354632c21d386, type: 3}
+  "\u5B50\u5F39\u53CD\u9988\u7C92\u5B50": {fileID: 8736170730626038700, guid: 889f53b417cd198429c354632c21d386, type: 3}
 --- !u!95 &2641736402862526437
 Animator:
   serializedVersion: 4

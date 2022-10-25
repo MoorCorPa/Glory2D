@@ -24,13 +24,13 @@ public class Gun : MonoBehaviour
     public bool 主动换弹 = false;
 
     public GameObject 换弹进度条;
-    public Animator 换弹动画;
 
     public Vector3 换弹进度条缩放;
 
     public AudioSource 开枪音效;
     public AudioSource 换弹音效;
 
+    [SerializeField] private Animator 换弹动画;
     [SerializeField] private Texture2D 默认鼠标指针纹理;
     [SerializeField] private Texture2D 射击鼠标指针纹理;
 

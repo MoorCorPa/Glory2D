@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class EnemyMove : MonoBehaviour
 {
-    // Start is called before the first frame update
     public Transform 目标;
     public Transform 本体;
 
@@ -43,7 +42,6 @@ public class EnemyMove : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         if (路径 == null)

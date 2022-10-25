@@ -72,10 +72,12 @@ public abstract class Enemy : MonoBehaviour
     public Rigidbody2D 刚体;
 
     public Color 初始颜色;
+    public Vector3 初始缩放;
     public void Start()
     {
         初始颜色 = GetComponent<SpriteRenderer>().color;
         animator = GetComponent<Animator>();
+        初始缩放 = transform.localScale;
         //transform.position = Vector2.MoveTowards(transform.position, -transform.position, moveSpeed * Time.deltaTime);
     }
 
@@ -134,7 +136,7 @@ public abstract class Enemy : MonoBehaviour
             {
                 // 进入锁定范围
                 Debug.Log("进入锁定范围");
-                transform.localScale = new Vector3(getFaceAt() ? 1 : -1, 1, 1);
+                transform.localScale = new Vector3(getFaceAt() ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.z);
                 transform.position = Vector2.MoveTowards(transform.position,
                     new Vector3(PlayerController.instance.transform.position.x, transform.position.y,
                         transform.position.z), moveSpeed * 0.02f);
@@ -163,7 +165,7 @@ public abstract class Enemy : MonoBehaviour
             moveTimeCount = 0;
         }
 
-        transform.localScale = new Vector3(moveX < transform.position.x ? 1 : -1, 1, 1);
+        transform.localScale = new Vector3(moveX < transform.position.x ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.z);
         transform.position = Vector2.MoveTowards(transform.position,
             new Vector2(moveX, transform.position.y), moveSpeed * 0.02f);
     }

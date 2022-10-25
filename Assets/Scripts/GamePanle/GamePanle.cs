@@ -11,14 +11,14 @@ public class GamePanle : MonoBehaviour
     void Start()
     {
         //Text = transform.GetComponent<TextMeshProUGUI>();
-        血量.text = "血量:"+PlayerController.instance.health.ToString();
+        血量.text = PlayerController.instance.health.ToString();
         子弹.text = "x" + Gun.instance.当前子弹数量 + "/" + Gun.instance.最大子弹数量;
     }
 
     // Update is called once per frame
     void Update()
     {
-        血量.text = "血量:"+PlayerController.instance.health.ToString();
+        血量.text = PlayerController.instance.health.ToString();
         子弹.text = "x" + Gun.instance.当前子弹数量 + "/" + Gun.instance.最大子弹数量;
     }
 }
