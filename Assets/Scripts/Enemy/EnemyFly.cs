@@ -13,6 +13,7 @@ public abstract class EnemyFly : MonoBehaviour
     [Min(0f)] public int 最大血量;
     [Min(0f)] public int 当前血量;
     [Min(0f)] public int 攻击力;
+    [Min(0f)] public float 攻击前摇;
     [Min(0f)] public float 移动速度;
     [Min(0f)] public float 攻击半径;
     [Min(0f)] public float 索敌半径;
@@ -29,6 +30,7 @@ public abstract class EnemyFly : MonoBehaviour
     public GameObject 子弹;
 
     private float 攻击间隔计时;
+    private float 攻击前摇计时;
     private float 颜色透明度;
 
     private Rigidbody2D 刚体;
@@ -58,6 +60,7 @@ public abstract class EnemyFly : MonoBehaviour
         初始位置 = transform.position;
         当前血量 = 最大血量;
         攻击间隔计时 = 0;
+        攻击前摇计时 = 0;
         随机位置 = 获取可移动范围内随机坐标();
     }
 
@@ -72,24 +75,33 @@ public abstract class EnemyFly : MonoBehaviour
                 LayerMask.GetMask("Ground"));
             Debug.DrawLine(当前位置, 随机位置, Color.green);
 
+            攻击间隔计时 += Time.deltaTime;
+
             var 与玩家的距离 = Vector2.Distance(当前位置, 玩家位置);
             if (与玩家的距离 < 攻击半径)
             {
-                if (是否远程)
+                if (攻击间隔 < 攻击间隔计时)
                 {
-                    攻击间隔计时 += Time.deltaTime;
-                    if (攻击间隔 < 攻击间隔计时)
+                    攻击前摇计时 += Time.deltaTime;
+                    if (攻击前摇 < 攻击前摇计时)
                     {
-                        Instantiate(子弹, 当前位置, transform.rotation);
-                        攻击间隔计时 = 0;
+                        if (是否远程)
+                        {
+                            Instantiate(子弹, 当前位置, transform.rotation);
+                        }
+                        else
+                        {
+                            //摁创
+                        }
+                        攻击前摇计时 = 攻击间隔计时 = 0;
                     }
                 }
                 else
                 {
-                    //摁创
+                    随机移动();
                 }
             }
-            else if (与玩家的距离 < 索敌半径 && !射线.collider.CompareTag("地图碰撞区域"))
+            else if (与玩家的距离 < 索敌半径 && !射线.collider.CompareTag("地图碰撞区域") && 攻击间隔 < 攻击间隔计时)
             {
                 当前位置 = Vector2.MoveTowards(当前位置, 玩家位置 - 当前位置 * (攻击半径 / 与玩家的距离) + 当前位置, 移动速度 * Time.deltaTime);
             }
