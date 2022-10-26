@@ -1,226 +1,236 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class EnemyRemake : MonoBehaviour
 {
-    public int ¹ÖÎïID;
-    [Min(0f)] public int ×î´óÑªÁ¿;
-    [Min(0f)] public int µ±Ç°ÑªÁ¿;
-    [Min(0f)] public int ¹¥»÷Á¦;
+    public int æ€ªç‰©ID;
+    [Min(0f)] public int æœ€å¤§è¡€é‡;
+    [Min(0f)] public int å½“å‰è¡€é‡;
+    [Min(0f)] public int æ”»å‡»åŠ›;
 
-    [Header("É¨ÃèÇøÓòÉèÖÃ")]
-    [Tooltip("É¨Ãè¹¥»÷ÇøÓò")]
+    [Header("æ‰«æåŒºåŸŸè®¾ç½®")]
+    [Tooltip("æ‰«ææ”»å‡»åŒºåŸŸ")]
     [Range(0.0f, 360.0f)]
-    public float ÊÓ½Ç·½Ïò = 0.0f;
+    public float è§†è§’æ–¹å‘ = 0.0f;
 
-    [Range(0.0f, 360.0f)] public float ÊÓ½ÇFOV;
-    [Min(0f)] public float ÊÓÒ°¾àÀë;
+    [Range(0.0f, 360.0f)] public float è§†è§’FOV;
+    [Min(0f)] public float è§†é‡è·ç¦»;
 
-    [Min(0f)] public float ÒÆ¶¯ËÙ¶È;
-    [Min(0f)] public float ¹¥»÷°ë¾¶;
-    [Min(0f)] public float Ë÷µĞ°ë¾¶;
-    [Min(0f)] public float ¹¥»÷¼ä¸ô;
-    [Min(0f)] public float ÊÜÉË±äÉ«Ê±¼ä;
+    [Min(0f)] public float ç§»åŠ¨é€Ÿåº¦;
+    [Min(0f)] public float æ”»å‡»åŠå¾„;
+    [Min(0f)] public float ç´¢æ•ŒåŠå¾„;
+    [Min(0f)] public float æ”»å‡»é—´éš”;
+    [Min(0f)] public float å—ä¼¤å˜è‰²æ—¶é—´;
 
-    public float ¿ÕÂ·ÉäÏß³¤¶È;
+    [Min(0f)] public float å¯ç§»åŠ¨xè½´;
+    [Min(0f)] public float å¯ç§»åŠ¨yè½´;
+    public float å¯ç§»åŠ¨xè½´åç§»;
+    public float å¯ç§»åŠ¨yè½´åç§»;
 
-    public bool ÊÇ·ñÔ¶³Ì;
+    public float ç©ºè·¯å°„çº¿é•¿åº¦;
 
-    public GameObject ×Óµ¯;
+    public bool æ˜¯å¦è¿œç¨‹;
 
-    private float ¹¥»÷¼ä¸ô¼ÆÊ±;
-    private float ÑÕÉ«Í¸Ã÷¶È;
+    public GameObject å­å¼¹;
 
-    private Rigidbody2D ¸ÕÌå;
-    private Animator ¶¯»­;
-    private SpriteRenderer ÎÆÀí;
-    private Color32 ³õÊ¼ÑÕÉ«;
+    private float æ”»å‡»é—´éš”è®¡æ—¶;
+    private float é¢œè‰²é€æ˜åº¦;
 
-    private Vector3 Ëæ»úÎ»ÖÃ;
-    private Vector3 ³õÊ¼Î»ÖÃ;
-    private Vector3 »º´æÎ»ÖÃ;
+    private Rigidbody2D åˆšä½“;
+    private Animator åŠ¨ç”»;
+    private SpriteRenderer çº¹ç†;
+    private Color32 åˆå§‹é¢œè‰²;
+
+    private Vector3 éšæœºä½ç½®;
+    private Vector3 åˆå§‹ä½ç½®;
+    private Vector3 ç¼“å­˜ä½ç½®;
    
-    private Vector3 µ±Ç°Î»ÖÃ
+    private Vector3 å½“å‰ä½ç½®
     {
         get => transform.position;
         set => transform.position = value;
     }
 
-    private Vector3 Íæ¼ÒÎ»ÖÃ => PlayerController.instance.transform.position;
+    private Vector3 ç©å®¶ä½ç½® => PlayerController.instance.transform.position;
 
-    private float ÓëÍæ¼Ò¾àÀë;
+    private float ä¸ç©å®¶è·ç¦»;
 
-    // Start is called before the first frame update
     void Start()
     {
-        ¸ÕÌå = GetComponent<Rigidbody2D>();
-        ¶¯»­ = GetComponent<Animator>();
-        ÎÆÀí = GetComponent<SpriteRenderer>();
-        ³õÊ¼ÑÕÉ« = ÎÆÀí.color;
-        ÑÕÉ«Í¸Ã÷¶È = ³õÊ¼ÑÕÉ«.r;
-        ¶¯»­.SetInteger("¹ÖÎïID", ¹ÖÎïID);
-        ³õÊ¼Î»ÖÃ = transform.position;
-        µ±Ç°ÑªÁ¿ = ×î´óÑªÁ¿;
-        ¹¥»÷¼ä¸ô¼ÆÊ± = 0;
-        »º´æÎ»ÖÃ = µ±Ç°Î»ÖÃ;
+        åˆšä½“ = GetComponent<Rigidbody2D>();
+        åŠ¨ç”» = GetComponent<Animator>();
+        çº¹ç† = GetComponent<SpriteRenderer>();
+        åˆå§‹é¢œè‰² = çº¹ç†.color;
+        é¢œè‰²é€æ˜åº¦ = åˆå§‹é¢œè‰².r;
+        åŠ¨ç”».SetInteger("æ€ªç‰©ID", æ€ªç‰©ID);
+        åˆå§‹ä½ç½® = transform.position;
+        å½“å‰è¡€é‡ = æœ€å¤§è¡€é‡;
+        æ”»å‡»é—´éš”è®¡æ—¶ = 0;
+        ç¼“å­˜ä½ç½® = å½“å‰ä½ç½®;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (µ±Ç°ÑªÁ¿ > 0)
+        if (å½“å‰è¡€é‡ > 0)
         {
-            ÓëÍæ¼Ò¾àÀë = Vector2.Distance(µ±Ç°Î»ÖÃ, Íæ¼ÒÎ»ÖÃ);
-            var ÉäÏß = Physics2D.Raycast(µ±Ç°Î»ÖÃ, Íæ¼ÒÎ»ÖÃ - µ±Ç°Î»ÖÃ, Vector2.Distance(µ±Ç°Î»ÖÃ, Íæ¼ÒÎ»ÖÃ), ~LayerMask.GetMask("Enemy"));
-            Debug.DrawLine(µ±Ç°Î»ÖÃ, ÉäÏß.point, Color.red);
-            ¹¥»÷¼ä¸ô¼ÆÊ± += Time.deltaTime;
+            ä¸ç©å®¶è·ç¦» = Vector2.Distance(å½“å‰ä½ç½®, ç©å®¶ä½ç½®);
+            var å°„çº¿ = Physics2D.Raycast(å½“å‰ä½ç½®, ç©å®¶ä½ç½® - å½“å‰ä½ç½®, Vector2.Distance(å½“å‰ä½ç½®, ç©å®¶ä½ç½®), ~LayerMask.GetMask("Enemy"));
+            Debug.DrawLine(å½“å‰ä½ç½®, å°„çº¿.point, Color.red);
+            æ”»å‡»é—´éš”è®¡æ—¶ += Time.deltaTime;
 
-            if (¹¥»÷¼ä¸ô < ¹¥»÷¼ä¸ô¼ÆÊ±)
+            if (æ”»å‡»é—´éš” < æ”»å‡»é—´éš”è®¡æ—¶)
             {
-                if (ÊÇ·ñÔ¶³Ì)
+                if (æ˜¯å¦è¿œç¨‹)
                 {
-                    if (ÓëÍæ¼Ò¾àÀë < ¹¥»÷°ë¾¶ && !ÉäÏß.collider.CompareTag("µØÍ¼Åö×²ÇøÓò"))
+                    if (ä¸ç©å®¶è·ç¦» < æ”»å‡»åŠå¾„ && !å°„çº¿.collider.CompareTag("åœ°å›¾ç¢°æ’åŒºåŸŸ"))
                     {
-                        Instantiate(×Óµ¯, µ±Ç°Î»ÖÃ, transform.rotation);
+                        Instantiate(å­å¼¹, å½“å‰ä½ç½®, transform.rotation);
                     }
                     else
                     {
-                        Ëæ»úÒÆ¶¯();
+                        éšæœºç§»åŠ¨();
                     }
                 }
                 else
                 {
-                    if (ÓëÍæ¼Ò¾àÀë < Ë÷µĞ°ë¾¶ && !Ç°·½Â·¶ÎÎª¿Õ())
+                    if (ä¸ç©å®¶è·ç¦» < ç´¢æ•ŒåŠå¾„ && !å‰æ–¹è·¯æ®µä¸ºç©º())
                     {
-                        if (Íæ¼ÒÔÚÉÈĞÎ·¶Î§())
+                        if (ç©å®¶åœ¨æ‰‡å½¢èŒƒå›´())
                         {
-                            ¶¯»­.SetTrigger("Attack");
+                            åŠ¨ç”».SetTrigger("Attack");
                         }
                         else
                         {
-                            µ±Ç°Î»ÖÃ = Vector2.MoveTowards(µ±Ç°Î»ÖÃ, new Vector3(Íæ¼ÒÎ»ÖÃ.x, µ±Ç°Î»ÖÃ.y, µ±Ç°Î»ÖÃ.z), ÒÆ¶¯ËÙ¶È * Time.deltaTime);
-                            Debug.Log("±¦±´ÎÒÀ´¿©");
+                            å½“å‰ä½ç½® = Vector2.MoveTowards(å½“å‰ä½ç½®, new Vector3(ç©å®¶ä½ç½®.x, å½“å‰ä½ç½®.y, å½“å‰ä½ç½®.z), ç§»åŠ¨é€Ÿåº¦ * Time.deltaTime);
+                            Debug.Log("å®è´æˆ‘æ¥å’¯");
                         }
                     }
                     else
                     {
-                        Ëæ»úÒÆ¶¯();
+                        éšæœºç§»åŠ¨();
                     }
                 }
             }
             else
             {
-                Ëæ»úÒÆ¶¯();
+                éšæœºç§»åŠ¨();
             }
-            ×ªÏò();
+            è½¬å‘();
         }
         else
         {
-            ÑÕÉ«Í¸Ã÷¶È -= Time.deltaTime * 100;
-            ÎÆÀí.color = new Color32(³õÊ¼ÑÕÉ«.a, ³õÊ¼ÑÕÉ«.b, ³õÊ¼ÑÕÉ«.g, (byte)ÑÕÉ«Í¸Ã÷¶È);
-            if (ÑÕÉ«Í¸Ã÷¶È < 0)
+            é¢œè‰²é€æ˜åº¦ -= Time.deltaTime * 100;
+            çº¹ç†.color = new Color32(åˆå§‹é¢œè‰².a, åˆå§‹é¢œè‰².b, åˆå§‹é¢œè‰².g, (byte)é¢œè‰²é€æ˜åº¦);
+            if (é¢œè‰²é€æ˜åº¦ < 0)
             {
                 Destroy(gameObject);
             }
         }
     }
 
-    public virtual void Ëæ»úÒÆ¶¯()
+    public virtual void éšæœºç§»åŠ¨()
     {
-        if ((Vector2.Distance(µ±Ç°Î»ÖÃ, Ëæ»úÎ»ÖÃ) < 0.3f) || Ç°·½Â·¶ÎÎª¿Õ())
+        if ((Vector2.Distance(å½“å‰ä½ç½®, éšæœºä½ç½®) < 0.3f) || å‰æ–¹è·¯æ®µä¸ºç©º())
         {
-            »ñÈ¡ĞÂÎ»ÖÃ();
+            è·å–æ–°ä½ç½®();
         }
-        µ±Ç°Î»ÖÃ = Vector2.MoveTowards(µ±Ç°Î»ÖÃ, Ëæ»úÎ»ÖÃ, ÒÆ¶¯ËÙ¶È * Time.deltaTime);
+        å½“å‰ä½ç½® = Vector2.MoveTowards(å½“å‰ä½ç½®, éšæœºä½ç½®, ç§»åŠ¨é€Ÿåº¦ * Time.deltaTime);
     }
 
-    public void »ñÈ¡ĞÂÎ»ÖÃ()
+    public void è·å–æ–°ä½ç½®()
     {
-        Ëæ»úÎ»ÖÃ = new Vector3(µ±Ç°Î»ÖÃ.x+Random.Range(-3, 3f), µ±Ç°Î»ÖÃ.y, µ±Ç°Î»ÖÃ.z);
+        éšæœºä½ç½® = new Vector3(å½“å‰ä½ç½®.x+Random.Range(-3, 3f), å½“å‰ä½ç½®.y, å½“å‰ä½ç½®.z);
     }
 
-    public bool Íæ¼ÒÔÚÉÈĞÎ·¶Î§()
+    public bool ç©å®¶åœ¨æ‰‡å½¢èŒƒå›´()
     {
-        Vector2 ÕıÇ°·½ÏòÁ¿ = transform.rotation * (transform.localScale.x > 0 ? Vector2.left : Vector2.right);
-        Vector3 v = Quaternion.Euler(0, 0, transform.localScale.x > 0 ? ÊÓ½Ç·½Ïò : -ÊÓ½Ç·½Ïò) * ÕıÇ°·½ÏòÁ¿;
-        Vector2 µ½Íæ¼ÒµÄÏòÁ¿ = Íæ¼ÒÎ»ÖÃ - µ±Ç°Î»ÖÃ;
-        // Á½¸öÏòÁ¿µÄ¼Ğ½Ç
-        float ¼Ğ½Ç = Mathf.Acos(Vector2.Dot(v.normalized, µ½Íæ¼ÒµÄÏòÁ¿.normalized)) * Mathf.Rad2Deg;
+        Vector2 æ­£å‰æ–¹å‘é‡ = transform.rotation * (transform.localScale.x > 0 ? Vector2.left : Vector2.right);
+        Vector3 v = Quaternion.Euler(0, 0, transform.localScale.x > 0 ? è§†è§’æ–¹å‘ : -è§†è§’æ–¹å‘) * æ­£å‰æ–¹å‘é‡;
+        Vector2 åˆ°ç©å®¶çš„å‘é‡ = ç©å®¶ä½ç½® - å½“å‰ä½ç½®;
+        // ä¸¤ä¸ªå‘é‡çš„å¤¹è§’
+        float å¤¹è§’ = Mathf.Acos(Vector2.Dot(v.normalized, åˆ°ç©å®¶çš„å‘é‡.normalized)) * Mathf.Rad2Deg;
 
-        if (ÓëÍæ¼Ò¾àÀë < ÊÓÒ°¾àÀë)
+        if (ä¸ç©å®¶è·ç¦» < è§†é‡è·ç¦»)
         {
-            if (¼Ğ½Ç <= ÊÓ½ÇFOV * 0.5f)
+            if (å¤¹è§’ <= è§†è§’FOV * 0.5f)
             {
-                Debug.Log("Íæ¼Ò³öÏÖÔÚÉÈĞÎ·¶Î§ÄÚ£¡");
+                Debug.Log("ç©å®¶å‡ºç°åœ¨æ‰‡å½¢èŒƒå›´å†…ï¼");
                 return true;
             }
         }
-        Debug.Log("´ÁÀ²£¬²»ÔÚÂï");
+        Debug.Log("æˆ³å•¦ï¼Œä¸åœ¨å˜›");
         return false;
     }
 
-    public bool Ç°·½Â·¶ÎÎª¿Õ()
+    public bool å‰æ–¹è·¯æ®µä¸ºç©º()
     {
-        Vector3 ·½Ïò = new Vector3(-transform.localScale.x, -1, 0);
-        Debug.DrawLine(transform.position, transform.position + ·½Ïò.normalized * ¿ÕÂ·ÉäÏß³¤¶È, Color.yellow);
+        Vector3 æ–¹å‘ = new Vector3(-transform.localScale.x, -1, 0);
+        Debug.DrawLine(transform.position, transform.position + æ–¹å‘.normalized * ç©ºè·¯å°„çº¿é•¿åº¦, Color.yellow);
 
-        if (Physics2D.Raycast(transform.position, ·½Ïò, ¿ÕÂ·ÉäÏß³¤¶È, LayerMask.GetMask("Ground")))
+        if (Physics2D.Raycast(transform.position, æ–¹å‘, ç©ºè·¯å°„çº¿é•¿åº¦, LayerMask.GetMask("Ground")))
         {
-            Debug.Log("¿ÕÂ·¶ÎÉäÏß²âÊÔ");
+            Debug.Log("ç©ºè·¯æ®µå°„çº¿æµ‹è¯•");
             return false;
         }
-        Debug.Log("´ÁÀ²£¬²»¿ÕÂï");
+        Debug.Log("æˆ³å•¦ï¼Œä¸ç©ºå˜›");
         return true;
     }
 
-    public void ×ªÏò()
+    public void è½¬å‘()
     {
-        if (»º´æÎ»ÖÃ.x - µ±Ç°Î»ÖÃ.x != 0)
+        if (ç¼“å­˜ä½ç½®.x - å½“å‰ä½ç½®.x != 0)
         {
-            transform.localScale = new Vector3(»º´æÎ»ÖÃ.x > µ±Ç°Î»ÖÃ.x ? 1 : -1, 1, 1);
+            transform.localScale = new Vector3(ç¼“å­˜ä½ç½®.x > å½“å‰ä½ç½®.x ? 1 : -1, 1, 1);
         }
-        »º´æÎ»ÖÃ = µ±Ç°Î»ÖÃ;
+        ç¼“å­˜ä½ç½® = å½“å‰ä½ç½®;
     }
 
-    public void µôÑª(int ÉËº¦)
+    public void æ‰è¡€(int ä¼¤å®³)
     {
-        µ±Ç°ÑªÁ¿ -= ÉËº¦;
-        if (µ±Ç°ÑªÁ¿ > 0)
+        å½“å‰è¡€é‡ -= ä¼¤å®³;
+        if (å½“å‰è¡€é‡ > 0)
         {
-            ÎÆÀí.color = new Color(0.99f, 0.3f, 0.3f, 1f);
-            ¶¯»­.SetTrigger("µôÑª");
-            Invoke("»Ö¸´ÑÕÉ«", ÊÜÉË±äÉ«Ê±¼ä);
+            çº¹ç†.color = new Color(0.99f, 0.3f, 0.3f, 1f);
+            åŠ¨ç”».SetTrigger("æ‰è¡€");
+            Invoke("æ¢å¤é¢œè‰²", å—ä¼¤å˜è‰²æ—¶é—´);
         }
         else
         {
-            ¸ÕÌå.gravityScale = 1;
-            ¶¯»­.SetTrigger("ËÀÍö");
+            åˆšä½“.gravityScale = 1;
+            åŠ¨ç”».SetTrigger("æ­»äº¡");
         }
     }
 
-    public void »Ö¸´ÑÕÉ«()
+    public void æ¢å¤é¢œè‰²()
     {
-        ÎÆÀí.color = ³õÊ¼ÑÕÉ«;
+        çº¹ç†.color = åˆå§‹é¢œè‰²;
     }
 
-    //»æÖÆ
+    //ç»˜åˆ¶
     private void OnDrawGizmosSelected()
     {
-        // ¹¥»÷·¶Î§
+        var ç»¿è‰² = new Color(0, 1.0f, 0, 0.4f);
+        var çº¢è‰² = new Color(1.0f, 0, 0, 0.1f);
+        var è“è‰² = new Color(0.0f, 0.0f, 1f, 0.1f);
+        var é»„è‰² = new Color(1f, 0.9215686f, 0.01568628f, 0.1f);
+
+        // æ”»å‡»èŒƒå›´
         Vector3 forward = transform.localScale.x > 0 ? Vector2.left : Vector2.right;
-        forward = Quaternion.Euler(0, 0, transform.localScale.x > 0 ? ÊÓ½Ç·½Ïò : -ÊÓ½Ç·½Ïò) * forward;
+        forward = Quaternion.Euler(0, 0, transform.localScale.x > 0 ? è§†è§’æ–¹å‘ : -è§†è§’æ–¹å‘) * forward;
         if (GetComponent<SpriteRenderer>().flipX) forward.x = -forward.x;
 
-        Vector3 endpoint = transform.position + (Quaternion.Euler(0, 0, ÊÓ½ÇFOV * 0.5f) * forward);
+        Vector3 endpoint = transform.position + (Quaternion.Euler(0, 0, è§†è§’FOV * 0.5f) * forward);
 
-        Handles.color = new Color(0, 1.0f, 0, 0.2f);
-        Handles.DrawSolidArc(transform.position, -Vector3.forward, (endpoint - transform.position).normalized, ÊÓ½ÇFOV,
-            ÊÓÒ°¾àÀë);
-
-        // Ë÷µĞ·¶Î§
-        Handles.color = new Color(1.0f, 0, 0, 0.1f);
-        Handles.DrawSolidDisc(transform.position, Vector3.back, Mathf.Sqrt(Ë÷µĞ°ë¾¶));
+        Handles.color = çº¢è‰²;
+        Handles.DrawSolidArc(transform.position, -Vector3.forward, (endpoint - transform.position).normalized, è§†è§’FOV,
+            è§†é‡è·ç¦»);
+        // ç´¢æ•ŒèŒƒå›´
+        Handles.color = é»„è‰²;
+        Handles.DrawSolidDisc(transform.position, Vector3.back, ç´¢æ•ŒåŠå¾„);
+        // ç§»åŠ¨èŒƒå›´
+        Handles.DrawSolidRectangleWithOutline(
+            new Rect(åˆå§‹ä½ç½®.x - å¯ç§»åŠ¨xè½´ + å¯ç§»åŠ¨xè½´åç§» * 2, åˆå§‹ä½ç½®.y - å¯ç§»åŠ¨yè½´ + å¯ç§»åŠ¨yè½´åç§» * 2, å¯ç§»åŠ¨xè½´ * 2, å¯ç§»åŠ¨yè½´ * 2), ç»¿è‰², è“è‰²);
     }
 }
