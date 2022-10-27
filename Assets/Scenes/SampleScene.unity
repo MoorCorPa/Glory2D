@@ -5770,7 +5770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &286440672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5783,13 +5783,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbdae27908bc4b6c866da73aa3e84610, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "\u602A\u7269ID": 2
   "\u6700\u5927\u8840\u91CF": 6
   "\u5F53\u524D\u8840\u91CF": 6
   "\u653B\u51FB\u529B": 1
+  "\u79FB\u52A8\u901F\u5EA6": 1
+  "\u602A\u7269ID": 2
   "\u51B2\u51FB\u529B": 0
   "\u653B\u51FB\u524D\u6447": 0.5
-  "\u79FB\u52A8\u901F\u5EA6": 1
   "\u653B\u51FB\u534A\u5F84": 2
   "\u7D22\u654C\u534A\u5F84": 3
   "\u653B\u51FB\u95F4\u9694": 2
@@ -7709,11 +7709,10 @@ GameObject:
   m_Component:
   - component: {fileID: 990614617}
   - component: {fileID: 990614616}
+  - component: {fileID: 990614619}
   - component: {fileID: 990614615}
   - component: {fileID: 990614614}
   - component: {fileID: 990614618}
-  - component: {fileID: 990614620}
-  - component: {fileID: 990614619}
   m_Layer: 12
   m_Name: "Enemy\u8F6F\u6CE5\u602A"
   m_TagString: Enemy
@@ -7821,11 +7820,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 990614613}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.73, y: 0.14, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.73, y: 0.13999999, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1315977543}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7842,7 +7842,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.09, y: -0.1}
+  m_Offset: {x: 0, y: -0.1}
   m_Size: {x: 0.45, y: 0.3}
   m_Direction: 1
 --- !u!114 &990614619
@@ -7857,62 +7857,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0478d86c75fd2ff4fa066e42da8bd89d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 990614615}
-  viewDirection: 325
-  viewFov: 49
-  viewDistance: 0.62
-  health: 10
-  damage: 1
-  moveSpeed: 0.5
-  moveTimeCount: 0
-  moveColldownTime: 2
-  "\u8DF3\u8DC3\u529B\u5EA6": 35
-  "\u8DF3\u8DC3\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.5
-  "\u8DF3\u8DC3\u662F\u5426\u51B7\u5374": 1
-  "\u8DF3\u8DC3\u51B7\u5374\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.28
-  "\u7A7A\u8DEF\u6BB5\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.4
-  attackTime: 0
-  attackColldown: 2
-  perceptionRadius: 7
-  attackTriggerColl: {fileID: 990614620}
-  moveX: 0
-  isAttacked: 1
-  isNearPlayer: 0
-  isAttackHitRange: 0
+  "\u6700\u5927\u8840\u91CF": 10
+  "\u5F53\u524D\u8840\u91CF": 0
+  "\u653B\u51FB\u529B": 1
+  "\u79FB\u52A8\u901F\u5EA6": 0.4
+  "\u602A\u7269ID": 0
+  "\u653B\u51FB\u50F5\u76F4": 1
+  "\u653B\u51FB\u524D\u6447": 0.1
+  "\u653B\u51FB\u95F4\u9694": 2
   "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4": 0.2
-  "\u662F\u5426\u6B63\u5728\u6B7B\u4EA1": 0
-  "\u521A\u4F53": {fileID: 990614614}
-  "\u521D\u59CB\u989C\u8272": {r: 0, g: 0, b: 0, a: 0}
-  "\u521D\u59CB\u7F29\u653E": {x: 0, y: 0, z: 0}
---- !u!60 &990614620
-PolygonCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 990614613}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.036593318, y: 0.06385973}
-      - {x: -0.4007522, y: 0.34480602}
-      - {x: -0.47365558, y: 0.2703206}
-      - {x: -0.18390858, y: -0.028208941}
+  "\u5411\u5DE6\u5DE1\u903B\u68C0\u6D4B\u7684x\u8F74": 1
+  "\u5411\u53F3\u5DE1\u903B\u68C0\u6D4B\u7684x\u8F74": 1
+  "\u5411\u5DE6\u7D22\u654C\u7684x\u8F74": 1
+  "\u5411\u53F3\u7D22\u654C\u7684x\u8F74": 1
+  "\u6700\u5C0F\u79FB\u52A8\u8DDD\u79BB": 0.2
+  "\u7A7A\u8DEF\u5C04\u7EBF\u957F\u5EA6": 1
+  "\u662F\u5426\u8FDC\u7A0B": 0
+  "\u73A9\u5BB6\u662F\u5426\u5728\u8303\u56F4\u5185": 0
+  "\u5B50\u5F39": {fileID: 0}
+  "\u89C6\u89D2\u65B9\u5411": 324
+  "\u89C6\u89D2FOV": 76
+  "\u89C6\u91CE\u8DDD\u79BB": 0.6
+  "\u7D22\u654C\u534A\u5F84": 1
 --- !u!1 &1056239794
 GameObject:
   m_ObjectHideFlags: 0
@@ -8269,6 +8235,67 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1202966520}
   m_CullTransparentMesh: 1
+--- !u!1 &1315977542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1315977543}
+  - component: {fileID: 1315977544}
+  m_Layer: 13
+  m_Name: "\u653B\u51FB\u5224\u5B9A"
+  m_TagString: "\u653B\u51FB\u8303\u56F4"
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1315977543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315977542}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 990614617}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!60 &1315977544
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315977542}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.43326676, y: 0.3667642}
+      - {x: -0.52037585, y: 0.29420394}
+      - {x: -0.15098965, y: -0.14800763}
+      - {x: 0.034531116, y: 0.0035085976}
 --- !u!1 &1323095810
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ TagManager:
   - Gun
   - "\u5B50\u5F39"
   - "\u5730\u56FE\u78B0\u649E\u533A\u57DF"
+  - "\u653B\u51FB\u8303\u56F4"
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - "\u80CC\u666F"
   - "\u524D\u666F"
   - Enemy
-  - 
+  - "\u653B\u51FB\u8303\u56F4"
   - 
   - 
   - 

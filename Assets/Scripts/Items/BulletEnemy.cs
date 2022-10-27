@@ -11,17 +11,17 @@ public class BulletEnemy : MonoBehaviour
     [Min(1)] public int 子弹伤害;
     [Min(0)] public float 子弹销毁时间;
 
-    private Rigidbody2D 子弹刚体;
-    private bool 是否触发 = false;
+    public Rigidbody2D 子弹刚体;
+    public bool 是否触发 = false;
 
-    
-    private Vector3 玩家位置 => PlayerController.instance.transform.position;
-    private Vector3 当前位置
+
+    public Vector3 玩家位置 => PlayerController.instance.transform.position;
+    public Vector3 当前位置
     {
         get => transform.position;
         set => transform.position = value;
     }
-    private void Awake()
+    public void Awake()
     {
         Destroy(gameObject, 子弹销毁时间);
         子弹刚体 = GetComponent<Rigidbody2D>();
@@ -31,12 +31,12 @@ public class BulletEnemy : MonoBehaviour
         
     }
 
-    private void Update()
+    public void Update()
     {
        
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (!collision.CompareTag("子弹") && !collision.CompareTag("Enemy"))
         {

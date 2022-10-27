@@ -5,14 +5,11 @@ using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class EnemyRemake : MonoBehaviour
+public class EnemyGround : Enemy
 {
     public int 怪物ID;
-    [Min(0f)] public int 最大血量;
-    [Min(0f)] public int 当前血量;
-    [Min(0f)] public int 攻击力;
+    [Min(0f)] public float 攻击僵直;
     [Min(0f)] public float 攻击前摇;
-    [Min(0f)] public float 移动速度;
     [Min(0f)] public float 攻击间隔;
     [Min(0f)] public float 受伤变色时间;
 
@@ -27,6 +24,8 @@ public class EnemyRemake : MonoBehaviour
 
     public bool 是否远程;
 
+    public bool 玩家是否在范围内;
+
     public GameObject 子弹;
 
     [Header("扫描区域设置")] [Tooltip("扫描攻击区域")] [Range(0.0f, 360.0f)]
@@ -36,10 +35,10 @@ public class EnemyRemake : MonoBehaviour
 
     [Min(0f)] public float 视野距离;
     [Min(0f)] public float 索敌半径;
-    [Min(0f)] public float 攻击半径;
 
     private float 攻击间隔计时;
     private float 攻击前摇计时;
+    private float 攻击僵直计时;
     private float 颜色透明度;
 
     private Rigidbody2D 刚体;
@@ -94,12 +93,13 @@ public class EnemyRemake : MonoBehaviour
                 Color.yellow);
             Debug.DrawLine(当前位置, 随机位置, Color.green);
             与玩家距离 = Vector2.Distance(当前位置, 玩家位置);
-            var 射线 = Physics2D.Raycast(当前位置, 玩家位置 - 当前位置, Vector2.Distance(当前位置, 玩家位置), ~LayerMask.GetMask("Enemy"));
+            var 射线 = Physics2D.Raycast(当前位置, 玩家位置 - 当前位置, Vector2.Distance(当前位置, 玩家位置), ~LayerMask.GetMask("Enemy") | ~LayerMask.GetMask("Player"));
             Debug.DrawLine(当前位置, 射线.point, Color.red);
             攻击间隔计时 += Time.deltaTime;
+            攻击僵直计时 += Time.deltaTime;
 
 
-            if (玩家在扇形范围())
+            if (玩家在扇形范围() && ((射线?!射线.collider.CompareTag("地图碰撞区域"):true) || !是否远程))
             {
                 if (攻击间隔 < 攻击间隔计时)
                 {
@@ -108,38 +108,38 @@ public class EnemyRemake : MonoBehaviour
                     {
                         if (是否远程)
                         {
-                            // if (与玩家距离 < 攻击半径 && !射线.collider.CompareTag("地图碰撞区域"))
-                            // {
-                            //     Instantiate(子弹, 当前位置, transform.rotation);
-                            // }
-                            // else
-                            // {
-                            //     随机移动();
-                            // }
+                            Instantiate(子弹, 当前位置, transform.rotation);
                         }
                         else
                         {
+                            攻击僵直计时 = 0;
                             动画.SetTrigger("Attack");
                         }
                         攻击间隔计时 = 攻击前摇计时 = 0;
                         获取新位置();
                     }
-                    else
+                }
+                else
+                {
+                    if (攻击僵直计时 > 攻击僵直)
                     {
                         随机移动();
+
                     }
                 }
             }
-            else if (索敌范围射线 && (与玩家距离 < 索敌半径))
+            else if (索敌范围射线 && (与玩家距离 < 索敌半径) && 攻击间隔 < 攻击间隔计时 && Mathf.Abs(玩家位置.x - 当前位置.x) > 0.3f)
             {
+                transform.localScale = new Vector3(当前位置.x - 玩家位置.x > 0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
                 当前位置 = Vector2.MoveTowards(当前位置, new Vector3(玩家位置.x, 当前位置.y, 当前位置.z), 移动速度 * Time.deltaTime);
             }
             else
             {
-                随机移动();
+                if (攻击僵直计时 > 攻击僵直)
+                {
+                    随机移动();
+                }
             }
-
-            转向();
         }
         else
         {
@@ -161,6 +161,8 @@ public class EnemyRemake : MonoBehaviour
 
         if (Math.Abs(当前位置.y - 随机位置.y) < 0.1f)
         {
+
+            transform.localScale = new Vector3(当前位置.x - 随机位置.x>0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
             当前位置 = Vector2.MoveTowards(当前位置, 随机位置, 移动速度 * Time.deltaTime);
         }
         else
@@ -214,23 +216,13 @@ public class EnemyRemake : MonoBehaviour
 
     public void 判断是否击中玩家()
     {
-        if (玩家在扇形范围())
+        if (玩家是否在范围内)
         {
             PlayerController.instance.TakeDamage(攻击力);
         }
     }
 
-    public void 转向()
-    {
-        if (缓存位置.x - 当前位置.x != 0)
-        {
-            transform.localScale = new Vector3(缓存位置.x > 当前位置.x ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
-        }
-
-        缓存位置 = 当前位置;
-    }
-
-    public void 掉血(int 伤害)
+    public override void 掉血(int 伤害)
     {
         当前血量 -= 伤害;
         if (当前血量 > 0)
@@ -250,6 +242,25 @@ public class EnemyRemake : MonoBehaviour
         纹理.color = 初始颜色;
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        if (collision.CompareTag("Player"))
+        {
+            玩家是否在范围内 = true;
+            // Debug.Log("检测到玩家");
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+
+        if (collision.CompareTag("Player"))
+        {
+            玩家是否在范围内 = false;
+            Debug.Log("检测到玩家");
+        }
+    }
     //绘制
     private void OnDrawGizmosSelected()
     {

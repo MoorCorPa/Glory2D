@@ -39,9 +39,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var colname = collision.name;
-
-        if (!collision.CompareTag("子弹") && !colname.Equals("Player"))
+        if (!collision.CompareTag("子弹") && !collision.CompareTag("Player") && !collision.CompareTag("攻击范围"))
         {
 
             if (!是否触发)
@@ -50,16 +48,7 @@ public class Bullet : MonoBehaviour
                 //Physics2D.IgnoreCollision(collision, GetComponent<Collider2D>());
                 if (collision.GetComponent<Enemy>())
                 {
-                    if (collision.GetComponent<Enemy>().是否正在死亡)
-                    {
-                        是否触发 = false;
-                        return;
-                    }
-                    collision.GetComponent<Enemy>().TakeDamage(子弹伤害);
-                }
-                else if (collision.GetComponent<EnemyFly>())
-                {
-                    collision.GetComponent<EnemyFly>().掉血(子弹伤害);
+                    collision.GetComponent<Enemy>().掉血(子弹伤害);
                 }
                 
 

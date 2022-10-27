@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class EnemyRNG : Enemy
+public class EnemyRNG : EnemyGround
 {
     //Ray2D ray;
 
@@ -32,17 +32,11 @@ public class EnemyRNG : Enemy
             Debug.Log("没有碰撞任何对象");
         }*/
         base.Start();
-        animator.SetInteger("怪物ID", 0);
     }
 
     new void Update()
     {
         base.Update();
-    }
-
-    new void FixedUpdate()
-    {
-        base.FixedUpdate();
     }
 
 }

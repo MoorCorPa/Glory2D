@@ -7,15 +7,11 @@ using UnityEngine;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 using Random = UnityEngine.Random;
 
-public abstract class EnemyFly : MonoBehaviour
+public class EnemyFly : Enemy
 {
     public int 怪物ID;
-    [Min(0f)] public int 最大血量;
-    [Min(0f)] public int 当前血量;
-    [Min(0f)] public int 攻击力;
     [Min(0f)] public float 冲击力;
     [Min(0f)] public float 攻击前摇;
-    [Min(0f)] public float 移动速度;
     [Min(0f)] public float 攻击半径;
     [Min(0f)] public float 索敌半径;
     [Min(0f)] public float 攻击间隔;
@@ -171,7 +167,7 @@ public abstract class EnemyFly : MonoBehaviour
         return 随机坐标;
     }
 
-    public void 掉血(int 伤害)
+    public override void 掉血(int 伤害)
     {
         当前血量 -= 伤害;
         if (当前血量 > 0)
@@ -190,11 +186,6 @@ public abstract class EnemyFly : MonoBehaviour
     public void 恢复颜色()
     {
         纹理.color = 初始颜色;
-    }
-
-    public void 销毁()
-    {
-        Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D other)
