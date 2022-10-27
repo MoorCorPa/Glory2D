@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class EnemyRemake : MonoBehaviour
 {
@@ -9,33 +11,35 @@ public class EnemyRemake : MonoBehaviour
     [Min(0f)] public int 最大血量;
     [Min(0f)] public int 当前血量;
     [Min(0f)] public int 攻击力;
-
-    [Header("扫描区域设置")]
-    [Tooltip("扫描攻击区域")]
-    [Range(0.0f, 360.0f)]
-    public float 视角方向 = 0.0f;
-
-    [Range(0.0f, 360.0f)] public float 视角FOV;
-    [Min(0f)] public float 视野距离;
-
+    [Min(0f)] public float 攻击前摇;
     [Min(0f)] public float 移动速度;
-    [Min(0f)] public float 攻击半径;
-    [Min(0f)] public float 索敌半径;
     [Min(0f)] public float 攻击间隔;
     [Min(0f)] public float 受伤变色时间;
 
-    [Min(0f)] public float 可移动x轴;
-    [Min(0f)] public float 可移动y轴;
-    public float 可移动x轴偏移;
-    public float 可移动y轴偏移;
 
-    public float 空路射线长度;
+    [Min(0f)] public float 向左巡逻检测的x轴;
+    [Min(0f)] public float 向右巡逻检测的x轴;
+    [Min(0f)] public float 向左索敌的x轴;
+    [Min(0f)] public float 向右索敌的x轴;
+    [Min(0f)] public float 最小移动距离;
+
+    [Min(0f)] public float 空路射线长度;
 
     public bool 是否远程;
 
     public GameObject 子弹;
 
+    [Header("扫描区域设置")] [Tooltip("扫描攻击区域")] [Range(0.0f, 360.0f)]
+    public float 视角方向;
+
+    [Range(0.0f, 360.0f)] public float 视角FOV;
+
+    [Min(0f)] public float 视野距离;
+    [Min(0f)] public float 索敌半径;
+    [Min(0f)] public float 攻击半径;
+
     private float 攻击间隔计时;
+    private float 攻击前摇计时;
     private float 颜色透明度;
 
     private Rigidbody2D 刚体;
@@ -45,8 +49,9 @@ public class EnemyRemake : MonoBehaviour
 
     private Vector3 随机位置;
     private Vector3 初始位置;
+    private Vector3 初始缩放;
     private Vector3 缓存位置;
-   
+
     private Vector3 当前位置
     {
         get => transform.position;
@@ -57,72 +62,89 @@ public class EnemyRemake : MonoBehaviour
 
     private float 与玩家距离;
 
-    void Start()
+    public void Start()
     {
+        初始位置 = transform.position;
+        初始缩放 = transform.localScale;
         刚体 = GetComponent<Rigidbody2D>();
         动画 = GetComponent<Animator>();
         纹理 = GetComponent<SpriteRenderer>();
         初始颜色 = 纹理.color;
         颜色透明度 = 初始颜色.r;
         动画.SetInteger("怪物ID", 怪物ID);
-        初始位置 = transform.position;
         当前血量 = 最大血量;
         攻击间隔计时 = 0;
         缓存位置 = 当前位置;
     }
 
-    void Update()
+    public void Update()
     {
         if (当前血量 > 0)
         {
+            var 索敌范围射线 = Physics2D.Raycast(new Vector2(初始位置.x - 向左索敌的x轴, 当前位置.y), transform.right,
+                Vector2.Distance(new Vector2(初始位置.x - 向左索敌的x轴, 当前位置.y), new Vector2(初始位置.x + 向右索敌的x轴, 当前位置.y)),
+                LayerMask.GetMask("Player"));
+            Debug.DrawLine(new Vector2(初始位置.x - 向左索敌的x轴, 当前位置.y), new Vector2(初始位置.x + 向右索敌的x轴, 当前位置.y),
+                Color.blue);
+            
+            // var 检测范围射线 = Physics2D.Raycast(new Vector2(初始位置.x - 向左巡逻检测的x轴, 当前位置.y), transform.right,
+            //     Vector2.Distance(new Vector2(初始位置.x - 向左巡逻检测的x轴, 当前位置.y), new Vector2(初始位置.x + 向右巡逻检测的x轴, 当前位置.y)),
+            //     LayerMask.GetMask("Player"));
+            Debug.DrawLine(new Vector2(初始位置.x - 向左巡逻检测的x轴, 当前位置.y), new Vector2(初始位置.x + 向右巡逻检测的x轴, 当前位置.y),
+                Color.yellow);
+            Debug.DrawLine(当前位置, 随机位置, Color.green);
             与玩家距离 = Vector2.Distance(当前位置, 玩家位置);
             var 射线 = Physics2D.Raycast(当前位置, 玩家位置 - 当前位置, Vector2.Distance(当前位置, 玩家位置), ~LayerMask.GetMask("Enemy"));
             Debug.DrawLine(当前位置, 射线.point, Color.red);
             攻击间隔计时 += Time.deltaTime;
 
-            if (攻击间隔 < 攻击间隔计时)
+
+            if (玩家在扇形范围())
             {
-                if (是否远程)
+                if (攻击间隔 < 攻击间隔计时)
                 {
-                    if (与玩家距离 < 攻击半径 && !射线.collider.CompareTag("地图碰撞区域"))
+                    攻击前摇计时 += Time.deltaTime;
+                    if (攻击前摇 < 攻击前摇计时)
                     {
-                        Instantiate(子弹, 当前位置, transform.rotation);
-                    }
-                    else
-                    {
-                        随机移动();
-                    }
-                }
-                else
-                {
-                    if (与玩家距离 < 索敌半径 && !前方路段为空())
-                    {
-                        if (玩家在扇形范围())
+                        if (是否远程)
                         {
-                            动画.SetTrigger("Attack");
+                            // if (与玩家距离 < 攻击半径 && !射线.collider.CompareTag("地图碰撞区域"))
+                            // {
+                            //     Instantiate(子弹, 当前位置, transform.rotation);
+                            // }
+                            // else
+                            // {
+                            //     随机移动();
+                            // }
                         }
                         else
                         {
-                            当前位置 = Vector2.MoveTowards(当前位置, new Vector3(玩家位置.x, 当前位置.y, 当前位置.z), 移动速度 * Time.deltaTime);
-                            Debug.Log("宝贝我来咯");
+                            动画.SetTrigger("Attack");
                         }
+                        攻击间隔计时 = 攻击前摇计时 = 0;
+                        获取新位置();
                     }
                     else
                     {
                         随机移动();
                     }
                 }
+            }
+            else if (索敌范围射线 && (与玩家距离 < 索敌半径))
+            {
+                当前位置 = Vector2.MoveTowards(当前位置, new Vector3(玩家位置.x, 当前位置.y, 当前位置.z), 移动速度 * Time.deltaTime);
             }
             else
             {
                 随机移动();
             }
+
             转向();
         }
         else
         {
             颜色透明度 -= Time.deltaTime * 100;
-            纹理.color = new Color32(初始颜色.a, 初始颜色.b, 初始颜色.g, (byte)颜色透明度);
+            纹理.color = new Color32(初始颜色.a, 初始颜色.b, 初始颜色.g, (byte) 颜色透明度);
             if (颜色透明度 < 0)
             {
                 Destroy(gameObject);
@@ -136,12 +158,22 @@ public class EnemyRemake : MonoBehaviour
         {
             获取新位置();
         }
-        当前位置 = Vector2.MoveTowards(当前位置, 随机位置, 移动速度 * Time.deltaTime);
+
+        if (Math.Abs(当前位置.y - 随机位置.y) < 0.1f)
+        {
+            当前位置 = Vector2.MoveTowards(当前位置, 随机位置, 移动速度 * Time.deltaTime);
+        }
+        else
+        {
+            获取新位置();
+        }
     }
 
     public void 获取新位置()
     {
-        随机位置 = new Vector3(当前位置.x+Random.Range(-3, 3f), 当前位置.y, 当前位置.z);
+        var 向左移动距离 = Random.Range(-向左巡逻检测的x轴, -最小移动距离);
+        var 向右移动距离 = Random.Range(最小移动距离, 向右巡逻检测的x轴);
+        随机位置 = new Vector2(初始位置.x, 当前位置.y) + new Vector2(Random.Range(0, 2) > 0 ? 向左移动距离 : 向右移动距离, 0);
     }
 
     public bool 玩家在扇形范围()
@@ -160,6 +192,7 @@ public class EnemyRemake : MonoBehaviour
                 return true;
             }
         }
+
         Debug.Log("戳啦，不在嘛");
         return false;
     }
@@ -174,16 +207,26 @@ public class EnemyRemake : MonoBehaviour
             Debug.Log("空路段射线测试");
             return false;
         }
+
         Debug.Log("戳啦，不空嘛");
         return true;
+    }
+
+    public void 判断是否击中玩家()
+    {
+        if (玩家在扇形范围())
+        {
+            PlayerController.instance.TakeDamage(攻击力);
+        }
     }
 
     public void 转向()
     {
         if (缓存位置.x - 当前位置.x != 0)
         {
-            transform.localScale = new Vector3(缓存位置.x > 当前位置.x ? 1 : -1, 1, 1);
+            transform.localScale = new Vector3(缓存位置.x > 当前位置.x ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
         }
+
         缓存位置 = 当前位置;
     }
 
@@ -198,7 +241,6 @@ public class EnemyRemake : MonoBehaviour
         }
         else
         {
-            刚体.gravityScale = 1;
             动画.SetTrigger("死亡");
         }
     }
@@ -229,8 +271,8 @@ public class EnemyRemake : MonoBehaviour
         // 索敌范围
         Handles.color = 黄色;
         Handles.DrawSolidDisc(transform.position, Vector3.back, 索敌半径);
-        // 移动范围
-        Handles.DrawSolidRectangleWithOutline(
-            new Rect(初始位置.x - 可移动x轴 + 可移动x轴偏移 * 2, 初始位置.y - 可移动y轴 + 可移动y轴偏移 * 2, 可移动x轴 * 2, 可移动y轴 * 2), 绿色, 蓝色);
+        // // 移动范围
+        // Handles.DrawSolidRectangleWithOutline(
+        //     new Rect(初始位置.x - 可移动x轴 + 可移动x轴偏移 * 2, 初始位置.y - 可移动y轴 + 可移动y轴偏移 * 2, 可移动x轴 * 2, 可移动y轴 * 2), 绿色, 蓝色);
     }
 }

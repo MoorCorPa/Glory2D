@@ -14,12 +14,19 @@ public class BloodVolume : MonoBehaviour
     public float 像素宽度;
     public GameObject 血量头;
     public GameObject 血量尾;
+    public GameObject 血量框;
     void Start()
     {
         最大血量 = (float)PlayerController.instance.health;
         //GetComponent<Image>().preferredWidth(maxHealth * 5);
         Image = this.transform.GetComponent<Image>();
         this.transform.GetComponent<RectTransform>().sizeDelta = new Vector2((最大血量-2) * 像素长度, 像素宽度);
+        Debug.Log(血量框.GetComponent<RectTransform>().rect.width);
+        血量框.GetComponent<RectTransform>().sizeDelta = new Vector2(
+            血量框.GetComponent<RectTransform>().rect.width + (最大血量 - 5) * 8,
+            血量框.GetComponent<RectTransform>().rect.height);
+        Debug.Log(血量框.GetComponent<RectTransform>().rect.width);
+    
     }
 
     void Update()

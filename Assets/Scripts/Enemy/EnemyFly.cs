@@ -13,6 +13,7 @@ public abstract class EnemyFly : MonoBehaviour
     [Min(0f)] public int 最大血量;
     [Min(0f)] public int 当前血量;
     [Min(0f)] public int 攻击力;
+    [Min(0f)] public float 冲击力;
     [Min(0f)] public float 攻击前摇;
     [Min(0f)] public float 移动速度;
     [Min(0f)] public float 攻击半径;
@@ -21,6 +22,8 @@ public abstract class EnemyFly : MonoBehaviour
     [Min(0f)] public float 受伤变色时间;
     [Min(0f)] public float 最大升力;
     [Min(0f)] public float 最小升力;
+    [Min(0f)] public float 死亡消失速度;
+    [Min(0f)] public float 死亡消失透明度;
 
     public bool 是否远程;
 
@@ -42,6 +45,7 @@ public abstract class EnemyFly : MonoBehaviour
 
     private Vector3 随机位置;
     private Vector3 初始位置;
+    private Vector3 初始缩放;
     private Vector3 缓存位置;
 
     private Vector3 当前位置
@@ -61,9 +65,9 @@ public abstract class EnemyFly : MonoBehaviour
         颜色透明度 = 初始颜色.r;
         动画.SetInteger("怪物ID", 怪物ID);
         初始位置 = transform.position;
+        初始缩放 = transform.localScale;
         当前血量 = 最大血量;
-        攻击间隔计时 = 0;
-        攻击前摇计时 = 0;
+        攻击间隔计时 = 攻击前摇计时 = 0;
         随机位置 = 获取可移动范围内随机坐标();
         缓存位置 = 当前位置;
     }
@@ -99,7 +103,7 @@ public abstract class EnemyFly : MonoBehaviour
                             //摁创
                             if (!射线.collider.CompareTag("地图碰撞区域"))
                             {
-                                刚体.AddForce((玩家位置 - 当前位置).normalized * 3f,ForceMode2D.Impulse);
+                                刚体.AddForce((玩家位置 - 当前位置).normalized * 冲击力, ForceMode2D.Impulse);
                             }
                         }
                         随机位置 = 获取可移动范围内随机坐标();
@@ -127,9 +131,9 @@ public abstract class EnemyFly : MonoBehaviour
         }
         else
         {
-            颜色透明度 -= Time.deltaTime * 100;
+            颜色透明度 -= Time.deltaTime * 死亡消失速度;
             纹理.color = new Color32(初始颜色.a, 初始颜色.b, 初始颜色.g, (byte) 颜色透明度);
-            if (颜色透明度 < 0)
+            if (颜色透明度 < 死亡消失透明度)
             {
                 Destroy(gameObject);
             }
@@ -152,7 +156,7 @@ public abstract class EnemyFly : MonoBehaviour
 
     public void 转向()
     {
-        if (缓存位置.x-当前位置.x!=0)
+        if (缓存位置.x - 当前位置.x != 0)
         {
             transform.localScale = new Vector3(缓存位置.x > 当前位置.x ? 1 : -1, 1, 1);
         }
@@ -161,7 +165,8 @@ public abstract class EnemyFly : MonoBehaviour
 
     public Vector2 获取可移动范围内随机坐标()
     {
-        var 随机坐标 = new Vector2(Random.Range(初始位置.x - 可移动x轴, 初始位置.x + 可移动x轴), Random.Range(初始位置.y - 可移动y轴, 初始位置.y + 可移动y轴));
+        var 随机坐标 = new Vector2(Random.Range(初始位置.x - 可移动x轴, 初始位置.x + 可移动x轴),
+            Random.Range(初始位置.y - 可移动y轴, 初始位置.y + 可移动y轴));
         随机坐标 -= new Vector2(可移动x轴偏移, 可移动y轴偏移);
         return 随机坐标;
     }
@@ -177,7 +182,7 @@ public abstract class EnemyFly : MonoBehaviour
         }
         else
         {
-            刚体.gravityScale = 1;
+            刚体.gravityScale = 1.5f;
             动画.SetTrigger("死亡");
         }
     }
@@ -185,6 +190,11 @@ public abstract class EnemyFly : MonoBehaviour
     public void 恢复颜色()
     {
         纹理.color = 初始颜色;
+    }
+
+    public void 销毁()
+    {
+        Destroy(gameObject);
     }
 
     private void OnCollisionEnter2D(Collision2D other)

@@ -13,6 +13,13 @@ public class PlayerController : MonoBehaviour
     [Min(0)] public int health;
     [Min(0)] public float 受伤变色时间;
 
+    public AudioSource 内部音效器;
+    [SerializeField] private List<AudioClip> 移动音效;
+    [SerializeField] private AudioClip 跳跃音效;
+    [SerializeField] private AudioClip 落地音效;
+    public AudioSource 外部音效器;
+    [SerializeField] private AudioClip 受伤音效;
+    
     public bool isAttacking;
     public float 触地射线检测长度 = 0.5f;
     public bool 是否触地 = false;
@@ -20,6 +27,10 @@ public class PlayerController : MonoBehaviour
     public GameObject 跳跃粒子;
     public GameObject 落地粒子;
     public bool 是否落地 => plRigi.velocity.y < 0f && 是否触地;
+
+    public float 移动音效切换时间;
+    private float 移动音效切换计时;
+    private int 移动音效序号;
 
 
     private Rigidbody2D plRigi;
@@ -41,10 +52,13 @@ public class PlayerController : MonoBehaviour
         plRigi = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         arms = GameObject.FindGameObjectsWithTag("arms");
+        移动音效序号 = 0;
+        移动音效切换计时 = 0;
     }
 
     void Update()
     {
+        音效控制();
         跟随鼠标();
         Jump();
 
@@ -116,7 +130,7 @@ public class PlayerController : MonoBehaviour
         if (info.collider != null)
         {
             是否触地 = true;
-            if (落地前速度 < 0)
+            if (落地前速度 < 0 && plRigi.velocity.y == 0)
             {
                 Instantiate(落地粒子, info.point, Quaternion.identity); 
             }
@@ -129,6 +143,34 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("是否触地", 是否触地);
     }
 
+
+    private void 音效控制()
+    {
+        //内部音效器.PlayOneShot(内部音效器.clip);
+        // if (Mathf.Abs(plRigi.velocity.x)>0)
+        // {
+        //     内部音效器.clip = 移动音效[移动音效序号];
+        //     if (!内部音效器.isPlaying)
+        //     {
+        //         内部音效器.Play();
+        //     }
+        //     移动音效切换计时 += Time.deltaTime;
+        //     if (移动音效切换计时 > 移动音效切换时间)
+        //     {
+        //         移动音效序号++;
+        //         if (移动音效序号>=移动音效.Count)
+        //         {
+        //             移动音效序号 = 0;
+        //         }
+        //         移动音效切换计时 = 0;
+        //     }
+        // }
+        // if (Mathf.Abs(plRigi.velocity.y)>0)
+        // {
+        //     内部音效器.clip = 移动音效1;
+        // }
+    }
+    
     // 人物掉血
     public void TakeDamage(int damage)
     {

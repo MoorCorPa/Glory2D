@@ -23,4 +23,8 @@ public class panle : MonoBehaviour
     {
         settingPanle.SetActive(true);
     }
+    public void 退出游戏()
+    {
+        Application.Quit();
+    }
 }

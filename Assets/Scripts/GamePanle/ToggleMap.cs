@@ -6,20 +6,11 @@ using UnityEngine.SceneManagement;
 
 public class ToggleMap : MonoBehaviour
 {
-    public String sceneName;
-    void Start()
-    {
-        
-    }
+    public string sceneName;
 
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag.Equals("Player"))
+        if (collision.CompareTag("Player"))
         {
             SceneManager.LoadScene(sceneName);
         }

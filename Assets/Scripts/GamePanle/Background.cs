@@ -12,7 +12,6 @@ public class Background : MonoBehaviour
     {
         人物 = GameObject.FindWithTag("Player").transform;
         人物位置 = 人物.position;
-        Debug.Log(人物位置);
     }
 
 
