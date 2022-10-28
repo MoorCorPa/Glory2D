@@ -102,6 +102,7 @@ public class EnemyFly : Enemy
                                 刚体.AddForce((玩家位置 - 当前位置).normalized * 冲击力, ForceMode2D.Impulse);
                             }
                         }
+
                         随机位置 = 获取可移动范围内随机坐标();
                         攻击前摇计时 = 攻击间隔计时 = 0;
                     }
@@ -134,6 +135,7 @@ public class EnemyFly : Enemy
                 Destroy(gameObject);
             }
         }
+
         转向();
     }
 
@@ -154,8 +156,9 @@ public class EnemyFly : Enemy
     {
         if (缓存位置.x - 当前位置.x != 0)
         {
-            transform.localScale = new Vector3(缓存位置.x > 当前位置.x ? 1 : -1, 1, 1);
+            transform.localScale = new Vector3(缓存位置.x > 当前位置.x ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.z);
         }
+
         缓存位置 = 当前位置;
     }
 

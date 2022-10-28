@@ -37,6 +37,7 @@ public class Gun : MonoBehaviour
 
     private float 鼠标动画计时 = 0f;
     private float 鼠标动画时间 = 0.2f;
+
     private void Awake()
     {
         instance = this;
@@ -51,30 +52,22 @@ public class Gun : MonoBehaviour
         换弹进度条缩放 = 换弹进度条.transform.localScale;
     }
 
-    Texture2D Resize(Texture2D texture2D,int targetX,int targetY)
-    {
-        RenderTexture rt=new RenderTexture(targetX, targetY,24);
-        RenderTexture.active = rt;
-        Graphics.Blit(texture2D,rt);
-        Texture2D result=new Texture2D(targetX,targetY);
-        result.ReadPixels(new Rect(0,0,targetX,targetY),0,0);
-        result.Apply();
-        return result;
-    }
     private void Update()
     {
-        
-        if (Input.GetMouseButton(0) && isColldown && !是否正在换弹)
+        if (Time.timeScale > 0)
         {
-            Cursor.SetCursor(射击鼠标指针纹理, new Vector2(32, 32), CursorMode.Auto);
-            Fire();
-        }
+            if (Input.GetMouseButton(0) && isColldown && !是否正在换弹)
+            {
+                Cursor.SetCursor(射击鼠标指针纹理, new Vector2(32, 32), CursorMode.Auto);
+                Fire();
+            }
 
-        检测子弹();
+            检测子弹();
 
-        if (Input.GetKeyDown(KeyCode.R) && !是否正在换弹 && 最大子弹数量 > 当前子弹数量)
-        {
-            主动换弹 = true;
+            if (Input.GetKeyDown(KeyCode.R) && !是否正在换弹 && 最大子弹数量 > 当前子弹数量)
+            {
+                主动换弹 = true;
+            }
         }
     }
 

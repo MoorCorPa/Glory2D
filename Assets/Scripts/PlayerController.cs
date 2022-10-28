@@ -13,13 +13,15 @@ public class PlayerController : MonoBehaviour
     [Min(0)] public int health;
     [Min(0)] public float 受伤变色时间;
 
-    public AudioSource 内部音效器;
-    [SerializeField] private List<AudioClip> 移动音效;
+
+    [SerializeField] private AudioSource 内部音效器;
+    [SerializeField] private AudioClip[] 移动音效;
     [SerializeField] private AudioClip 跳跃音效;
     [SerializeField] private AudioClip 落地音效;
-    public AudioSource 外部音效器;
+    [SerializeField] private AudioSource 外部音效器;
     [SerializeField] private AudioClip 受伤音效;
-    
+
+
     public bool isAttacking;
     public float 触地射线检测长度 = 0.5f;
     public bool 是否触地 = false;
@@ -39,7 +41,7 @@ public class PlayerController : MonoBehaviour
     private GameObject[] arms;
     private float direction;
     private bool isOnGround;
-    
+
     private float 落地前速度;
 
     private void Awake()
@@ -58,25 +60,25 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        音效控制();
-        跟随鼠标();
-        Jump();
+        if (Time.timeScale > 0)
+        {
+            跟随鼠标();
+            Jump();
+        }
 
         plRigi.velocity = new Vector2(direction * speedX, plRigi.velocity.y);
         animator.SetBool("isMove", plRigi.velocity.x != 0 ? true : false);
 
-        if (plRigi.velocity.x != 0 && isOnGround)
+        if (plRigi.velocity.x != 0 && 是否触地)
         {
-            if (!GetComponent<AudioSource>().isPlaying)
+            if (!内部音效器.isPlaying)
             {
-                GetComponent<AudioSource>().Play();
-            }
-        }
-        else
-        {
-            if (GetComponent<AudioSource>().isPlaying)
-            {
-                GetComponent<AudioSource>().Stop();
+                内部音效器.PlayOneShot(移动音效[移动音效序号]);
+                移动音效序号++;
+                if (移动音效序号 >= 移动音效.Length)
+                {
+                    移动音效序号 = 0;
+                }
             }
         }
 
@@ -84,8 +86,6 @@ public class PlayerController : MonoBehaviour
 
         触地检测();
     }
-
-
 
     private void 跟随鼠标()
     {
@@ -117,11 +117,12 @@ public class PlayerController : MonoBehaviour
         {
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             animator.SetTrigger("jump");
+            内部音效器.PlayOneShot(跳跃音效);
             Instantiate(跳跃粒子, info.point, Quaternion.identity);
         }
     }
 
- 
+
     void 触地检测()
     {
         Vector3 终点 = new Vector3(0, -1, 0);
@@ -132,45 +133,19 @@ public class PlayerController : MonoBehaviour
             是否触地 = true;
             if (落地前速度 < 0 && plRigi.velocity.y == 0)
             {
-                Instantiate(落地粒子, info.point, Quaternion.identity); 
+                内部音效器.PlayOneShot(落地音效);
+                Instantiate(落地粒子, info.point, Quaternion.identity);
             }
         }
         else
         {
             是否触地 = false;
         }
+
         落地前速度 = plRigi.velocity.y;
         animator.SetBool("是否触地", 是否触地);
     }
 
-
-    private void 音效控制()
-    {
-        //内部音效器.PlayOneShot(内部音效器.clip);
-        // if (Mathf.Abs(plRigi.velocity.x)>0)
-        // {
-        //     内部音效器.clip = 移动音效[移动音效序号];
-        //     if (!内部音效器.isPlaying)
-        //     {
-        //         内部音效器.Play();
-        //     }
-        //     移动音效切换计时 += Time.deltaTime;
-        //     if (移动音效切换计时 > 移动音效切换时间)
-        //     {
-        //         移动音效序号++;
-        //         if (移动音效序号>=移动音效.Count)
-        //         {
-        //             移动音效序号 = 0;
-        //         }
-        //         移动音效切换计时 = 0;
-        //     }
-        // }
-        // if (Mathf.Abs(plRigi.velocity.y)>0)
-        // {
-        //     内部音效器.clip = 移动音效1;
-        // }
-    }
-    
     // 人物掉血
     public void TakeDamage(int damage)
     {
@@ -182,6 +157,7 @@ public class PlayerController : MonoBehaviour
             a.GetComponent<SpriteRenderer>().color = new Color(0.99f, 0.3f, 0.3f, 1f);
         }
 
+        外部音效器.PlayOneShot(受伤音效);
         animator.SetTrigger("掉血");
         Invoke("恢复颜色", 受伤变色时间);
     }
@@ -207,6 +183,7 @@ public class PlayerController : MonoBehaviour
         Vector2 val = context.ReadValue<Vector2>();
         direction = val.x;
     }
+
     public void Attack(InputAction.CallbackContext context)
     {
         //if (context.started && !isAttacking) isAttacking = true;
