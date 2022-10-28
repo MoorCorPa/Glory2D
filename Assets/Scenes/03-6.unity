@@ -274,7 +274,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!95 &269163938
 Animator:
   serializedVersion: 4
@@ -7050,11 +7050,18 @@ MonoBehaviour:
   flag: 0
   health: 10
   "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4": 0.25
+  "\u5185\u90E8\u97F3\u6548\u5668": {fileID: 0}
+  "\u79FB\u52A8\u97F3\u6548": []
+  "\u8DF3\u8DC3\u97F3\u6548": {fileID: 0}
+  "\u843D\u5730\u97F3\u6548": {fileID: 0}
+  "\u5916\u90E8\u97F3\u6548\u5668": {fileID: 0}
+  "\u53D7\u4F24\u97F3\u6548": {fileID: 0}
   isAttacking: 0
   "\u89E6\u5730\u5C04\u7EBF\u68C0\u6D4B\u957F\u5EA6": 0.6
   "\u662F\u5426\u89E6\u5730": 0
   "\u8DF3\u8DC3\u7C92\u5B50": {fileID: 5362875135589811972, guid: cb56034281d82e4429ceda8aef5cd55f, type: 3}
   "\u843D\u5730\u7C92\u5B50": {fileID: 5362875135589811972, guid: 5ebc97af722222a48aae4e87e7906927, type: 3}
+  "\u79FB\u52A8\u97F3\u6548\u5207\u6362\u65F6\u95F4": 0
 --- !u!70 &508819211
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -22397,6 +22404,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411a8d3e140676b45beeefb84b873a96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  "\u8840\u91CF\u4E2D1\u50CF\u7D20\u957F\u5EA6": 0
+  "\u8840\u91CF\u4E2D1\u50CF\u7D20\u5BBD\u5EA6": 0
+  "\u8840\u91CF\u4E2D2\u50CF\u7D20\u957F\u5EA6": 0
+  "\u8840\u91CF\u4E2D2\u50CF\u7D20\u5BBD\u5EA6": 0
+  "\u8840\u91CF\u5934": {fileID: 0}
+  "\u8840\u91CF\u4E2D1": {fileID: 0}
+  "\u8840\u91CF\u4E2D2": {fileID: 0}
+  "\u8840\u91CF\u5C3E": {fileID: 0}
 --- !u!114 &872651546
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22521,6 +22536,7 @@ MonoBehaviour:
   "\u50CF\u7D20\u5BBD\u5EA6": 0
   "\u8840\u91CF\u5934": {fileID: 0}
   "\u8840\u91CF\u5C3E": {fileID: 0}
+  "\u8840\u91CF\u6846": {fileID: 0}
 --- !u!114 &997512742
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -22933,7 +22949,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1222857230
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23054,37 +23070,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58cab35bf7041a1408f13d9473e119ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "\u602A\u7269ID": 4
   "\u6700\u5927\u8840\u91CF": 100
   "\u5F53\u524D\u8840\u91CF": 0
   "\u653B\u51FB\u529B": 0
-  "\u89C6\u89D2\u65B9\u5411": 0
-  "\u89C6\u89D2FOV": 0
-  "\u89C6\u91CE\u8DDD\u79BB": 0
   "\u79FB\u52A8\u901F\u5EA6": 0
-  "\u653B\u51FB\u534A\u5F84": 8.22
-  "\u7D22\u654C\u534A\u5F84": 0
-  "\u653B\u51FB\u95F4\u9694": 3
-  "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4": 0.4
-  "\u53EF\u79FB\u52A8x\u8F74": 0
-  "\u53EF\u79FB\u52A8y\u8F74": 0
-  "\u53EF\u79FB\u52A8x\u8F74\u504F\u79FB": 0
-  "\u53EF\u79FB\u52A8y\u8F74\u504F\u79FB": 0
-  "\u7A7A\u8DEF\u5C04\u7EBF\u957F\u5EA6": 0
-  "\u662F\u5426\u8FDC\u7A0B": 1
-  "\u5B50\u5F39": {fileID: 0}
-  "\u653B\u51FB\u95F4\u9694\u8BA1\u65F6": 0
-  "\u989C\u8272\u900F\u660E\u5EA6": 0
-  "\u521A\u4F53": {fileID: 0}
-  "\u52A8\u753B": {fileID: 0}
-  "\u7EB9\u7406": {fileID: 0}
-  "\u521D\u59CB\u989C\u8272":
-    serializedVersion: 2
-    rgba: 0
-  "\u968F\u673A\u4F4D\u7F6E": {x: 0, y: 0, z: 0}
-  "\u521D\u59CB\u4F4D\u7F6E": {x: 0, y: 0, z: 0}
-  "\u7F13\u5B58\u4F4D\u7F6E": {x: 0, y: 0, z: 0}
-  "\u4E0E\u73A9\u5BB6\u8DDD\u79BB": 0
 --- !u!70 &1222857235
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -23215,7 +23204,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!212 &1278167344
 SpriteRenderer:
   m_ObjectHideFlags: 0
