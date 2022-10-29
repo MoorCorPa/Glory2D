@@ -13,6 +13,8 @@ TagManager:
   - "\u653B\u51FB\u8303\u56F4"
   - "\u654C\u4EBA\u5B50\u5F39"
   - "\u73A9\u5BB6\u5B50\u5F39"
+  - "\u5B50\u5F39"
+  - "\u6309\u94AE"
   layers:
   - Default
   - TransparentFX
@@ -23,7 +25,7 @@ TagManager:
   - Ground
   - Wall
   - Player
-  - "\u5B50\u5F39"
+  - "\u73A9\u5BB6\u5B50\u5F39"
   - "\u80CC\u666F"
   - "\u524D\u666F"
   - Enemy

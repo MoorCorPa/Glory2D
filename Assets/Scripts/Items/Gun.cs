@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.Burst.Intrinsics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
@@ -23,6 +24,7 @@ public class Gun : MonoBehaviour
     public float 换弹计时 = 0;
     public bool 是否正在换弹 = false;
     public bool 主动换弹 = false;
+    public float 射击切回瞄准时间;
 
     public GameObject 换弹进度条;
 
@@ -32,11 +34,15 @@ public class Gun : MonoBehaviour
     public AudioSource 换弹音效;
 
     [SerializeField] private Animator 换弹动画;
-    [SerializeField] private Texture2D 默认鼠标指针纹理;
-    [SerializeField] private Texture2D 射击鼠标指针纹理;
+    [SerializeField] private Texture2D 默认指针;
+    [SerializeField] private Texture2D 瞄准指针;
+    [SerializeField] private Texture2D 射击指针;
+    [SerializeField] private Texture2D[] 换弹指针;
 
     private float 鼠标动画计时 = 0f;
     private float 鼠标动画时间 = 0.2f;
+    private bool 正在射击;
+    private float 射击切回瞄准时间计时;
 
     private void Awake()
     {
@@ -46,22 +52,42 @@ public class Gun : MonoBehaviour
 
     private void Start()
     {
-        Cursor.SetCursor(默认鼠标指针纹理, new Vector2(32, 32), CursorMode.Auto);
+        Cursor.SetCursor(默认指针, new Vector2(0, 0), CursorMode.Auto);
         Physics2D.queriesStartInColliders = false;
         当前子弹数量 = 最大子弹数量;
         换弹进度条缩放 = 换弹进度条.transform.localScale;
+        正在射击 = false;
     }
 
     private void Update()
     {
         if (Time.timeScale > 0)
         {
-            if (Input.GetMouseButton(0) && isColldown && !是否正在换弹)
+            if (EventSystem.current.IsPointerOverGameObject())
             {
-                Cursor.SetCursor(射击鼠标指针纹理, new Vector2(32, 32), CursorMode.Auto);
+                Cursor.SetCursor(默认指针, new Vector2(0, 0), CursorMode.Auto);
+            }
+            else if (Input.GetMouseButton(0) && isColldown && !是否正在换弹)
+            {
+                正在射击 = true;
                 Fire();
+                Cursor.SetCursor(射击指针, new Vector2(32, 32), CursorMode.Auto);
+            }
+            else if (!正在射击)
+            {
+                Cursor.SetCursor(瞄准指针, new Vector2(32, 32), CursorMode.Auto);
             }
 
+            if (正在射击)
+            {
+                射击切回瞄准时间计时 += Time.deltaTime;
+                if (射击切回瞄准时间计时 > 射击切回瞄准时间)
+                {
+                    射击切回瞄准时间计时 = 0;
+                    正在射击 = false;
+                }
+            }
+            
             检测子弹();
 
             if (Input.GetKeyDown(KeyCode.R) && !是否正在换弹 && 最大子弹数量 > 当前子弹数量)
@@ -93,7 +119,7 @@ public class Gun : MonoBehaviour
             {
                 timeCount = 0;
                 isColldown = true;
-                Cursor.SetCursor(默认鼠标指针纹理, new Vector2(32, 32), CursorMode.Auto);
+                // Cursor.SetCursor(瞄准指针, new Vector2(32, 32), CursorMode.Auto);
             }
         }
     }

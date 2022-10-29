@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioSource 外部音效器;
     [SerializeField] private AudioClip 受伤音效;
 
+    public GameObject 信息;
 
     public bool isAttacking;
     public float 触地射线检测长度 = 0.5f;
@@ -34,6 +35,7 @@ public class PlayerController : MonoBehaviour
     private float 移动音效切换计时;
     private int 移动音效序号;
 
+    private Vector3 信息初始缩放;
 
     private Rigidbody2D plRigi;
     private Animator animator;
@@ -51,11 +53,13 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1;
         plRigi = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         arms = GameObject.FindGameObjectsWithTag("arms");
         移动音效序号 = 0;
         移动音效切换计时 = 0;
+        信息初始缩放 = 信息.transform.localScale;
     }
 
     void Update()
@@ -91,9 +95,11 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(0, -0.05f, 0);
         flag = mosPos.x > plRigi.position.x ? 1 : -1;
-
-        Gun.instance.换弹进度条.transform.localScale = new Vector3(flag * Gun.instance.换弹进度条缩放.x,
-            Gun.instance.换弹进度条缩放.y, Gun.instance.换弹进度条缩放.z);
+        信息.transform.localScale = new Vector3(flag * 信息初始缩放.x, 信息初始缩放.y, 信息初始缩放.z);
+        
+        // Gun.instance.换弹进度条.transform.localScale = new Vector3(flag * Gun.instance.换弹进度条缩放.x,
+        //     Gun.instance.换弹进度条缩放.y, Gun.instance.换弹进度条缩放.z);
+        
         transform.localScale = new Vector3(flag, 1, 1);
         foreach (var a in arms)
         {

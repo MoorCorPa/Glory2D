@@ -14,7 +14,6 @@ public class Background : MonoBehaviour
         人物位置 = 人物.position;
     }
 
-
     private void LateUpdate()
     {
         Vector3 移动差 =  人物.position - 人物位置;

@@ -53,6 +53,7 @@ public class Bullet : MonoBehaviour
                 {
                     if (collision.GetComponent<Enemy>().当前血量 <= 0)
                     {
+                        是否触发 = false;
                         return;
                     }
 

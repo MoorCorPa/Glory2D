@@ -6,18 +6,15 @@ using UnityEngine.SceneManagement;
 public class panle : MonoBehaviour
 {
     public GameObject settingPanle;
-    void Start()
+
+    private void Start()
     {
-        
+        Time.timeScale = 1;
     }
 
-    void Update()
-    {
-
-    }
     public void OnStartHandler()
     {
-        SceneManager.LoadScene("00-InitialLevel");
+        SceneManager.LoadScene(1);
     }
     public void OnOpenSettingPanleHandler()
     {

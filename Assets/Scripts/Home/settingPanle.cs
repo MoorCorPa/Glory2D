@@ -6,32 +6,33 @@ using UnityEngine.Audio;
 
 public class settingPanle : MonoBehaviour
 {
-    public AudioMixer audioMixer;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    public AudioMixer 音乐;
+    public AudioMixer 音效;
 
     public void OnCloseHandler()
     {
         gameObject.SetActive(false);
     }
-    public void SetVolumeHandler(float i)
+    public void 音乐控制(float i)
     {
         if (i > -30)
         {
-            audioMixer.SetFloat("BGMAudioMixer", i);
+            音乐.SetFloat("BGMAudioMixer", i);
         }
         else
         {
-            audioMixer.SetFloat("BGMAudioMixer", -80);
+            音效.SetFloat("BGMAudioMixer", -80);
+        }
+    }
+    public void 音效控制(float i)
+    {
+        if (i > -30)
+        {
+            音效.SetFloat("BGMAudioMixer", i);
+        }
+        else
+        {
+            音效.SetFloat("BGMAudioMixer", -80);
         }
     }
 }
