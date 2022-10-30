@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class 存档
 {
-    public List<GameObject> 怪物 = new List<GameObject>();
-    public GameObject 玩家 = new GameObject();
+    public int 血量;
+    public string 关卡名字;
+    public string 存档时间;
 }
