@@ -128,6 +128,7 @@ public class EnemyFly : Enemy
         }
         else
         {
+            刚体.velocity = new Vector2(0, 刚体.velocity.y);
             颜色透明度 -= Time.deltaTime * 死亡消失速度;
             纹理.color = new Color32(初始颜色.a, 初始颜色.b, 初始颜色.g, (byte) 颜色透明度);
             if (颜色透明度 < 死亡消失透明度)

@@ -143,6 +143,7 @@ public class EnemyGround : Enemy
         }
         else
         {
+            刚体.velocity = new Vector2(0, 刚体.velocity.y);
             颜色透明度 -= Time.deltaTime * 100;
             纹理.color = new Color32(初始颜色.a, 初始颜色.b, 初始颜色.g, (byte) 颜色透明度);
             if (颜色透明度 < 0)
