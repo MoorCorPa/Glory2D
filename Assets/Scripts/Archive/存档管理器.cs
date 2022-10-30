@@ -1,53 +1,66 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
 using UnityEditor;
+using Unity.VisualScripting;
 
-public class ´æµµ¹ÜÀíÆ÷
+public class å­˜æ¡£ç®¡ç†å™¨
 {
-    //±£´æÔÚassetsÄ¿Â¼ÏÂ
-    public static string ´æµµÂ·¾¶ = Application.dataPath+"/Archive.data";
 
-    public static ´æµµ ´´½¨´æµµ()
+    //ä¿å­˜åœ¨assetsç›®å½•ä¸‹
+    public static string å­˜æ¡£è·¯å¾„ = Application.streamingAssetsPath+"Archive.data";
+
+    public static å­˜æ¡£ åˆ›å»ºå­˜æ¡£()
     {
-        ´æµµ save = new ´æµµ();
-        save.ÑªÁ¿ = PlayerController.instance.health;
-        save.¹Ø¿¨Ãû×Ö = SceneManager.GetActiveScene().name;
-        save.´æµµÊ±¼ä = System.DateTime.Now.ToString();
+        å­˜æ¡£ save = new å­˜æ¡£();
+        save.è¡€é‡ = PlayerController.instance.health;
+        save.å…³å¡åå­— = SceneManager.GetActiveScene().name;
+        save.å­˜æ¡£æ—¶é—´ = System.DateTime.Now.ToString();
         return save;
     }
 
-    [MenuItem("µµ°¸¹ÜÀíÆ÷/´æµµ")]
-    public static void ±£´æ´æµµ()
+    [MenuItem("å­˜æ¡£ç®¡ç†å™¨/å­˜æ¡£")]
+    public static void ä¿å­˜å­˜æ¡£()
     {
-        ´æµµ save = ´´½¨´æµµ();
-        BinaryFormatter ¶ş½øÖÆ¸ñÊ½Æ÷ = new BinaryFormatter();
-        FileStream ÎÄ¼şÁ÷ = File.Create(´æµµÂ·¾¶);
-
-        ¶ş½øÖÆ¸ñÊ½Æ÷.Serialize(ÎÄ¼şÁ÷, save);
-        ÎÄ¼şÁ÷.Close();
+        å­˜æ¡£ save = åˆ›å»ºå­˜æ¡£();
+        BinaryFormatter äºŒè¿›åˆ¶æ ¼å¼å™¨ = new BinaryFormatter();
+        FileStream æ–‡ä»¶æµ = File.Create(å­˜æ¡£è·¯å¾„);
+        Debug.Log(save.è¡€é‡);
+        äºŒè¿›åˆ¶æ ¼å¼å™¨.Serialize(æ–‡ä»¶æµ, save);
+        æ–‡ä»¶æµ.Close();
     }
 
-    [MenuItem("µµ°¸¹ÜÀíÆ÷/¶Áµµ")]
-    public static void ¶ÁÈ¡´æµµ()
+    IEnumerator è½½å…¥åœºæ™¯(å­˜æ¡£ save)
     {
-        if (File.Exists(´æµµÂ·¾¶))
+        AsyncOperation operation = SceneManager.LoadSceneAsync(save.å…³å¡åå­—, LoadSceneMode.Additive);
+        yield return null;
+
+        if (operation.isDone)
         {
-            BinaryFormatter ¶ş½øÖÆ¸ñÊ½Æ÷ = new BinaryFormatter();
-            FileStream ÎÄ¼şÁ÷ = File.Open(´æµµÂ·¾¶, FileMode.Open);
+            PlayerController.instance.health = save.è¡€é‡;
+        }
+    }
 
-            ´æµµ save = ¶ş½øÖÆ¸ñÊ½Æ÷.Deserialize(ÎÄ¼şÁ÷) as ´æµµ;
-            ÎÄ¼şÁ÷.Close();
+    [MenuItem("å­˜æ¡£ç®¡ç†å™¨/è¯»æ¡£")]
+    public static void è¯»å–å­˜æ¡£()
+    {
+        if (File.Exists(å­˜æ¡£è·¯å¾„))
+        {
+            BinaryFormatter äºŒè¿›åˆ¶æ ¼å¼å™¨ = new BinaryFormatter();
+            FileStream æ–‡ä»¶æµ = File.Open(å­˜æ¡£è·¯å¾„, FileMode.Open);
 
-            SceneManager.LoadScene(save.¹Ø¿¨Ãû×Ö);
-            PlayerController.instance.health = save.ÑªÁ¿;
+            å­˜æ¡£ save = äºŒè¿›åˆ¶æ ¼å¼å™¨.Deserialize(æ–‡ä»¶æµ) as å­˜æ¡£;
+            æ–‡ä»¶æµ.Close();
+
+            SceneManager.LoadScene(save.å…³å¡åå­—);
+            //instance.StartCoroutine("è½½å…¥åœºæ™¯", save);
         }
         else
         {
-            Debug.Log("ÃÃÓĞ´æµµÄó");
+            Debug.Log("å¦¹æœ‰å­˜æ¡£æ");
         }
     }
 }

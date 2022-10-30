@@ -1,7 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -60,6 +63,17 @@ public class PlayerController : MonoBehaviour
         移动音效序号 = 0;
         移动音效切换计时 = 0;
         信息初始缩放 = 信息.transform.localScale;
+
+        if (File.Exists(存档管理器.存档路径))
+        {
+            BinaryFormatter 二进制格式器 = new BinaryFormatter();
+            FileStream 文件流 = File.Open(存档管理器.存档路径, FileMode.Open);
+
+            存档 save = 二进制格式器.Deserialize(文件流) as 存档;
+            文件流.Close();
+
+            health = save.血量;
+        }
     }
 
     void Update()
