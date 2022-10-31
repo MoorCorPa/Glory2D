@@ -15,6 +15,7 @@ TagManager:
   - "\u73A9\u5BB6\u5B50\u5F39"
   - "\u5B50\u5F39"
   - "\u6309\u94AE"
+  - "\u6389\u843D\u7269"
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - Enemy
   - "\u653B\u51FB\u8303\u56F4"
   - "\u654C\u4EBA\u5B50\u5F39"
-  - 
+  - "\u6389\u843D\u7269"
   - 
   - 
   - 

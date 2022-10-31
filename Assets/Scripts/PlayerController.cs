@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     // 人物血量
     [Min(0)] public int health;
     [Min(0)] public float 受伤变色时间;
+    [Min(0)] public int 水晶数量;
 
 
     [SerializeField] private AudioSource 内部音效器;
@@ -60,6 +61,7 @@ public class PlayerController : MonoBehaviour
         plRigi = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         arms = GameObject.FindGameObjectsWithTag("arms");
+        水晶数量 = 0;
         移动音效序号 = 0;
         移动音效切换计时 = 0;
         信息初始缩放 = 信息.transform.localScale;
@@ -142,7 +144,21 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void 水晶增加(int 数量)
+    {
+        水晶数量 += 数量;
+    }
+    public bool 水晶消耗(int 数量)
+    {
+        if (水晶数量-数量<0)
+        {
+            return false;
+        }
 
+        水晶数量 -= 数量;
+        return true;
+    }
+    
     void 触地检测()
     {
         Vector3 终点 = new Vector3(0, -1, 0);

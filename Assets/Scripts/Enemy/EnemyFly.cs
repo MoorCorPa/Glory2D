@@ -134,6 +134,7 @@ public class EnemyFly : Enemy
             if (颜色透明度 < 死亡消失透明度)
             {
                 Destroy(gameObject);
+                Instantiate(掉落物, transform.position,transform.rotation);
             }
         }
 

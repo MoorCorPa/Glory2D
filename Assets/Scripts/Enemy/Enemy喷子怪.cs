@@ -1,0 +1,166 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Pool;
+
+public class Enemy喷子怪 : Enemy
+{
+    [Min(0f)] public float 攻击僵直;
+    [Min(0f)] public float 攻击前摇;
+    [Min(0f)] public float 攻击间隔;
+    [Min(0f)] public float 受伤变色时间;
+
+
+    [Min(0f)] public float 向左巡逻检测的x轴;
+    [Min(0f)] public float 向右巡逻检测的x轴;
+    [Min(0f)] public float 向左索敌的x轴;
+    [Min(0f)] public float 向右索敌的x轴;
+    [Min(0f)] public float 最小移动距离;
+
+    [Min(0f)] public float 空路射线长度;
+    [Min(0f)] public float 墙体检测射线长度;
+
+    public bool 是否远程;
+
+    public bool 玩家是否在范围内;
+
+    public GameObject 子弹;
+
+
+    private float 攻击间隔计时;
+    private float 攻击前摇计时;
+    private float 攻击僵直计时;
+    private float 颜色透明度;
+
+    private Rigidbody2D 刚体;
+    private Animator 动画;
+    private SpriteRenderer 纹理;
+    private Color32 初始颜色;
+
+    private Vector3 随机位置;
+    private Vector3 初始位置;
+    private Vector3 初始缩放;
+    private Vector3 缓存位置;
+
+    public static Enemy喷子怪 instance;
+    private Vector3 当前位置
+    {
+        get => transform.position;
+        set => transform.position = value;
+    }
+
+    private Vector3 玩家位置 => PlayerController.instance.transform.position;
+
+    private float 与玩家距离;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    private void Start()
+    {
+        初始位置 = transform.position;
+        初始缩放 = transform.localScale;
+        刚体 = GetComponent<Rigidbody2D>();
+        动画 = GetComponent<Animator>();
+        纹理 = GetComponent<SpriteRenderer>();
+        初始颜色 = 纹理.color;
+        颜色透明度 = 初始颜色.r;
+        当前血量 = 最大血量;
+        攻击间隔计时 = 0;
+        缓存位置 = 当前位置;
+        InvokeRepeating("播放攻击", 0, 3);
+        攻击僵直计时 = 攻击僵直;
+        //InvokeRepeating("发射", 0, 1);
+    }
+
+    private void Update()
+    {
+        var 墙体检测 = Physics2D.Raycast(当前位置 + Vector3.down * 0.5f, transform.right, 墙体检测射线长度,
+            LayerMask.GetMask("Ground"));
+        Debug.DrawLine(当前位置 + Vector3.down * 0.5f, 当前位置 + Vector3.down * 0.5f + transform.right * 墙体检测射线长度, Color.red);
+
+        if (墙体检测)
+        {
+            transform.right = -transform.right;
+            移动速度 = -移动速度;
+        }
+
+        攻击僵直计时 += Time.deltaTime;
+    }
+
+    private void FixedUpdate()
+    {
+        if (攻击僵直计时 > 攻击僵直)
+        {
+            刚体.velocity = new Vector2(移动速度, 刚体.velocity.y);
+        }
+        else
+        {
+            刚体.velocity = new Vector2(0, 刚体.velocity.y);
+        }
+    }
+
+    public Transform target;
+    public Transform point;
+    public float YThanTarget;
+    public Vector3 velocity;
+
+    public void 计算抛物线()
+    {
+        float Gravity = Mathf.Abs(Physics2D.gravity.y * 子弹.GetComponent<Rigidbody2D>().gravityScale);
+        float height_1, height_2;
+        if (target.position.y > transform.position.y)
+        {
+            height_1 = YThanTarget + target.position.y - transform.position.y;
+            height_2 = YThanTarget;
+        }
+        else
+        {
+            height_1 = YThanTarget;
+            height_2 = transform.position.y + YThanTarget - target.position.y;
+        }
+
+        float time_1 = Mathf.Sqrt(2 * height_1 / Gravity);
+        float time_2 = Mathf.Sqrt(2 * height_1 / Gravity) + Mathf.Sqrt(2 * height_2 / Gravity);
+        Vector3 distance = target.position - transform.position;
+        distance.y = 0;
+        Vector3 speed = distance / time_2;
+        velocity = speed + time_1 * Gravity * Vector3.up;
+    }
+
+    private void 攻击()
+    {
+        计算抛物线();
+        Instantiate(子弹, 当前位置, transform.rotation);
+    }
+
+    private void 播放攻击()
+    {
+        动画.SetTrigger("攻击");
+        攻击僵直计时 = 0;
+    }
+
+    public override void 掉血(int 伤害)
+    {
+        当前血量 -= 伤害;
+        // if (当前血量 > 0)
+        // {
+        //     动画.SetTrigger("掉血");
+        // }
+        // else
+        // {
+        //     动画.SetTrigger("死亡");
+        // }
+
+        纹理.color = new Color(0.99f, 0.3f, 0.3f, 1f);
+        Invoke("恢复颜色", 受伤变色时间);
+    }
+
+    public void 恢复颜色()
+    {
+        纹理.color = 初始颜色;
+    }
+}
