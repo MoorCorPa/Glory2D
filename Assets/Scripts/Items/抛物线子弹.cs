@@ -15,7 +15,7 @@ public class 抛物线子弹 : MonoBehaviour
     public bool 是否触发;
 
     public Vector3 玩家位置 => PlayerController.instance.transform.position;
-    public Vector3 速度 => Enemy喷子怪.instance.velocity;
+    public Vector3 速度;
 
     public Vector3 当前位置
     {
@@ -23,13 +23,18 @@ public class 抛物线子弹 : MonoBehaviour
         set => transform.position = value;
     }
 
+/*    public 抛物线子弹(Vector3 向量)
+    {
+        速度 = 向量;
+    }*/
+
     public void Start()
     {
         Destroy(gameObject, 子弹销毁时间);
         子弹刚体 = GetComponent<Rigidbody2D>();
         transform.right = (玩家位置 - 当前位置).normalized;
         //子弹刚体.velocity = transform.right * 子弹飞行速度;
-        子弹刚体.velocity = 速度;
+//子弹刚体.velocity = 速度;
         //Physics2D.IgnoreLayerCollision(8, 9);
         是否触发 = false;
         

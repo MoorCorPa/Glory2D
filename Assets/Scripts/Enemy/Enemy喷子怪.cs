@@ -1,29 +1,23 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
+using Random = UnityEngine.Random;
 
 public class Enemy喷子怪 : Enemy
 {
+    [Min(0f)] public int 最小子弹数量;
+    [Min(0f)] public int 最大子弹数量;
+    [Min(0f)] public float 子弹x轴偏移;
+    [Min(0f)] public float 子弹y轴偏移;
     [Min(0f)] public float 攻击僵直;
     [Min(0f)] public float 攻击前摇;
     [Min(0f)] public float 攻击间隔;
     [Min(0f)] public float 受伤变色时间;
 
-
-    [Min(0f)] public float 向左巡逻检测的x轴;
-    [Min(0f)] public float 向右巡逻检测的x轴;
-    [Min(0f)] public float 向左索敌的x轴;
-    [Min(0f)] public float 向右索敌的x轴;
-    [Min(0f)] public float 最小移动距离;
-
-    [Min(0f)] public float 空路射线长度;
     [Min(0f)] public float 墙体检测射线长度;
-
-    public bool 是否远程;
-
-    public bool 玩家是否在范围内;
 
     public GameObject 子弹;
 
@@ -43,7 +37,6 @@ public class Enemy喷子怪 : Enemy
     private Vector3 初始缩放;
     private Vector3 缓存位置;
 
-    public static Enemy喷子怪 instance;
     private Vector3 当前位置
     {
         get => transform.position;
@@ -53,11 +46,6 @@ public class Enemy喷子怪 : Enemy
     private Vector3 玩家位置 => PlayerController.instance.transform.position;
 
     private float 与玩家距离;
-
-    private void Awake()
-    {
-        instance = this;
-    }
 
     private void Start()
     {
@@ -71,7 +59,7 @@ public class Enemy喷子怪 : Enemy
         当前血量 = 最大血量;
         攻击间隔计时 = 0;
         缓存位置 = 当前位置;
-        InvokeRepeating("播放攻击", 0, 3);
+        InvokeRepeating("播放攻击", 0, 攻击间隔计时);
         攻击僵直计时 = 攻击僵直;
         //InvokeRepeating("发射", 0, 1);
     }
@@ -108,7 +96,7 @@ public class Enemy喷子怪 : Enemy
     public float YThanTarget;
     public Vector3 velocity;
 
-    public void 计算抛物线()
+    public Vector3 计算抛物线()
     {
         float Gravity = Mathf.Abs(Physics2D.gravity.y * 子弹.GetComponent<Rigidbody2D>().gravityScale);
         float height_1, height_2;
@@ -129,12 +117,19 @@ public class Enemy喷子怪 : Enemy
         distance.y = 0;
         Vector3 speed = distance / time_2;
         velocity = speed + time_1 * Gravity * Vector3.up;
+        return speed + time_1 * Gravity * Vector3.up;
     }
 
     private void 攻击()
     {
         计算抛物线();
-        Instantiate(子弹, 当前位置, transform.rotation);
+
+        for (int i = 0; i< Random.Range(最小子弹数量,最大子弹数量); i++)
+        {
+            GameObject b = Instantiate(子弹, 当前位置, transform.rotation);
+            velocity += new Vector3(Random.Range(-子弹x轴偏移,子弹x轴偏移), Random.Range(-子弹y轴偏移, 子弹y轴偏移), 0);
+            b.GetComponent<Rigidbody2D>().velocity = velocity;
+        }
     }
 
     private void 播放攻击()
@@ -146,15 +141,14 @@ public class Enemy喷子怪 : Enemy
     public override void 掉血(int 伤害)
     {
         当前血量 -= 伤害;
-        // if (当前血量 > 0)
-        // {
-        //     动画.SetTrigger("掉血");
-        // }
-        // else
-        // {
-        //     动画.SetTrigger("死亡");
-        // }
-
+        if (当前血量 <= 0)
+        {
+            for (int i = 0; i < Random.Range(最小子弹数量, 最大子弹数量); i++)
+            {
+                Instantiate(掉落物, 当前位置, transform.rotation);
+            }
+            Destroy(gameObject);
+        }
         纹理.color = new Color(0.99f, 0.3f, 0.3f, 1f);
         Invoke("恢复颜色", 受伤变色时间);
     }
