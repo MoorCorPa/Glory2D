@@ -35,7 +35,17 @@ public class CanvasPanle : MonoBehaviour
     {
         水晶显示数量.text = 水晶数量.ToString();
     }
-    
+
+    public void 开面板(GameObject 面板)
+    {
+        面板.SetActive(true);
+    }
+
+    public void 关面板(GameObject 面板)
+    {
+        面板.SetActive(false);
+    }
+
     private void Update()
     {
         if (玩家血量<=0)
