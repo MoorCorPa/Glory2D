@@ -50,9 +50,21 @@ public class PlayerController : MonoBehaviour
 
     private float 落地前速度;
 
+    private InputControler 行为控制;
+
     private void Awake()
     {
         instance = this;
+    }
+
+    private void OnEnable()
+    {
+        行为控制 = KeySetter.input;
+        //行为控制 = new InputControler();
+        行为控制.Player.Movement.performed += Movement;
+        行为控制.Player.Movement.canceled += ctx => direction = 0;
+
+        行为控制.Player.Movement.Enable();
     }
 
     void Start()
@@ -83,7 +95,6 @@ public class PlayerController : MonoBehaviour
         if (Time.timeScale > 0)
         {
             跟随鼠标();
-            Jump();
         }
 
         plRigi.velocity = new Vector2(direction * speedX, plRigi.velocity.y);
@@ -135,7 +146,7 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-        if (Input.GetButtonDown("Jump") && 是否触地)
+        if (是否触地)
         {
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             animator.SetTrigger("jump");
@@ -217,6 +228,10 @@ public class PlayerController : MonoBehaviour
     public void Movement(InputAction.CallbackContext context)
     {
         Vector2 val = context.ReadValue<Vector2>();
+        if (val.y > 0)
+        {
+            Jump();
+        }
         direction = val.x;
     }
 
