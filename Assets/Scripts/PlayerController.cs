@@ -1,7 +1,10 @@
+using Pathfinding.Util;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -30,6 +33,8 @@ public class PlayerController : MonoBehaviour
     public bool isAttacking;
     public float 触地射线检测长度 = 0.5f;
     public bool 是否触地 = false;
+    public Transform 脚底;
+    public float 脚底检测范围;
 
     public GameObject 跳跃粒子;
     public GameObject 落地粒子;
@@ -43,7 +48,7 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D plRigi;
     private Animator animator;
-    private RaycastHit2D info;
+    private Collider2D info;
     private GameObject[] arms;
     private float direction;
     private bool isOnGround;
@@ -69,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
         plRigi = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         arms = GameObject.FindGameObjectsWithTag("arms");
@@ -116,6 +121,7 @@ public class PlayerController : MonoBehaviour
         if (health < 0) health = 0;
 
         触地检测();
+
     }
 
     private void 跟随鼠标()
@@ -154,7 +160,7 @@ public class PlayerController : MonoBehaviour
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             animator.SetTrigger("jump");
             内部音效器.PlayOneShot(跳跃音效);
-            Instantiate(跳跃粒子, info.point, Quaternion.identity);
+            Instantiate(跳跃粒子, info.ClosestPoint(脚底.position), Quaternion.identity);
         }
     }
 
@@ -172,19 +178,19 @@ public class PlayerController : MonoBehaviour
         水晶数量 -= 数量;
         return true;
     }
-    
-    void 触地检测()
+
+
+    void 触地检测() 
     {
-        Vector3 终点 = new Vector3(0, -1, 0);
-        Debug.DrawLine(transform.position, transform.position + 终点 * 触地射线检测长度, Color.red);
-        info = Physics2D.Raycast(transform.position, 终点, 触地射线检测长度, LayerMask.GetMask("Ground"));
-        if (info.collider != null)
+        info = Physics2D.OverlapCircle(脚底.position, 脚底检测范围, LayerMask.GetMask("Ground"));
+
+        if (info != null)
         {
             是否触地 = true;
             if (落地前速度 < 0 && plRigi.velocity.y == 0)
             {
                 内部音效器.PlayOneShot(落地音效);
-                Instantiate(落地粒子, info.point, Quaternion.identity);
+                Instantiate(落地粒子, info.ClosestPoint(脚底.position), Quaternion.identity);
             }
         }
         else
@@ -196,8 +202,18 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("是否触地", 是否触地);
     }
 
-    // 人物掉血
-    public void TakeDamage(int damage)
+    private void OnDrawGizmosSelected()
+    {
+
+        var 红色 = new Color(1.0f, 0, 0, 0.1f);
+
+        // 攻击范围
+        Handles.color = 红色;
+        Handles.DrawSolidDisc(脚底.position, Vector3.back, 脚底检测范围);
+    }
+
+// 人物掉血
+public void TakeDamage(int damage)
     {
         health -= damage;
         GetComponent<SpriteRenderer>().color = new Color(0.99f, 0.3f, 0.3f, 1f);
