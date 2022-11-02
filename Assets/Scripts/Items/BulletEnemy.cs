@@ -46,7 +46,7 @@ public class BulletEnemy : MonoBehaviour
 
             子弹刚体.velocity = new Vector2();
             transform.position = collision.ClosestPoint(transform.position);
-            GetComponent<Animator>().Play("射击反馈3");
+            GetComponent<Animator>().Play("射击反馈");
         }
         // }
     }

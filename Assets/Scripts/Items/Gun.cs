@@ -25,6 +25,7 @@ public class Gun : MonoBehaviour
     public bool 是否正在换弹 = false;
     public bool 主动换弹 = false;
     public float 射击切回瞄准时间;
+    public float 换弹动画切换时间;
     private bool 开火;
 
     public GameObject 换弹进度条;
@@ -44,14 +45,10 @@ public class Gun : MonoBehaviour
     private float 鼠标动画时间 = 0.2f;
     private bool 正在射击;
     private float 射击切回瞄准时间计时;
-
+    private float 换弹动画切换计时;
+    private int 换弹指针序号;
+    
     private InputControler 行为控制;
-
-    private void Awake()
-    {
-        instance = this;
-        //startTime = Time.time;
-    }
 
     private void OnEnable()
     {
@@ -63,6 +60,11 @@ public class Gun : MonoBehaviour
         行为控制.Player.Fire.Enable();
         行为控制.Player.Reload.Enable();
     }
+    private void Awake()
+    {
+        instance = this;
+        //startTime = Time.time;
+    }
 
     private void Start()
     {
@@ -71,6 +73,7 @@ public class Gun : MonoBehaviour
         当前子弹数量 = 最大子弹数量;
         换弹进度条缩放 = 换弹进度条.transform.localScale;
         正在射击 = false;
+        换弹指针序号= 0;
     }
 
     private void Update()
@@ -86,6 +89,21 @@ public class Gun : MonoBehaviour
                 正在射击 = true;
                 Fire();
                 Cursor.SetCursor(射击指针, new Vector2(32, 32), CursorMode.Auto);
+            }
+            else if (是否正在换弹)
+            {
+                换弹动画切换计时+= Time.deltaTime;
+                if (换弹动画切换计时>换弹动画切换时间)
+                {
+                    Cursor.SetCursor(换弹指针[换弹指针序号], new Vector2(32, 32), CursorMode.Auto);
+                    换弹指针序号++;
+                    if (换弹指针序号 >= 换弹指针.Length)
+                    {
+                        换弹指针序号 = 0;
+                    }
+                    换弹动画切换计时= 0;
+                }
+
             }
             else if (!正在射击)
             {
@@ -151,7 +169,7 @@ public class Gun : MonoBehaviour
             换弹();
         }
     }
-
+    
     public void 触发换弹(InputAction.CallbackContext context)
     {
         if (!是否正在换弹 && 最大子弹数量 > 当前子弹数量)
@@ -159,7 +177,7 @@ public class Gun : MonoBehaviour
             主动换弹 = true;
         }
     }
-
+    
     public void 换弹()
     {
         if (是否正在换弹 == false)
@@ -172,6 +190,7 @@ public class Gun : MonoBehaviour
         是否正在换弹 = true;
         换弹计时 += Time.deltaTime;
         换弹进度条.GetComponent<Slider>().value = 换弹计时 / 换弹时间;
+        
         if (换弹计时 > 换弹时间)
         {
             换弹计时 = 0;

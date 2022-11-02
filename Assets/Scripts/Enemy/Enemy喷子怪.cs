@@ -10,6 +10,8 @@ public class Enemy喷子怪 : Enemy
 {
     [Min(0f)] public int 最小子弹数量;
     [Min(0f)] public int 最大子弹数量;
+    [Min(0f)] public int 最小掉落物数量;
+    [Min(0f)] public int 最大掉落物数量;
     [Min(0f)] public float 子弹x轴偏移;
     [Min(0f)] public float 子弹y轴偏移;
     [Min(0f)] public float 攻击僵直;
@@ -37,6 +39,8 @@ public class Enemy喷子怪 : Enemy
     private Vector3 初始缩放;
     private Vector3 缓存位置;
 
+    public Transform 炮口;
+
     private Vector3 当前位置
     {
         get => transform.position;
@@ -59,7 +63,7 @@ public class Enemy喷子怪 : Enemy
         当前血量 = 最大血量;
         攻击间隔计时 = 0;
         缓存位置 = 当前位置;
-        InvokeRepeating("播放攻击", 0, 攻击间隔计时);
+        InvokeRepeating("播放攻击", 0, 攻击间隔);
         攻击僵直计时 = 攻击僵直;
         //InvokeRepeating("发射", 0, 1);
     }
@@ -124,11 +128,11 @@ public class Enemy喷子怪 : Enemy
     {
         计算抛物线();
 
-        for (int i = 0; i< Random.Range(最小子弹数量,最大子弹数量); i++)
+        for (int i = 0; i < Random.Range(最小子弹数量, 最大子弹数量); i++)
         {
-            GameObject b = Instantiate(子弹, 当前位置, transform.rotation);
-            velocity += new Vector3(Random.Range(-子弹x轴偏移,子弹x轴偏移), Random.Range(-子弹y轴偏移, 子弹y轴偏移), 0);
-            b.GetComponent<Rigidbody2D>().velocity = velocity;
+            GameObject b = Instantiate(子弹, 炮口.position, transform.rotation);
+            var 速度 = velocity + new Vector3(Random.Range(-子弹x轴偏移, 子弹x轴偏移), Random.Range(-子弹y轴偏移, 子弹y轴偏移), 0);
+            b.GetComponent<Rigidbody2D>().velocity = 速度;
         }
     }
 
@@ -141,14 +145,24 @@ public class Enemy喷子怪 : Enemy
     public override void 掉血(int 伤害)
     {
         当前血量 -= 伤害;
-        if (当前血量 <= 0)
+        if (当前血量 > 0)
         {
-            for (int i = 0; i < Random.Range(最小子弹数量, 最大子弹数量); i++)
+            if (当前血量 % 5 == 0)
             {
-                Instantiate(掉落物, 当前位置, transform.rotation);
+                Instantiate(掉落物, 炮口.position, transform.rotation);
             }
+        }
+        else
+        {
+            for (int i = 0; i < Random.Range(最小掉落物数量, 最大掉落物数量); i++)
+            {
+                Instantiate(掉落物, 当前位置 + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0),
+                    transform.rotation);
+            }
+
             Destroy(gameObject);
         }
+
         纹理.color = new Color(0.99f, 0.3f, 0.3f, 1f);
         Invoke("恢复颜色", 受伤变色时间);
     }

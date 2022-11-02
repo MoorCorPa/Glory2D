@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 613015607211564119}
   - component: {fileID: 40165789147364363}
   - component: {fileID: 2641736402862526437}
-  - component: {fileID: -3312610706354019751}
+  - component: {fileID: 4616381330603188175}
   m_Layer: 14
-  m_Name: "\u629B\u7269\u7EBF\u5B50\u5F394"
+  m_Name: "\u5B50\u5F393 1"
   m_TagString: "\u654C\u4EBA\u5B50\u5F39"
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 40165789147364471}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.5, y: 5.5, z: 5.5}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: -2.5, y: 2.5, z: 2.5}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -77,12 +77,12 @@ SpriteRenderer:
   m_SortingLayerID: 1214552893
   m_SortingLayer: 1
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 51fcfc21fe0d4434b8d3739e03a490a4, type: 3}
+  m_Sprite: {fileID: 409016039, guid: 53ad403581ced8241b50a21cdb27daba, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.63, y: 0.32}
+  m_Size: {x: 0.140625, y: 0.09375}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -96,14 +96,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 40165789147364471}
-  m_BodyType: 0
+  m_BodyType: 1
   m_Simulated: 1
   m_UseFullKinematicContacts: 1
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -123,8 +123,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.1, y: 0.12}
-  m_Direction: 0
+  m_Size: {x: 0.15, y: 0.1}
+  m_Direction: 1
 --- !u!95 &2641736402862526437
 Animator:
   serializedVersion: 4
@@ -135,7 +135,7 @@ Animator:
   m_GameObject: {fileID: 40165789147364471}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 675595b31b0284be597928669156d722, type: 2}
+  m_Controller: {fileID: 9100000, guid: d59623598f10cf7419c26302fdb86972, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -145,7 +145,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-3312610706354019751
+--- !u!114 &4616381330603188175
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -154,12 +154,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 40165789147364471}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1400dbfd6ed4489a993493ca77a01638, type: 3}
+  m_Script: {fileID: 11500000, guid: aed471d943fe4419be6b005caabe1560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "\u5B50\u5F39\u98DE\u884C\u901F\u5EA6": 10
-  "\u5B50\u5F39\u4F24\u5BB3": 0
-  "\u5B50\u5F39\u9500\u6BC1\u65F6\u95F4": 10
+  "\u5B50\u5F39\u98DE\u884C\u901F\u5EA6": 4
+  "\u5B50\u5F39\u4F24\u5BB3": 1
+  "\u5B50\u5F39\u9500\u6BC1\u65F6\u95F4": 2
   "\u5B50\u5F39\u521A\u4F53": {fileID: 0}
   "\u662F\u5426\u89E6\u53D1": 0
-  "\u901F\u5EA6": {x: 0, y: 0, z: 0}

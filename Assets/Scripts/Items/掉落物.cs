@@ -31,7 +31,7 @@ public class 掉落物 : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        掉落物刚体.velocity = new Vector2();
+        if (!other.collider.CompareTag("掉落物")) 掉落物刚体.velocity = new Vector2();
         if (other.collider.CompareTag("Player"))
         {
             Destroy(gameObject);

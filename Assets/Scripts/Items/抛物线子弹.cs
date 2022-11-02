@@ -52,10 +52,11 @@ public class 抛物线子弹 : MonoBehaviour
             {
                 collision.GetComponent<PlayerController>().TakeDamage(子弹伤害);
             }
-
+            
             子弹刚体.velocity = new Vector2();
+            子弹刚体.gravityScale = 0;
             transform.position = collision.ClosestPoint(transform.position);
-            GetComponent<Animator>().Play("射击反馈3");
+            GetComponent<Animator>().Play("射击反馈");
         }
         // }
     }
