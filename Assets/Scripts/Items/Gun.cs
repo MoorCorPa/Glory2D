@@ -25,6 +25,7 @@ public class Gun : MonoBehaviour
     public bool 是否正在换弹 = false;
     public bool 主动换弹 = false;
     public float 射击切回瞄准时间;
+    private bool 开火;
 
     public GameObject 换弹进度条;
 
@@ -44,10 +45,23 @@ public class Gun : MonoBehaviour
     private bool 正在射击;
     private float 射击切回瞄准时间计时;
 
+    private InputControler 行为控制;
+
     private void Awake()
     {
         instance = this;
         //startTime = Time.time;
+    }
+
+    private void OnEnable()
+    {
+        行为控制 = KeySetter.input;
+        行为控制.Player.Fire.performed += ctx => 开火 = true;
+        行为控制.Player.Fire.canceled += ctx => 开火 = false;
+        行为控制.Player.Reload.started += 触发换弹;
+
+        行为控制.Player.Fire.Enable();
+        行为控制.Player.Reload.Enable();
     }
 
     private void Start()
@@ -67,7 +81,7 @@ public class Gun : MonoBehaviour
             {
                 Cursor.SetCursor(默认指针, new Vector2(0, 0), CursorMode.Auto);
             }
-            else if (Input.GetMouseButton(0) && isColldown && !是否正在换弹)
+            else if (开火 && isColldown && !是否正在换弹)
             {
                 正在射击 = true;
                 Fire();
@@ -89,11 +103,6 @@ public class Gun : MonoBehaviour
             }
             
             检测子弹();
-
-            if (Input.GetKeyDown(KeyCode.R) && !是否正在换弹 && 最大子弹数量 > 当前子弹数量)
-            {
-                主动换弹 = true;
-            }
         }
     }
 
@@ -140,6 +149,14 @@ public class Gun : MonoBehaviour
         else
         {
             换弹();
+        }
+    }
+
+    public void 触发换弹(InputAction.CallbackContext context)
+    {
+        if (!是否正在换弹 && 最大子弹数量 > 当前子弹数量)
+        {
+            主动换弹 = true;
         }
     }
 

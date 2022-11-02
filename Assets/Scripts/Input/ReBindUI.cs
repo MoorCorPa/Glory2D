@@ -8,9 +8,11 @@ using UnityEngine.Windows;
 public class ReBindUI : MonoBehaviour
 {
     [SerializeField]
-    private InputActionReference reference;
-
-    private int 下标;
+    private InputActionReference moveReference;
+    [SerializeField]
+    private InputActionReference fireReference;
+    [SerializeField]
+    private InputActionReference reloadReference;
 
     [SerializeField]
     private Button resetButton;
@@ -19,9 +21,11 @@ public class ReBindUI : MonoBehaviour
     {
         resetButton.onClick.AddListener(() => 重置绑定());
 
-        if (reference != null)
+        if (moveReference != null)
         {
             KeySetter.加载绑定覆盖("Movement");
+            KeySetter.加载绑定覆盖("Fire");
+            KeySetter.加载绑定覆盖("Reload");
             更新UI();
         }
 
@@ -37,7 +41,7 @@ public class ReBindUI : MonoBehaviour
 
     private void OnValidate()
     {
-        if (reference != null)
+        if (moveReference != null)
         {
             更新UI();
         }
@@ -46,6 +50,9 @@ public class ReBindUI : MonoBehaviour
     public void 重绑(Button 按钮)
     {
         var 按钮文字 = 按钮.GetComponentInChildren<TMP_Text>();
+        string actionName = "Movement";
+        int 下标 = 0;
+
         switch (按钮.name)
         {
             case "跳跃设置":
@@ -57,24 +64,47 @@ public class ReBindUI : MonoBehaviour
             case "右设置":
                 下标 = 3;
                 break;
+            case "射击设置":
+                actionName = "Fire";
+                break;
+            case "换弹设置":
+                actionName = "Reload";
+                break;
             default:
                 break;
         }
-        KeySetter.开启重绑("Movement", 下标, 按钮文字);
+        KeySetter.开启重绑(actionName, 下标, 按钮文字);
     }
 
     private void 重置绑定()
     {
         KeySetter.重置绑定("Movement");
+        KeySetter.重置绑定("Fire");
+        KeySetter.重置绑定("Reload");
         更新UI();
     }
 
 
     private void 更新UI()
     {
+        Debug.Log("GENGX");
         for (int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).GetChild(1).GetComponentInChildren<TMP_Text>().text = Application.isPlaying? KeySetter.获取绑定名称("Movement", i + 1):reference.action.GetBindingDisplayString(i + 1);
+            string text = "";
+
+            switch (i)
+            {
+                case 3:
+                    text = Application.isPlaying ? KeySetter.获取绑定名称("Fire", 0) : fireReference.action.GetBindingDisplayString(0);
+                    break;
+                case 4:
+                    text = Application.isPlaying ? KeySetter.获取绑定名称("Reload", 0) : reloadReference.action.GetBindingDisplayString(0);
+                    break;
+                default:
+                    text = Application.isPlaying ? KeySetter.获取绑定名称("Movement", i + 1) : moveReference.action.GetBindingDisplayString(i + 1);
+                    break;
+            }
+            transform.GetChild(i).GetChild(1).GetComponentInChildren<TMP_Text>().text = text;
         }
     }
 }

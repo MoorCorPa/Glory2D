@@ -104,7 +104,13 @@ public class KeySetter : MonoBehaviour
             Debug.Log("ÃÃÓĞÄó");
             return;
         }
-            
+
+        for (int i = 0; i < action.bindings.Count; i++)
+        {
+            if (!string.IsNullOrEmpty(PlayerPrefs.GetString(action.actionMap + action.name + i)))
+                PlayerPrefs.DeleteKey(action.actionMap + action.name + i);
+        }
+
         action.RemoveAllBindingOverrides();
     }
 }

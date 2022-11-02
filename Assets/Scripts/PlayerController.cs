@@ -148,6 +148,9 @@ public class PlayerController : MonoBehaviour
     {
         if (是否触地)
         {
+            
+            plRigi.velocity = new Vector2(plRigi.velocity.x, 0);
+
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
             animator.SetTrigger("jump");
             内部音效器.PlayOneShot(跳跃音效);

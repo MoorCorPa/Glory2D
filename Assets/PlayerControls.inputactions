@@ -6,15 +6,6 @@
             "id": "663aecf6-4a42-4447-8e1d-42cbe1dc9bbf",
             "actions": [
                 {
-                    "name": "Attack",
-                    "type": "Button",
-                    "id": "27ec16ec-2163-46e3-aade-f371ea8d89e6",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Movement",
                     "type": "Value",
                     "id": "344423f6-fe24-4256-b4a2-914a78df5779",
@@ -31,20 +22,18 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "db3256f2-096f-4741-8573-0eda80411e8a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
-                {
-                    "name": "",
-                    "id": "d134aaca-7055-4c46-8e20-b04c648659ce",
-                    "path": "<Keyboard>/j",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Attack",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
                 {
                     "name": "2D Vector",
                     "id": "c47cfe99-3516-40cc-89ed-081bae66cf7a",
@@ -97,6 +86,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c3d2e078-753c-4c53-b792-0ae9ea0bf10d",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
