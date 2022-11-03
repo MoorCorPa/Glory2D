@@ -20,6 +20,7 @@ public class EnemyFly : Enemy
     [Min(0f)] public float 最小升力;
     [Min(0f)] public float 死亡消失速度;
     [Min(0f)] public float 死亡消失透明度;
+    [Min(0f)] public float 墙体碰撞检测;
 
     public bool 是否远程;
 
@@ -44,6 +45,8 @@ public class EnemyFly : Enemy
     private Vector3 初始缩放;
     private Vector3 缓存位置;
 
+    private bool 是否启动;
+    
     private Vector3 当前位置
     {
         get => transform.position;
@@ -57,6 +60,7 @@ public class EnemyFly : Enemy
         刚体 = GetComponent<Rigidbody2D>();
         动画 = GetComponent<Animator>();
         纹理 = GetComponent<SpriteRenderer>();
+        是否启动 = true;
         初始颜色 = 纹理.color;
         颜色透明度 = 初始颜色.r;
         动画.SetInteger("怪物ID", 怪物ID);
@@ -168,7 +172,7 @@ public class EnemyFly : Enemy
     {
         var 随机坐标 = new Vector2(Random.Range(初始位置.x - 可移动x轴, 初始位置.x + 可移动x轴),
             Random.Range(初始位置.y - 可移动y轴, 初始位置.y + 可移动y轴));
-        随机坐标 -= new Vector2(可移动x轴偏移, 可移动y轴偏移);
+        随机坐标 += new Vector2(可移动x轴偏移, 可移动y轴偏移);
         return 随机坐标;
     }
 
@@ -220,6 +224,11 @@ public class EnemyFly : Enemy
         Handles.DrawSolidDisc(当前位置, Vector3.back, 索敌半径);
         // 移动范围
         Handles.DrawSolidRectangleWithOutline(
-            new Rect(初始位置.x - 可移动x轴 + 可移动x轴偏移 * 2, 初始位置.y - 可移动y轴 + 可移动y轴偏移 * 2, 可移动x轴 * 2, 可移动y轴 * 2), 绿色, 蓝色);
+            是否启动
+                ? new Rect(初始位置.x - 可移动x轴 + 可移动x轴偏移, 初始位置.y - 可移动y轴 + 可移动y轴偏移, 可移动x轴 * 2, 可移动y轴 * 2)
+                : new Rect(当前位置.x - 可移动x轴 + 可移动x轴偏移, 当前位置.y - 可移动y轴 + 可移动y轴偏移, 可移动x轴 * 2, 可移动y轴 * 2), 绿色, 蓝色);
+        // 墙体检测范围
+        Handles.color = 蓝色;
+        Handles.DrawSolidDisc(当前位置, Vector3.back, 墙体碰撞检测);
     }
 }
