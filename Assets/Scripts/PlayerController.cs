@@ -1,3 +1,4 @@
+using Pathfinding;
 using Pathfinding.Util;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController : MonoBehaviour
 {
@@ -31,10 +33,12 @@ public class PlayerController : MonoBehaviour
     public GameObject 信息;
 
     public bool isAttacking;
-    public float 触地射线检测长度 = 0.5f;
     public bool 是否触地 = false;
+    
     public Transform 脚底;
     public float 脚底检测范围;
+    public float 恢复层时间;
+    public float 触地射线检测长度 = 0.5f;
 
     public GameObject 跳跃粒子;
     public GameObject 落地粒子;
@@ -56,6 +60,7 @@ public class PlayerController : MonoBehaviour
     private float 落地前速度;
 
     private InputControler 行为控制;
+    private GameObject 平台;
 
     private void Awake()
     {
@@ -121,6 +126,7 @@ public class PlayerController : MonoBehaviour
         if (health < 0) health = 0;
 
         触地检测();
+        角色切换层();
 
     }
 
@@ -180,11 +186,11 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void 触地检测() 
+    void  触地检测() 
     {
-        info = Physics2D.OverlapCircle(脚底.position, 脚底检测范围, LayerMask.GetMask("Ground"));
+        info = Physics2D.OverlapCircle(脚底.position, 脚底检测范围, LayerMask.GetMask("Ground", "GroundPlatform"));
 
-        if (info != null)
+        if (info != null && plRigi.velocity.y == 0)
         {
             是否触地 = true;
             if (落地前速度 < 0 && plRigi.velocity.y == 0)
@@ -247,16 +253,51 @@ public void TakeDamage(int damage)
     public void Movement(InputAction.CallbackContext context)
     {
         Vector2 val = context.ReadValue<Vector2>();
+        Debug.Log(val.y);
         if (val.y > 0)
         {
+            
             Jump();
         }
         direction = val.x;
     }
 
+
     public void Attack(InputAction.CallbackContext context)
     {
         //if (context.started && !isAttacking) isAttacking = true;
+    }
+
+    void 角色切换层()
+    {
+        float moveY = Input.GetAxis("Vertical");
+
+        if (info != null && moveY < -0.1f)
+        {
+            if ( info.gameObject.layer == LayerMask.NameToLayer("GroundPlatform"))
+            {
+                /*gameObject.layer = LayerMask.NameToLayer("GroundPlatform");
+                Invoke("角色恢复层", 恢复层时间);*/
+                平台 = info.gameObject;
+                平台.GetComponent<PlatformEffector2D>().colliderMask &= ~1 << gameObject.layer;
+                Invoke("角色恢复层", 恢复层时间);
+
+            }
+        }
+
+        
+    }
+
+    void 角色恢复层()
+    {
+        /*if (是否触地 && gameObject.layer != LayerMask.NameToLayer("Player"))
+        {
+            gameObject.layer = LayerMask.NameToLayer("Player");
+        }*/
+        /*info.gameObject.layer = LayerMask.NameToLayer("GroundPlatform");*/
+
+        平台.GetComponent<PlatformEffector2D>().colliderMask |= 1 << gameObject.layer;
+
     }
 
 /*    private void OnCollisionEnter2D(Collision2D collision)
