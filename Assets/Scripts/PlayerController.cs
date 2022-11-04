@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
 
     public bool isAttacking;
     public bool 是否触地 = false;
-    
+
     public Transform 脚底;
     public float 脚底检测范围;
     public float 恢复层时间;
@@ -42,9 +42,16 @@ public class PlayerController : MonoBehaviour
 
     public GameObject 跳跃粒子;
     public GameObject 落地粒子;
-    public bool 是否落地 => plRigi.velocity.y < 0f && 是否触地;
+    private bool 下落中 => plRigi.velocity.y < 0f && !是否触地;
 
     public float 移动音效切换时间;
+
+    public AnimationCurve 速度曲线;
+
+    private float 下落持续时间 => Time.time - 开始下落时间;
+    private float 开始下落时间;
+
+
     private float 移动音效切换计时;
     private int 移动音效序号;
 
@@ -127,7 +134,6 @@ public class PlayerController : MonoBehaviour
 
         触地检测();
         角色切换层();
-
     }
 
     private void 跟随鼠标()
@@ -135,10 +141,10 @@ public class PlayerController : MonoBehaviour
         Vector3 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(0, -0.05f, 0);
         flag = mosPos.x > plRigi.position.x ? 1 : -1;
         信息.transform.localScale = new Vector3(flag * 信息初始缩放.x, 信息初始缩放.y, 信息初始缩放.z);
-        
+
         // Gun.instance.换弹进度条.transform.localScale = new Vector3(flag * Gun.instance.换弹进度条缩放.x,
         //     Gun.instance.换弹进度条缩放.y, Gun.instance.换弹进度条缩放.z);
-        
+
         transform.localScale = new Vector3(flag, 1, 1);
         foreach (var a in arms)
         {
@@ -160,7 +166,6 @@ public class PlayerController : MonoBehaviour
     {
         if (是否触地)
         {
-            
             plRigi.velocity = new Vector2(plRigi.velocity.x, 0);
 
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
@@ -174,9 +179,10 @@ public class PlayerController : MonoBehaviour
     {
         水晶数量 += 数量;
     }
+
     public bool 水晶消耗(int 数量)
     {
-        if (水晶数量-数量<0)
+        if (水晶数量 - 数量 < 0)
         {
             return false;
         }
@@ -186,7 +192,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void  触地检测() 
+    void 触地检测()
     {
         info = Physics2D.OverlapCircle(脚底.position, 脚底检测范围, LayerMask.GetMask("Ground", "GroundPlatform"));
 
@@ -199,9 +205,21 @@ public class PlayerController : MonoBehaviour
                 Instantiate(落地粒子, info.ClosestPoint(脚底.position), Quaternion.identity);
             }
         }
+        else if (!是否触地)
+        {
+            if (下落中)
+            {
+                plRigi.velocity = new Vector2(plRigi.velocity.x, 速度曲线.Evaluate(下落持续时间));
+            }
+            else
+            {
+                开始下落时间 = Time.time;
+            }
+        }
         else
         {
             是否触地 = false;
+            开始下落时间 = Time.time;
         }
 
         落地前速度 = plRigi.velocity.y;
@@ -210,7 +228,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-
         var 红色 = new Color(1.0f, 0, 0, 0.1f);
 
         // 攻击范围
@@ -218,8 +235,8 @@ public class PlayerController : MonoBehaviour
         Handles.DrawSolidDisc(脚底.position, Vector3.back, 脚底检测范围);
     }
 
-// 人物掉血
-public void TakeDamage(int damage)
+    // 人物掉血
+    public void TakeDamage(int damage)
     {
         health -= damage;
         GetComponent<SpriteRenderer>().color = new Color(0.99f, 0.3f, 0.3f, 1f);
@@ -256,9 +273,9 @@ public void TakeDamage(int damage)
         Debug.Log(val.y);
         if (val.y > 0)
         {
-            
             Jump();
         }
+
         direction = val.x;
     }
 
@@ -274,18 +291,15 @@ public void TakeDamage(int damage)
 
         if (info != null && moveY < -0.1f)
         {
-            if ( info.gameObject.layer == LayerMask.NameToLayer("GroundPlatform"))
+            if (info.gameObject.layer == LayerMask.NameToLayer("GroundPlatform"))
             {
                 /*gameObject.layer = LayerMask.NameToLayer("GroundPlatform");
                 Invoke("角色恢复层", 恢复层时间);*/
                 平台 = info.gameObject;
                 平台.GetComponent<PlatformEffector2D>().colliderMask &= ~1 << gameObject.layer;
                 Invoke("角色恢复层", 恢复层时间);
-
             }
         }
-
-        
     }
 
     void 角色恢复层()
@@ -297,7 +311,6 @@ public void TakeDamage(int damage)
         /*info.gameObject.layer = LayerMask.NameToLayer("GroundPlatform");*/
 
         平台.GetComponent<PlatformEffector2D>().colliderMask |= 1 << gameObject.layer;
-
     }
 
 /*    private void OnCollisionEnter2D(Collision2D collision)
