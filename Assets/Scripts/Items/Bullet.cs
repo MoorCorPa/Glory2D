@@ -19,7 +19,7 @@ public class Bullet : MonoBehaviour
         transform.localScale = new Vector3(PlayerController.instance.flag * scale.x, scale.y, scale.z);
 
         子弹生成时的游戏时间 = Time.time;
-        //子弹刚体.velocity = PlayerController.instance.flag * transform.right * 子弹飞行速度;
+        子弹刚体.velocity = PlayerController.instance.flag * transform.right * 子弹飞行速度;
 
         //Physics2D.IgnoreLayerCollision(8, 9);
         是否触发 = false;

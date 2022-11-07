@@ -27,6 +27,8 @@ public class Gun : MonoBehaviour
     public bool 主动换弹 = false;
     public float 射击切回瞄准时间;
     public float 换弹动画切换时间;
+    public float 最大散射偏移;
+    public float 最大速度偏移;
     private bool 开火;
 
     public GameObject 换弹进度条;
@@ -137,30 +139,14 @@ public class Gun : MonoBehaviour
 
     public void 散射()
     {
-        int 计数 = 1;
+        int 计数 = 0;
+
         for (int i = 0; i < 散射数量; i++)
         {
-            Bullet b = Instantiate(bullet, muzzle.position, muzzle.rotation);
-            var 向量 = PlayerController.instance.flag * b.transform.right * b.子弹飞行速度;
-            if (i > 0)
-            {
-                if (i % 2 == 1)
-                    计数++;
-                var tempVec3 = new Vector3(1, 1, 0);
-                switch (i % 2)
-                {
-                    case 0:
-                        向量 += tempVec3 * 计数;
-                        break;
-                    case 1:
-                        向量 -= tempVec3 * 计数;
-                        break;
-                    default:
-                        break;
-                }
-            }
-            
-            b.GetComponent<Rigidbody2D>().velocity = 向量;
+            if (i % 2 == 1) 计数++;
+            var 偏移量 = muzzle.rotation.z + 计数 * (i % 2 == 0 ? Random.Range(0,最大散射偏移) : Random.Range(-最大散射偏移, 0));
+            var 子弹 = Instantiate(bullet, muzzle.position, new Quaternion(muzzle.rotation.x, muzzle.rotation.y, 偏移量, muzzle.rotation.w));
+            子弹.GetComponent<Rigidbody2D>().velocity *= Random.Range(1+ 最大速度偏移, 1- 最大速度偏移);
         }
     }
 
