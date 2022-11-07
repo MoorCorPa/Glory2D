@@ -92,20 +92,28 @@ public class CanvasPanle : MonoBehaviour
                 switch (_武器强化.序号)
                 {
                     case 1:
+                        Gun.instance.最大子弹数量 = 24;
+                        Gun.instance.换弹时间 = 0.8f;
                         break;
                     case 2:
+                        Gun.instance.timeToColldown = 0.1f;
                         break;
                     case 3:
+                        Gun.instance.散射数量 = 3;
                         break;
                     case 4:
                         break;
                     case 5:
                         break;
                     case 6:
+                        Gun.instance.最大子弹数量 = 50;
+                        Gun.instance.换弹时间 = 0.5f;
                         break;
                     case 7:
+                        Gun.instance.timeToColldown = 0.08f;
                         break;
                     case 8:
+                        Gun.instance.散射数量 = 5;
                         break;
                     case 9:
                         break;

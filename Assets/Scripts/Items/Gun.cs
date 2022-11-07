@@ -20,6 +20,7 @@ public class Gun : MonoBehaviour
 
     public int 最大子弹数量 = 12;
     public int 当前子弹数量;
+    public int 散射数量 = 1;
     public float 换弹时间 = 1f;
     public float 换弹计时 = 0;
     public bool 是否正在换弹 = false;
@@ -130,7 +131,37 @@ public class Gun : MonoBehaviour
         当前子弹数量--;
         isColldown = false;
         //startTime = Time.time;
-        Instantiate(bullet, muzzle.position, muzzle.rotation);
+        //Instantiate(bullet, muzzle.position, muzzle.rotation);
+        散射();
+    }
+
+    public void 散射()
+    {
+        int 计数 = 1;
+        for (int i = 0; i < 散射数量; i++)
+        {
+            Bullet b = Instantiate(bullet, muzzle.position, muzzle.rotation);
+            var 向量 = PlayerController.instance.flag * b.transform.right * b.子弹飞行速度;
+            if (i > 0)
+            {
+                if (i % 2 == 1)
+                    计数++;
+                var tempVec3 = new Vector3(1, 1, 0);
+                switch (i % 2)
+                {
+                    case 0:
+                        向量 += tempVec3 * 计数;
+                        break;
+                    case 1:
+                        向量 -= tempVec3 * 计数;
+                        break;
+                    default:
+                        break;
+                }
+            }
+            
+            b.GetComponent<Rigidbody2D>().velocity = 向量;
+        }
     }
 
     public void handleCooldown()
