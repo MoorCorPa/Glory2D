@@ -1,9 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class 激光控制 : MonoBehaviour
 {
+
+    public int 伤害 = 1;   
+    public float 攻击冷却 = 0.3f;
+
+    private float 攻击冷却计时 = 0;
+
     [SerializeField] private Color 颜色 = new Color(191/255,36/255,0);
     [SerializeField] private float 颜色强度 = 4.3f; //HDR >1光晕效果
 
@@ -64,5 +71,24 @@ public class 激光控制 : MonoBehaviour
         起点VFX.transform.position = 枪口.transform.position;
         终点VFX.transform.position = 终点;
         终点VFX.transform.rotation = Quaternion.Euler(0, 0, 激光末端旋转向量);
+
+        if (攻击冷却计时 > 攻击冷却)
+        {
+            攻击(hit);
+            攻击冷却计时 = 0;
+        }
+        else
+            攻击冷却计时 += Time.deltaTime;
+        
+            
+    }
+
+    private void 攻击(RaycastHit2D hit)
+    {
+        var e = hit.collider.GetComponent<Enemy>();
+        if (e!=null)
+        {
+            e.掉血(伤害);
+        };
     }
 }

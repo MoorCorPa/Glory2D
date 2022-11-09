@@ -1000,7 +1000,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &123772538
 Transform:
   m_ObjectHideFlags: 0
@@ -1031,6 +1031,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bf7661c3de22f4b8ff6eb37bbfbf90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  "\u4F24\u5BB3": 1
+  "\u653B\u51FB\u51B7\u5374": 1
   "\u989C\u8272": {r: 0.9528302, g: 0.39922684, b: 0, a: 1}
   "\u989C\u8272\u5F3A\u5EA6": 4.3
   "\u6700\u5927\u957F\u5EA6": 100
@@ -18192,7 +18194,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1121709968
 Transform:
   m_ObjectHideFlags: 0
@@ -35619,6 +35621,10 @@ PrefabInstance:
       propertyPath: "\u901F\u5EA6\u66F2\u7EBF.m_Curve.Array.data[1].tangentMode"
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8310501653558421754, guid: bcfdfe156a56fe94dbb3109e46558cc8, type: 3}
+      propertyPath: "\u6FC0\u5149"
+      value: 
+      objectReference: {fileID: 123772537}
     - target: {fileID: 8310501653558421754, guid: bcfdfe156a56fe94dbb3109e46558cc8, type: 3}
       propertyPath: "\u6563\u5C04\u6570\u91CF"
       value: 5

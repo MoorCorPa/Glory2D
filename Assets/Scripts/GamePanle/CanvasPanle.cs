@@ -116,6 +116,7 @@ public class CanvasPanle : MonoBehaviour
                         Gun.instance.散射数量 = 5;
                         break;
                     case 9:
+                        
                         break;
                     case 10:
                         break;

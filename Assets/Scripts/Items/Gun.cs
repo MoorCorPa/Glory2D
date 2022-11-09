@@ -53,15 +53,24 @@ public class Gun : MonoBehaviour
     
     private InputControler 行为控制;
 
+    [SerializeField] private GameObject 激光;
+    [SerializeField] private bool 激光模式 = false;
+
     private void OnEnable()
     {
         行为控制 = KeySetter.input;
         行为控制.Player.Fire.performed += ctx => 开火 = true;
-        行为控制.Player.Fire.canceled += ctx => 开火 = false;
+        行为控制.Player.Fire.canceled += ctx => 
+        {
+            开火 = false;
+            激光.SetActive(false);
+        };
         行为控制.Player.Reload.started += 触发换弹;
+        行为控制.Player.ChangeMode.started += ctx => 激光模式 = !激光模式;
 
         行为控制.Player.Fire.Enable();
         行为控制.Player.Reload.Enable();
+        行为控制.Player.ChangeMode.Enable();
     }
     private void Awake()
     {
@@ -134,7 +143,10 @@ public class Gun : MonoBehaviour
         isColldown = false;
         //startTime = Time.time;
         //Instantiate(bullet, muzzle.position, muzzle.rotation);
-        散射();
+        if (激光模式)
+            激光.SetActive(true);
+        else
+            散射();
     }
 
     public void 散射()
@@ -207,7 +219,8 @@ public class Gun : MonoBehaviour
         是否正在换弹 = true;
         换弹计时 += Time.deltaTime;
         换弹进度条.GetComponent<Slider>().value = 换弹计时 / 换弹时间;
-        
+        激光.SetActive(false);
+
         if (换弹计时 > 换弹时间)
         {
             换弹计时 = 0;
