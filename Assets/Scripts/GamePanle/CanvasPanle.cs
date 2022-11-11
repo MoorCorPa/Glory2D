@@ -104,6 +104,7 @@ public class CanvasPanle : MonoBehaviour
                     case 4:
                         break;
                     case 5:
+                        Gun.instance.攻击回血次数 = 100;
                         break;
                     case 6:
                         Gun.instance.最大子弹数量 = 50;

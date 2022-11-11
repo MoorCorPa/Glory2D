@@ -55,6 +55,8 @@ public class PlayerController : MonoBehaviour
     private float 移动音效切换计时;
     private int 移动音效序号;
 
+    public int 攻击计数;
+
     private Vector3 信息初始缩放;
 
     private Rigidbody2D plRigi;
