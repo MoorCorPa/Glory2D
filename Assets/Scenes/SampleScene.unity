@@ -1032,11 +1032,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   "\u4F24\u5BB3": 1
-  "\u653B\u51FB\u51B7\u5374": 1
-  "\u989C\u8272": {r: 0.9528302, g: 0.39922684, b: 0, a: 1}
-  "\u989C\u8272\u5F3A\u5EA6": 4.3
+  "\u653B\u51FB\u51B7\u5374": 0.22
+  "\u989C\u8272": {r: 0.08627451, g: 0.3137255, b: 0.9607843, a: 1}
+  "\u989C\u8272\u5F3A\u5EA6": 1.5
   "\u6700\u5927\u957F\u5EA6": 100
-  "\u5F3A\u5EA6": 2
+  "\u5F3A\u5EA6": 4
   "\u566A\u97F3\u7F29\u653E": 3.14
   "\u8D77\u70B9VFX": {fileID: 1121709967}
   "\u7EC8\u70B9VFX": {fileID: 1730050885}
@@ -8062,8 +8062,8 @@ LineRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1214552893
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -8076,10 +8076,19 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.33359537
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
+        value: 0.3
+        inSlope: 0.3
+        outSlope: 0.3
+        tangentMode: 34
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.1
+        value: 0.33
+        inSlope: 0.3
+        outSlope: 0.3
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
@@ -13555,8 +13564,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
-      minScalar: 0.2
+      scalar: 0.2
+      minScalar: 0.1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -13724,7 +13733,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.2
+      scalar: 0.3
       minScalar: 0.1
       maxCurve:
         serializedVersion: 2
@@ -24289,9 +24298,9 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1214552893
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_RenderMode: 0
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -24406,7 +24415,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 3
       scalar: 0.3
-      minScalar: 0.1
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -25094,7 +25103,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
     arc:
-      value: 360
+      value: 0
       mode: 0
       spread: 0
       speed:
@@ -31792,10 +31801,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1488281903673547399, guid: 1b57a5927f4326747aa647a7044b1c3b, type: 3}
+      propertyPath: m_SortingLayer
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1488281903673547399, guid: 1b57a5927f4326747aa647a7044b1c3b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1488281903673547399, guid: 1b57a5927f4326747aa647a7044b1c3b, type: 3}
+      propertyPath: m_SortingLayerID
+      value: -1935790463
+      objectReference: {fileID: 0}
     - target: {fileID: 1488281903673547400, guid: 1b57a5927f4326747aa647a7044b1c3b, type: 3}
       propertyPath: "\u63D0\u793A\u6587\u5B57"
       value: 
       objectReference: {fileID: 1686621407}
+    - target: {fileID: 1488281904363158931, guid: 1b57a5927f4326747aa647a7044b1c3b, type: 3}
+      propertyPath: m_SortingOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 1488281904412061365, guid: 1b57a5927f4326747aa647a7044b1c3b, type: 3}
       propertyPath: m_ConstrainProportionsScale
       value: 1

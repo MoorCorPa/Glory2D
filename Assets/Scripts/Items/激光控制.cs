@@ -66,10 +66,19 @@ public class 激光控制 : MonoBehaviour
         }
 
         线渲染器.SetPosition(1, new Vector2(长度, 0));
-
+        Debug.DrawLine(transform.position, hit.point,Color.red);
         Vector2 终点 = 枪口.transform.position + 长度 * flag * transform.right;
         起点VFX.transform.position = 枪口.transform.position;
-        终点VFX.transform.position = 终点;
+        if (hit)
+        {
+            终点VFX.SetActive(true);
+            终点VFX.transform.position = hit.point;
+        }
+        else
+        {
+            终点VFX.SetActive(false);
+        }
+        
         终点VFX.transform.rotation = Quaternion.Euler(0, 0, 激光末端旋转向量);
 
         if (攻击冷却计时 > 攻击冷却)
