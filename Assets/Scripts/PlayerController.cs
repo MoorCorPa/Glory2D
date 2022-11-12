@@ -70,7 +70,7 @@ public class PlayerController : MonoBehaviour
 
     private InputControler 行为控制;
     private GameObject 平台;
-
+    private Cinemachine.CinemachineImpulseSource 抖动源;
     private void Awake()
     {
         instance = this;
@@ -96,6 +96,7 @@ public class PlayerController : MonoBehaviour
         移动音效序号 = 0;
         移动音效切换计时 = 0;
         信息初始缩放 = 信息.transform.localScale;
+        抖动源 = GetComponent<Cinemachine.CinemachineImpulseSource>();
 
         if (File.Exists(存档管理器.存档路径))
         {
@@ -168,6 +169,7 @@ public class PlayerController : MonoBehaviour
     {
         if (是否触地)
         {
+            抖动源.GenerateImpulse();
             plRigi.velocity = new Vector2(plRigi.velocity.x, 0);
 
             plRigi.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
