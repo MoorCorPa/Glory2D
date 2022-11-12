@@ -21,7 +21,6 @@ public class Gun : MonoBehaviour
     public int 最大子弹数量 = 12;
     public int 当前子弹数量;
     public int 散射数量 = 1;
-    public int 攻击回血次数;
     public float 换弹时间 = 1f;
     public float 换弹计时 = 0;
     public bool 是否正在换弹 = false;
@@ -134,7 +133,6 @@ public class Gun : MonoBehaviour
             }
             
             检测子弹();
-            计数回血();
         }
     }
 
@@ -234,20 +232,5 @@ public class Gun : MonoBehaviour
         }
     }
 
-    public void 计数回血(){
-        if (PlayerController.instance.health < 5)
-        {
-            if (PlayerController.instance.攻击计数 >= 攻击回血次数)
-            {
-                Debug.Log(PlayerController.instance.攻击计数 + 攻击回血次数);
-                PlayerController.instance.health += 1;
-                PlayerController.instance.攻击计数 = 0;
-            }
-        }else{
-            if (PlayerController.instance.攻击计数 >= 攻击回血次数)
-            {
-                PlayerController.instance.攻击计数 = 0;
-            }
-        }
-    }
+
 }

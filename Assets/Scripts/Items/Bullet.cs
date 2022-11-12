@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
 
                     collision.GetComponent<Enemy>().掉血(子弹伤害);
                     
-                    PlayerController.instance.攻击计数 +=1;
+                    PlayerController.instance.攻击计数增加();
                 }
             }
 

@@ -107,15 +107,16 @@ public class Enemy鳄龟 : Enemy
             }
         }
 
-        if (攻击前摇计时 > 0 | (玩家在扇形范围() & Mathf.Abs(玩家位置.x - 当前位置.x) < 视野距离 - 0.5f))
+        if (攻击前摇计时 > 0 | (玩家在扇形范围() & Mathf.Abs(玩家位置.x - 当前位置.x) < 视野距离 - 0.2f))
         {
+            Debug.Log("dduidudiudids");
             开始向玩家移动 = false;
             动画.SetInteger("状态", 0);
             if (攻击间隔 < 攻击间隔计时)
             {
                 if (玩家在跺脚范围() && 是否需要判断跺脚)
                 {
-                    if (Random.Range(0, 3) == 0)
+                    if (Random.Range(0, 1) == 0)
                     {
                         攻击间隔计时 = 攻击前摇计时 = 攻击僵直计时 = 0;
                         动画.SetTrigger("跺脚");
@@ -151,12 +152,11 @@ public class Enemy鳄龟 : Enemy
         }
         else if (攻击僵直计时 > 攻击僵值)
         {
-            if (!(转向等待计时 > 转向等待)) return;
-            transform.localScale = new Vector3(当前位置.x - 玩家位置.x > 0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
-            转向等待计时 = 0;
-            if (!玩家在跺脚范围())
+            if (转向等待计时 > 转向等待)
             {
-                开始向玩家移动 = true;
+                transform.localScale = new Vector3(当前位置.x - 玩家位置.x > 0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
+                转向等待计时 = 0;
+                    开始向玩家移动 = true;
             }
         }
         else
@@ -174,12 +174,12 @@ public class Enemy鳄龟 : Enemy
         }
     }
 
-    public bool 玩家在跺脚范围()
+    private bool 玩家在跺脚范围()
     {
         return Mathf.Abs(跺脚位置.position.x - 玩家位置.x) < 跺脚半径;
     }
 
-    public bool 玩家在扇形范围()
+    private bool 玩家在扇形范围()
     {
         Vector2 正前方向量 = transform.rotation * (transform.localScale.x > 0 ? Vector2.left : Vector2.right);
         Vector3 v = Quaternion.Euler(0, 0, transform.localScale.x > 0 ? 视角方向 : -视角方向) * 正前方向量;
@@ -199,7 +199,7 @@ public class Enemy鳄龟 : Enemy
     }
 
 
-    public void 判断是否击中玩家(String 攻击方式)
+    public void 判断是否击中玩家(string 攻击方式)
     {
         var 击中玩家 = false;
         switch (攻击方式)
@@ -210,7 +210,7 @@ public class Enemy鳄龟 : Enemy
             case "跺脚":
                 抖动源.GenerateImpulse();
                 Instantiate(跺脚粒子, 跺脚位置);
-                击中玩家 = 玩家在跺脚范围() && Mathf.Abs(玩家位置.y - 跺脚位置.position.y) < 0.1f;
+                击中玩家 = 玩家在跺脚范围() && Mathf.Abs(玩家位置.y - 跺脚位置.position.y) < 0.7f;
                 break;
         }
 
@@ -261,6 +261,7 @@ public class Enemy鳄龟 : Enemy
     private void OnDrawGizmosSelected()
     {
         var 红色 = new Color(1.0f, 0, 0, 0.1f);
+        var 蓝色 = new Color(0.1f, 0.2f, 0.9f, 0.1f);
 
         // 攻击范围
         Vector3 forward = transform.localScale.x > 0 ? Vector2.left : Vector2.right;

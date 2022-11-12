@@ -104,7 +104,7 @@ public class CanvasPanle : MonoBehaviour
                     case 4:
                         break;
                     case 5:
-                        Gun.instance.攻击回血次数 = 100;
+                        PlayerController.instance.开启攻击回血 = true;
                         break;
                     case 6:
                         Gun.instance.最大子弹数量 = 50;
@@ -117,9 +117,11 @@ public class CanvasPanle : MonoBehaviour
                         Gun.instance.散射数量 = 5;
                         break;
                     case 9:
-                        
+
                         break;
                     case 10:
+                        PlayerController.instance.攻击回血次数 /= 2;
+                        PlayerController.instance.开启攻击回血 = true;
                         break;
                     default:
                         强化提示.GetComponent<强化提示>().提示文字内容("技能id错误");

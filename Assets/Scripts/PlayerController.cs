@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     public int flag;
 
     // 人物血量
+    [Min(0)] public int 最大血量;
     [Min(0)] public int health;
     [Min(0)] public float 受伤变色时间;
     [Min(0)] public int 水晶数量;
@@ -56,6 +57,8 @@ public class PlayerController : MonoBehaviour
     private int 移动音效序号;
 
     public int 攻击计数;
+    public int 攻击回血次数;
+    public bool 开启攻击回血;
 
     private Vector3 信息初始缩放;
 
@@ -85,7 +88,7 @@ public class PlayerController : MonoBehaviour
         行为控制.Player.Movement.Enable();
     }
 
-    void Start()
+    private void Start()
     {
         Time.timeScale = 1f;
         plRigi = GetComponent<Rigidbody2D>();
@@ -95,6 +98,7 @@ public class PlayerController : MonoBehaviour
         移动音效序号 = 0;
         移动音效切换计时 = 0;
         信息初始缩放 = 信息.transform.localScale;
+        最大血量 = health;
 
         if (File.Exists(存档管理器.存档路径))
         {
@@ -108,7 +112,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
+    private void Update()
     {
         if (Time.timeScale > 0)
         {
@@ -139,19 +143,22 @@ public class PlayerController : MonoBehaviour
 
     private void 跟随鼠标()
     {
-        Vector3 mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(0, -0.05f, 0);
-        flag = mosPos.x > plRigi.position.x ? 1 : -1;
-        信息.transform.localScale = new Vector3(flag * 信息初始缩放.x, 信息初始缩放.y, 信息初始缩放.z);
-
-        // Gun.instance.换弹进度条.transform.localScale = new Vector3(flag * Gun.instance.换弹进度条缩放.x,
-        //     Gun.instance.换弹进度条缩放.y, Gun.instance.换弹进度条缩放.z);
-
-        transform.localScale = new Vector3(flag, 1, 1);
-        foreach (var a in arms)
+        if (Camera.main is not null)
         {
-            Vector3 drc = (mosPos - a.transform.position).normalized;
-            float angle = 450 + (flag == 1 ? 0 : 180) - Mathf.Atan2(drc.x, drc.y) * Mathf.Rad2Deg;
-            a.transform.eulerAngles = new Vector3(0, 0, angle);
+            var mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(0, -0.05f, 0);
+            flag = mosPos.x > plRigi.position.x ? 1 : -1;
+            信息.transform.localScale = new Vector3(flag * 信息初始缩放.x, 信息初始缩放.y, 信息初始缩放.z);
+
+            // Gun.instance.换弹进度条.transform.localScale = new Vector3(flag * Gun.instance.换弹进度条缩放.x,
+            //     Gun.instance.换弹进度条缩放.y, Gun.instance.换弹进度条缩放.z);
+
+            transform.localScale = new Vector3(flag, 1, 1);
+            foreach (var a in arms)
+            {
+                Vector3 drc = (mosPos - a.transform.position).normalized;
+                float angle = 450 + (flag == 1 ? 0 : 180) - Mathf.Atan2(drc.x, drc.y) * Mathf.Rad2Deg;
+                a.transform.eulerAngles = new Vector3(0, 0, angle);
+            }
         }
 
 
@@ -163,7 +170,7 @@ public class PlayerController : MonoBehaviour
         }*/
     }
 
-    void Jump()
+    private void Jump()
     {
         if (是否触地)
         {
@@ -193,7 +200,7 @@ public class PlayerController : MonoBehaviour
     }
 
 
-    void 触地检测()
+    private void 触地检测()
     {
         info = Physics2D.OverlapCircle(脚底.position, 脚底检测范围, LayerMask.GetMask("Ground", "GroundPlatform"));
 
@@ -260,6 +267,15 @@ public class PlayerController : MonoBehaviour
         {
             a.GetComponent<SpriteRenderer>().color = Color.white;
         }
+    }
+    public void 攻击计数增加()
+    {
+        if (!开启攻击回血) return;
+        if (health >= 5) return;
+        攻击计数++;
+        if (攻击计数 < 攻击回血次数) return;
+        health++;
+        攻击计数 = 0;
     }
 
     public void 关闭换弹动画()
