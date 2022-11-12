@@ -14,6 +14,8 @@ public class BulletEnemy : MonoBehaviour
     public Rigidbody2D 子弹刚体;
     public bool 是否触发;
 
+    public Transform 父节点;
+
     public Vector3 玩家位置 => PlayerController.instance.transform.position;
 
     public Vector3 当前位置
@@ -26,8 +28,17 @@ public class BulletEnemy : MonoBehaviour
     {
         Destroy(gameObject, 子弹销毁时间);
         子弹刚体 = GetComponent<Rigidbody2D>();
-        transform.right = (玩家位置 - 当前位置).normalized;
-        子弹刚体.velocity = transform.right * 子弹飞行速度;
+        if (父节点 == null)
+        {
+            transform.right = (玩家位置 - 当前位置).normalized;
+            子弹刚体.velocity = transform.right * 子弹飞行速度;
+        }
+        else
+        {
+            父节点.right = (玩家位置 - 当前位置).normalized;
+            子弹刚体.velocity = 父节点.right * 子弹飞行速度;
+        }
+
         //Physics2D.IgnoreLayerCollision(8, 9);
         是否触发 = false;
     }
@@ -53,6 +64,13 @@ public class BulletEnemy : MonoBehaviour
 
     public void 子弹销毁()
     {
-        Destroy(gameObject);
+        if (父节点 != null)
+        {
+            Destroy(父节点.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

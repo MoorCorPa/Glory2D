@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Microsoft.Unity.VisualStudio.Editor;
 using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Pool;
+using Image = UnityEngine.UI.Image;
 using Random = UnityEngine.Random;
 
 public class Enemy喷子怪 : Enemy
@@ -22,7 +24,8 @@ public class Enemy喷子怪 : Enemy
     [Min(0f)] public float 墙体检测射线长度;
 
     public GameObject 子弹;
-
+    public GameObject 血条框;
+    public GameObject 血条;
 
     private float 攻击间隔计时;
     private float 攻击前摇计时;
@@ -66,6 +69,8 @@ public class Enemy喷子怪 : Enemy
         InvokeRepeating("播放攻击", 0, 攻击间隔);
         攻击僵直计时 = 攻击僵直;
         //InvokeRepeating("发射", 0, 1);
+        血条框.SetActive(true);
+        血条.GetComponent<Image>().fillAmount = 1;
     }
 
     private void Update()
@@ -151,6 +156,9 @@ public class Enemy喷子怪 : Enemy
             {
                 Instantiate(掉落物, 炮口.position, transform.rotation);
             }
+
+            血条.GetComponent<Image>().fillAmount = (float)当前血量 / (float)最大血量;
+            if(血条.GetComponent<Image>().fillAmount < 0.5f) 血条框.GetComponentInChildren<Animator>().SetBool("狂暴",true);
         }
         else
         {
@@ -159,8 +167,8 @@ public class Enemy喷子怪 : Enemy
                 Instantiate(掉落物, 当前位置 + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0),
                     transform.rotation);
             }
-
             Destroy(gameObject);
+            血条框.SetActive(false);
         }
 
         纹理.color = new Color(0.99f, 0.3f, 0.3f, 1f);
