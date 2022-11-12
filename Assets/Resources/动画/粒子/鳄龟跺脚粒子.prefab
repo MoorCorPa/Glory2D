@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &5362875135589811972
+--- !u!1 &7847612210179165776
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,38 +8,38 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1491894334148043479}
-  - component: {fileID: 4115008103060599057}
-  - component: {fileID: 8100523833567074818}
+  - component: {fileID: 2784456892220174922}
+  - component: {fileID: 6908548578245673014}
+  - component: {fileID: 3096953958471408000}
   m_Layer: 10
-  m_Name: "\u8DF3\u8DC3\u7C92\u5B50"
+  m_Name: "\u9CC4\u9F9F\u8DFA\u811A\u7C92\u5B50"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &1491894334148043479
+--- !u!4 &2784456892220174922
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5362875135589811972}
+  m_GameObject: {fileID: 7847612210179165776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!198 &4115008103060599057
+--- !u!198 &6908548578245673014
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5362875135589811972}
+  m_GameObject: {fileID: 7847612210179165776}
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 4
@@ -107,7 +107,7 @@ ParticleSystem:
       m_PostInfinity: 2
       m_RotationOrder: 4
   moveWithTransform: 0
-  moveWithCustomTransform: {fileID: 1491894334148043479}
+  moveWithCustomTransform: {fileID: 2784456892220174922}
   scalingMode: 1
   randomSeed: 0
   InitialModule:
@@ -223,7 +223,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 0.78431374}
+      maxColor: {r: 1, g: 1, b: 1, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -1379,7 +1379,7 @@ ParticleSystem:
           time: 0
           value: 0
           inSlope: 0
-          outSlope: 1
+          outSlope: 0
           tangentMode: 0
           weightedMode: 0
           inWeight: 0.33333334
@@ -1387,7 +1387,7 @@ ParticleSystem:
         - serializedVersion: 3
           time: 1
           value: 1
-          inSlope: 1
+          inSlope: 0
           outSlope: 0
           tangentMode: 0
           weightedMode: 0
@@ -1482,9 +1482,8 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 635146447, guid: 43b408a00a3cfd94bb96abee93d6dbca, type: 3}
-    - sprite: {fileID: -1945149214, guid: 43b408a00a3cfd94bb96abee93d6dbca, type: 3}
-    - sprite: {fileID: 1956007004, guid: 43b408a00a3cfd94bb96abee93d6dbca, type: 3}
+    - sprite: {fileID: 405181217, guid: ea114de034e87634eb7ac9d0137b86c1, type: 3}
+    - sprite: {fileID: -849158451, guid: ea114de034e87634eb7ac9d0137b86c1, type: 3}
     flipU: 0
     flipV: 0
   VelocityModule:
@@ -4742,14 +4741,14 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &8100523833567074818
+--- !u!199 &3096953958471408000
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5362875135589811972}
+  m_GameObject: {fileID: 7847612210179165776}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -4788,7 +4787,7 @@ ParticleSystemRenderer:
   m_MeshDistribution: 1
   m_SortMode: 0
   m_MinParticleSize: 0
-  m_MaxParticleSize: 0.1
+  m_MaxParticleSize: 1
   m_CameraVelocityScale: 0
   m_VelocityScale: 0
   m_LengthScale: 2

@@ -64,6 +64,13 @@ public class BulletEnemy : MonoBehaviour
 
     public void 子弹销毁()
     {
-        Destroy(gameObject);
+        if (父节点 != null)
+        {
+            Destroy(父节点.gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }
