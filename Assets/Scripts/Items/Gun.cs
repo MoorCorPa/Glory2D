@@ -44,8 +44,6 @@ public class Gun : MonoBehaviour
     [SerializeField] private Texture2D 射击指针;
     [SerializeField] private Texture2D[] 换弹指针;
 
-    private float 鼠标动画计时 = 0f;
-    private float 鼠标动画时间 = 0.2f;
     private bool 正在射击;
     private float 射击切回瞄准时间计时;
     private float 换弹动画切换计时;

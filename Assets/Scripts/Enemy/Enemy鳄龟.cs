@@ -109,7 +109,6 @@ public class Enemy鳄龟 : Enemy
 
         if (攻击前摇计时 > 0 | (玩家在扇形范围() & Mathf.Abs(玩家位置.x - 当前位置.x) < 视野距离 - 0.2f))
         {
-            Debug.Log("dduidudiudids");
             开始向玩家移动 = false;
             动画.SetInteger("状态", 0);
             if (攻击间隔 < 攻击间隔计时)

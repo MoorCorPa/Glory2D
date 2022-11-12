@@ -52,8 +52,6 @@ public class PlayerController : MonoBehaviour
     private float 下落持续时间 => Time.time - 开始下落时间;
     private float 开始下落时间;
 
-
-    private float 移动音效切换计时;
     private int 移动音效序号;
 
     public int 攻击计数;
@@ -96,7 +94,6 @@ public class PlayerController : MonoBehaviour
         arms = GameObject.FindGameObjectsWithTag("arms");
         水晶数量 = 0;
         移动音效序号 = 0;
-        移动音效切换计时 = 0;
         信息初始缩放 = 信息.transform.localScale;
         最大血量 = health;
 
@@ -287,7 +284,6 @@ public class PlayerController : MonoBehaviour
     public void Movement(InputAction.CallbackContext context)
     {
         Vector2 val = context.ReadValue<Vector2>();
-        Debug.Log(val.y);
         if (val.y > 0)
         {
             Jump();
