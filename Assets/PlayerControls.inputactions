@@ -33,12 +33,21 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "ChangeMode",
+                    "name": "Chmod",
                     "type": "Button",
                     "id": "01ebb1c8-5ba8-4c61-97fa-df3622acb7cc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "ae7f8cf5-323d-4cff-9f07-f5a3977e40be",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
                     "initialStateCheck": false
                 }
             ],
@@ -53,17 +62,6 @@
                     "action": "Movement",
                     "isComposite": true,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "up",
-                    "id": "59e3ce58-9dbb-421e-a8c5-8aa8b7a8bd30",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Movement",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "left",
@@ -116,7 +114,18 @@
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "ChangeMode",
+                    "action": "Chmod",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "80403182-06d5-42e8-bbed-c351a75dbb86",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

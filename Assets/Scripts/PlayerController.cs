@@ -81,9 +81,11 @@ public class PlayerController : MonoBehaviour
         行为控制 = KeySetter.input;
         //行为控制 = new InputControler();
         行为控制.Player.Movement.performed += Movement;
+        行为控制.Player.Jump.performed += Jump;
         行为控制.Player.Movement.canceled += ctx => direction = 0;
 
         行为控制.Player.Movement.Enable();
+        行为控制.Player.Jump.Enable();
     }
 
     private void Start()
@@ -167,7 +169,7 @@ public class PlayerController : MonoBehaviour
         }*/
     }
 
-    private void Jump()
+    private void Jump(InputAction.CallbackContext context)
     {
         if (是否触地)
         {
@@ -284,11 +286,6 @@ public class PlayerController : MonoBehaviour
     public void Movement(InputAction.CallbackContext context)
     {
         Vector2 val = context.ReadValue<Vector2>();
-        if (val.y > 0)
-        {
-            Jump();
-        }
-
         direction = val.x;
     }
 

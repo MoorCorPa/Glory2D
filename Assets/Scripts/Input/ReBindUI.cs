@@ -13,6 +13,10 @@ public class ReBindUI : MonoBehaviour
     private InputActionReference fireReference;
     [SerializeField]
     private InputActionReference reloadReference;
+    [SerializeField]
+    private InputActionReference chmodReference;
+    [SerializeField]
+    private InputActionReference jumpReference;
 
     [SerializeField]
     private Button resetButton;
@@ -26,6 +30,8 @@ public class ReBindUI : MonoBehaviour
             KeySetter.加载绑定覆盖("Movement");
             KeySetter.加载绑定覆盖("Fire");
             KeySetter.加载绑定覆盖("Reload");
+            KeySetter.加载绑定覆盖("Chmod");
+            KeySetter.加载绑定覆盖("Jump");
             更新UI();
         }
 
@@ -55,20 +61,23 @@ public class ReBindUI : MonoBehaviour
 
         switch (按钮.name)
         {
-            case "跳跃设置":
+            case "左设置":
                 下标 = 1;
                 break;
-            case "左设置":
+            case "右设置":
                 下标 = 2;
                 break;
-            case "右设置":
-                下标 = 3;
+            case "跳跃设置":
+                actionName = "Jump";
                 break;
             case "射击设置":
                 actionName = "Fire";
                 break;
             case "换弹设置":
                 actionName = "Reload";
+                break;
+            case "模式设置":
+                actionName = "Chmod";
                 break;
             default:
                 break;
@@ -81,27 +90,34 @@ public class ReBindUI : MonoBehaviour
         KeySetter.重置绑定("Movement");
         KeySetter.重置绑定("Fire");
         KeySetter.重置绑定("Reload");
+        KeySetter.重置绑定("Jump");
+        KeySetter.重置绑定("Chmod");
         更新UI();
     }
 
 
     private void 更新UI()
     {
-        Debug.Log("GENGX");
         for (int i = 0; i < transform.childCount; i++)
         {
             string text = "";
 
             switch (i)
             {
+                case 2:
+                    text = Application.isPlaying ? KeySetter.获取绑定名称("Jump", 0) : jumpReference.action.GetBindingDisplayString(0);
+                    break;
                 case 3:
                     text = Application.isPlaying ? KeySetter.获取绑定名称("Fire", 0) : fireReference.action.GetBindingDisplayString(0);
                     break;
                 case 4:
                     text = Application.isPlaying ? KeySetter.获取绑定名称("Reload", 0) : reloadReference.action.GetBindingDisplayString(0);
                     break;
+                case 5:
+                    text = Application.isPlaying ? KeySetter.获取绑定名称("Chmod", 0) : chmodReference.action.GetBindingDisplayString(0);
+                    break;
                 default:
-                    text = Application.isPlaying ? KeySetter.获取绑定名称("Movement", i + 1) : moveReference.action.GetBindingDisplayString(i + 1);
+                    text = Application.isPlaying ? KeySetter.获取绑定名称("Movement", i+1) : moveReference.action.GetBindingDisplayString(i+1);
                     break;
             }
             transform.GetChild(i).GetChild(1).GetComponentInChildren<TMP_Text>().text = text;

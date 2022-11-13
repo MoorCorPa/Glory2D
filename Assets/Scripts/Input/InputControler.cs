@@ -55,12 +55,21 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""ChangeMode"",
+                    ""name"": ""Chmod"",
                     ""type"": ""Button"",
                     ""id"": ""01ebb1c8-5ba8-4c61-97fa-df3622acb7cc"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""ae7f8cf5-323d-4cff-9f07-f5a3977e40be"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
                     ""initialStateCheck"": false
                 }
             ],
@@ -75,17 +84,6 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                     ""action"": ""Movement"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""up"",
-                    ""id"": ""59e3ce58-9dbb-421e-a8c5-8aa8b7a8bd30"",
-                    ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": ""left"",
@@ -138,7 +136,18 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""ChangeMode"",
+                    ""action"": ""Chmod"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""80403182-06d5-42e8-bbed-c351a75dbb86"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -152,7 +161,8 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_Fire = m_Player.FindAction("Fire", throwIfNotFound: true);
         m_Player_Reload = m_Player.FindAction("Reload", throwIfNotFound: true);
-        m_Player_ChangeMode = m_Player.FindAction("ChangeMode", throwIfNotFound: true);
+        m_Player_Chmod = m_Player.FindAction("Chmod", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -215,7 +225,8 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_Fire;
     private readonly InputAction m_Player_Reload;
-    private readonly InputAction m_Player_ChangeMode;
+    private readonly InputAction m_Player_Chmod;
+    private readonly InputAction m_Player_Jump;
     public struct PlayerActions
     {
         private @InputControler m_Wrapper;
@@ -223,7 +234,8 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @Fire => m_Wrapper.m_Player_Fire;
         public InputAction @Reload => m_Wrapper.m_Player_Reload;
-        public InputAction @ChangeMode => m_Wrapper.m_Player_ChangeMode;
+        public InputAction @Chmod => m_Wrapper.m_Player_Chmod;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -242,9 +254,12 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                 @Reload.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @Reload.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
                 @Reload.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnReload;
-                @ChangeMode.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeMode;
-                @ChangeMode.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeMode;
-                @ChangeMode.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChangeMode;
+                @Chmod.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChmod;
+                @Chmod.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChmod;
+                @Chmod.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnChmod;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -258,9 +273,12 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                 @Reload.started += instance.OnReload;
                 @Reload.performed += instance.OnReload;
                 @Reload.canceled += instance.OnReload;
-                @ChangeMode.started += instance.OnChangeMode;
-                @ChangeMode.performed += instance.OnChangeMode;
-                @ChangeMode.canceled += instance.OnChangeMode;
+                @Chmod.started += instance.OnChmod;
+                @Chmod.performed += instance.OnChmod;
+                @Chmod.canceled += instance.OnChmod;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
             }
         }
     }
@@ -270,6 +288,7 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
         void OnMovement(InputAction.CallbackContext context);
         void OnFire(InputAction.CallbackContext context);
         void OnReload(InputAction.CallbackContext context);
-        void OnChangeMode(InputAction.CallbackContext context);
+        void OnChmod(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
     }
 }

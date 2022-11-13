@@ -64,11 +64,11 @@ public class Gun : MonoBehaviour
             激光.SetActive(false);
         };
         行为控制.Player.Reload.started += 触发换弹;
-        行为控制.Player.ChangeMode.started += ctx => 激光模式 = !激光模式;
+        行为控制.Player.Chmod.started += ctx => 激光模式 = !激光模式;
 
         行为控制.Player.Fire.Enable();
         行为控制.Player.Reload.Enable();
-        行为控制.Player.ChangeMode.Enable();
+        行为控制.Player.Chmod.Enable();
     }
     private void Awake()
     {
