@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -11,6 +13,7 @@ public class CanvasPanle : MonoBehaviour
     public GameObject 设置面板;
     public GameObject 强化面板;
     public GameObject 死亡页;
+    public GameObject 强化树挡板;
 
     public TextMeshProUGUI 强化说明;
     public TextMeshProUGUI 需要水晶;
@@ -23,6 +26,12 @@ public class CanvasPanle : MonoBehaviour
     private PlayerController 玩家 => PlayerController.instance;
 
     private Color32 初始颜色;
+
+    private void Awake()
+    {
+        存档管理器.强化树挡板 = 强化树挡板;
+        读档();
+    }
 
     private void Start()
     {
@@ -161,5 +170,31 @@ public class CanvasPanle : MonoBehaviour
         }
 
         刷新水晶数量();
+    }
+
+    public void 读档()
+    {
+        if (File.Exists(存档管理器.存档路径))
+        {
+            BinaryFormatter 二进制格式器 = new BinaryFormatter();
+            FileStream 文件流 = File.Open(存档管理器.存档路径, FileMode.Open);
+
+            存档 save = 二进制格式器.Deserialize(文件流) as 存档;
+            文件流.Close();
+
+            var list = 强化树挡板.GetComponentsInChildren<武器强化>();
+            for (int i = 0; i < list.Length; i++)
+            {
+                foreach (var j in save.强化列表)
+                {
+                    if (list[i].序号 == j.序号)
+                    {
+                        list[i].序号 = j.序号;
+                        list[i].是否解锁 = j.是否解锁;
+                        break;
+                    }
+                }
+            }
+        }
     }
 }

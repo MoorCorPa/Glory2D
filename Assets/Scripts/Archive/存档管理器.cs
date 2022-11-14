@@ -12,14 +12,24 @@ public class 存档管理器
 
     //保存在assets目录下
     public static string 存档路径 = Application.streamingAssetsPath+"Archive.data";
+    public static GameObject 强化树挡板;
 
     public static 存档 创建存档()
     {
-        存档 save = new 存档();
+        存档 save = new();
+
         save.血量 = PlayerController.instance.health;
         save.关卡名字 = SceneManager.GetActiveScene().name;
         save.存档时间 = System.DateTime.Now.ToString();
         save.水晶数量 = PlayerController.instance.水晶数量;
+        
+        foreach (var i in 强化树挡板.GetComponentsInChildren<武器强化>())
+        {
+            强化存档 s = new();
+            s.序号 = i.序号;
+            s.是否解锁 = i.是否解锁;
+            save.强化列表.Add(s);
+        }
         return save;
     }
 
@@ -29,7 +39,7 @@ public class 存档管理器
         存档 save = 创建存档();
         BinaryFormatter 二进制格式器 = new BinaryFormatter();
         FileStream 文件流 = File.Create(存档路径);
-        Debug.Log(save.血量);
+        Debug.Log(save.强化列表[0].是否解锁);
         二进制格式器.Serialize(文件流, save);
         文件流.Close();
     }

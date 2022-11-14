@@ -3,6 +3,7 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
+[Serializable]
 public class 武器强化 : MonoBehaviour
 {
     public int 序号;
@@ -12,6 +13,7 @@ public class 武器强化 : MonoBehaviour
     public int 需要水晶;
     public string 强化说明 = "子弹上限+10";
     public GameObject 解锁技能;
+    [SerializeField]
     private SpriteRenderer 纹理;
 
     private void Start()
