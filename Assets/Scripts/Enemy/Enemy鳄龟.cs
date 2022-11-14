@@ -115,7 +115,7 @@ public class Enemy鳄龟 : Enemy
             {
                 if (玩家在跺脚范围() && 是否需要判断跺脚)
                 {
-                    if (Random.Range(0, 1) == 0)
+                    if (Random.Range(0, 2) == 0)
                     {
                         攻击间隔计时 = 攻击前摇计时 = 攻击僵直计时 = 0;
                         动画.SetTrigger("跺脚");
