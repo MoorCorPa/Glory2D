@@ -57,6 +57,7 @@ public class PlayerController : MonoBehaviour
     public int 攻击计数;
     public int 攻击回血次数;
     public bool 开启攻击回血;
+    public bool 开启激光;
 
     private Vector3 信息初始缩放;
 
@@ -108,6 +109,7 @@ public class PlayerController : MonoBehaviour
             文件流.Close();
 
             health = save.血量;
+            水晶数量 = save.水晶数量;
         }
     }
 

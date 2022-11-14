@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class 激光控制 : MonoBehaviour
 {
-
+    public static 激光控制 instance;
     public int 伤害 = 1;   
     public float 攻击冷却 = 0.3f;
 
@@ -25,6 +25,7 @@ public class 激光控制 : MonoBehaviour
 
     private void Awake()
     {
+        instance = this; 
         线渲染器 = GetComponentInChildren<LineRenderer>();
 
         线渲染器.material.color = 颜色 * 颜色强度;

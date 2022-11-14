@@ -19,6 +19,7 @@ public class 存档管理器
         save.血量 = PlayerController.instance.health;
         save.关卡名字 = SceneManager.GetActiveScene().name;
         save.存档时间 = System.DateTime.Now.ToString();
+        save.水晶数量 = PlayerController.instance.水晶数量;
         return save;
     }
 

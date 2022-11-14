@@ -102,6 +102,7 @@ public class CanvasPanle : MonoBehaviour
                         Gun.instance.散射数量 = 3;
                         break;
                     case 4:
+                        PlayerController.instance.开启激光 = true;
                         break;
                     case 5:
                         PlayerController.instance.开启攻击回血 = true;
@@ -117,7 +118,7 @@ public class CanvasPanle : MonoBehaviour
                         Gun.instance.散射数量 = 5;
                         break;
                     case 9:
-
+                        激光控制.instance.攻击冷却 -= 0.05f;
                         break;
                     case 10:
                         PlayerController.instance.攻击回血次数 /= 2;
