@@ -211,7 +211,7 @@ public class PlayerController : MonoBehaviour
     {
         info = Physics2D.OverlapCircle(脚底.position, 脚底检测范围, LayerMask.GetMask("Ground", "GroundPlatform"));
 
-        if (info != null && Mathf.Abs(plRigi.velocity.y) < 0.5f)
+        if (info != null && Mathf.Abs(plRigi.velocity.y) < 1f && 单项平台.GetComponent<PlatformEffector2D>().colliderMask == 初始单项平台)
         {
             if (!是否触地)
             {
@@ -221,7 +221,7 @@ public class PlayerController : MonoBehaviour
 
             是否触地 = true;
         }
-        else if (!是否触地 && info == null)
+        else if (!是否触地)
         {
             if (下落中)
             {
@@ -314,7 +314,6 @@ public class PlayerController : MonoBehaviour
             {
                 /*gameObject.layer = LayerMask.NameToLayer("GroundPlatform");
                 Invoke("角色恢复层", 恢复层时间);*/
-                Debug.Log("执行333");
                 单项平台.GetComponent<PlatformEffector2D>().colliderMask &= ~1 << gameObject.layer;
                 Invoke(nameof(角色恢复层), 恢复层时间);
             }
