@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using static UnityEngine.RuleTile.TilingRuleOutput;
-using Random = UnityEngine.Random;
+using Random = UnityEngine.Random;  
 
 public abstract class Enemy123 : MonoBehaviour
 {

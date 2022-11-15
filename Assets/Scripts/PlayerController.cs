@@ -71,7 +71,9 @@ public class PlayerController : MonoBehaviour
     private float 落地前速度;
 
     private InputControler 行为控制;
-    private GameObject 平台;
+    public GameObject 单项平台;
+    private int 初始单项平台;
+
     private void Awake()
     {
         instance = this;
@@ -99,6 +101,7 @@ public class PlayerController : MonoBehaviour
         移动音效序号 = 0;
         信息初始缩放 = 信息.transform.localScale;
         最大血量 = health;
+        初始单项平台 = 单项平台.GetComponent<PlatformEffector2D>().colliderMask;
 
         if (File.Exists(存档管理器.存档路径))
         {
@@ -139,7 +142,10 @@ public class PlayerController : MonoBehaviour
         if (health < 0) health = 0;
 
         触地检测();
-        角色切换层();
+        if (Keyboard.current.sKey.isPressed)
+        {
+            角色切换层();
+        }
     }
 
     private void 跟随鼠标()
@@ -205,16 +211,17 @@ public class PlayerController : MonoBehaviour
     {
         info = Physics2D.OverlapCircle(脚底.position, 脚底检测范围, LayerMask.GetMask("Ground", "GroundPlatform"));
 
-        if (info != null && plRigi.velocity.y == 0)
+        if (info != null && Mathf.Abs(plRigi.velocity.y) < 0.5f)
         {
-            是否触地 = true;
-            if (落地前速度 < 0 && plRigi.velocity.y == 0)
+            if (!是否触地)
             {
                 内部音效器.PlayOneShot(落地音效);
                 Instantiate(落地粒子, info.ClosestPoint(脚底.position), Quaternion.identity);
             }
+
+            是否触地 = true;
         }
-        else if (!是否触地)
+        else if (!是否触地 && info == null)
         {
             if (下落中)
             {
@@ -269,6 +276,7 @@ public class PlayerController : MonoBehaviour
             a.GetComponent<SpriteRenderer>().color = Color.white;
         }
     }
+
     public void 攻击计数增加()
     {
         if (!开启攻击回血) return;
@@ -299,17 +307,16 @@ public class PlayerController : MonoBehaviour
 
     void 角色切换层()
     {
-        float moveY = Input.GetAxis("Vertical");
-
-        if (info != null && moveY < -0.1f)
+        if (info != null && plRigi.velocity.y == 0)
         {
-            if (info.gameObject.layer == LayerMask.NameToLayer("GroundPlatform"))
+            if (info.gameObject.layer == LayerMask.NameToLayer("GroundPlatform") &
+                单项平台.GetComponent<PlatformEffector2D>().colliderMask == 初始单项平台)
             {
                 /*gameObject.layer = LayerMask.NameToLayer("GroundPlatform");
                 Invoke("角色恢复层", 恢复层时间);*/
-                平台 = info.gameObject;
-                平台.GetComponent<PlatformEffector2D>().colliderMask &= ~1 << gameObject.layer;
-                Invoke("角色恢复层", 恢复层时间);
+                Debug.Log("执行333");
+                单项平台.GetComponent<PlatformEffector2D>().colliderMask &= ~1 << gameObject.layer;
+                Invoke(nameof(角色恢复层), 恢复层时间);
             }
         }
     }
@@ -321,8 +328,9 @@ public class PlayerController : MonoBehaviour
             gameObject.layer = LayerMask.NameToLayer("Player");
         }*/
         /*info.gameObject.layer = LayerMask.NameToLayer("GroundPlatform");*/
-
-        平台.GetComponent<PlatformEffector2D>().colliderMask |= 1 << gameObject.layer;
+        CancelInvoke(nameof(角色恢复层));
+        //单项平台.GetComponent<PlatformEffector2D>().colliderMask |= 1 << gameObject.layer;
+        单项平台.GetComponent<PlatformEffector2D>().colliderMask = 初始单项平台;
     }
 
 /*    private void OnCollisionEnter2D(Collision2D collision)

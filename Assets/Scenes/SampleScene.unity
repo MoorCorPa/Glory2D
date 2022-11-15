@@ -183,6 +183,7 @@ MonoBehaviour:
   "\u9700\u8981\u6C34\u6676": 0
   "\u5F3A\u5316\u8BF4\u660E": "\u9519\u8BEF\u7684"
   "\u89E3\u9501\u6280\u80FD": {fileID: 415185588}
+  "\u7EB9\u7406": {fileID: 0}
 --- !u!114 &27320552
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -337,6 +338,7 @@ MonoBehaviour:
   "\u9700\u8981\u6C34\u6676": 0
   "\u5F3A\u5316\u8BF4\u660E": "\u5C04\u51FB\u95F4\u9694\u5927\u5E45\u964D\u4F4E"
   "\u89E3\u9501\u6280\u80FD": {fileID: 1472737388}
+  "\u7EB9\u7406": {fileID: 0}
 --- !u!114 &51865966
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1835,7 +1837,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2138689230727848737, guid: 9efc9d062c10da2449724d12d6cc83d9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2138689230727848744, guid: 9efc9d062c10da2449724d12d6cc83d9, type: 3}
       propertyPath: "\u8840\u6761"
@@ -1950,6 +1952,7 @@ MonoBehaviour:
   "\u9700\u8981\u6C34\u6676": 0
   "\u5F3A\u5316\u8BF4\u660E": "\u70C2\u70C2\u70C2"
   "\u89E3\u9501\u6280\u80FD": {fileID: 0}
+  "\u7EB9\u7406": {fileID: 0}
 --- !u!114 &415185590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2557,6 +2560,7 @@ MonoBehaviour:
   "\u9700\u8981\u6C34\u6676": 0
   "\u5F3A\u5316\u8BF4\u660E": "\u5B50\u5F39\u4E0A\u9650+12\uFF0C\u6362\u5F39\u65F6\u95F4\u5C0F\u5E45\u964D\u4F4E"
   "\u89E3\u9501\u6280\u80FD": {fileID: 0}
+  "\u7EB9\u7406": {fileID: 0}
 --- !u!114 &529209108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2690,6 +2694,7 @@ MonoBehaviour:
   "\u9700\u8981\u6C34\u6676": 20
   "\u5F3A\u5316\u8BF4\u660E": "\u5C04\u51FB\u5F39\u836F+2"
   "\u89E3\u9501\u6280\u80FD": {fileID: 0}
+  "\u7EB9\u7406": {fileID: 0}
 --- !u!114 &561975651
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3203,6 +3208,7 @@ MonoBehaviour:
   "\u9700\u8981\u6C34\u6676": 0
   "\u5F3A\u5316\u8BF4\u660E": "\u751F\u6210bug"
   "\u89E3\u9501\u6280\u80FD": {fileID: 1503752619}
+  "\u7EB9\u7406": {fileID: 0}
 --- !u!114 &623350844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3492,6 +3498,7 @@ MonoBehaviour:
   "\u9700\u8981\u6C34\u6676": 0
   "\u5F3A\u5316\u8BF4\u660E": "\u5C04\u51FB\u5F39\u836F+4"
   "\u89E3\u9501\u6280\u80FD": {fileID: 561975649}
+  "\u7EB9\u7406": {fileID: 0}
 --- !u!114 &668887738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4156,6 +4163,7 @@ MonoBehaviour:
   "\u8BBE\u7F6E\u9762\u677F": {fileID: 1395199140}
   "\u5F3A\u5316\u9762\u677F": {fileID: 1177010836}
   "\u6B7B\u4EA1\u9875": {fileID: 1054950677}
+  "\u5F3A\u5316\u6811\u6321\u677F": {fileID: 0}
   "\u5F3A\u5316\u8BF4\u660E": {fileID: 2135308743}
   "\u9700\u8981\u6C34\u6676": {fileID: 1526375693}
   "\u5F3A\u5316\u6309\u94AE": {fileID: 1322646137}
@@ -12552,6 +12560,7 @@ MonoBehaviour:
   "\u9700\u8981\u6C34\u6676": 10
   "\u5F3A\u5316\u8BF4\u660E": "\u5C04\u51FB\u95F4\u9694\u5C0F\u5E45\u964D\u4F4E"
   "\u89E3\u9501\u6280\u80FD": {fileID: 0}
+  "\u7EB9\u7406": {fileID: 0}
 --- !u!114 &1472737390
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12917,6 +12926,7 @@ MonoBehaviour:
   "\u9700\u8981\u6C34\u6676": 0
   "\u5F3A\u5316\u8BF4\u660E": "\u4E0D\u5982\u539F\u4EC0"
   "\u89E3\u9501\u6280\u80FD": {fileID: 0}
+  "\u7EB9\u7406": {fileID: 0}
 --- !u!114 &1503752621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15386,6 +15396,7 @@ MonoBehaviour:
   "\u9700\u8981\u6C34\u6676": 0
   "\u5F3A\u5316\u8BF4\u660E": "\u5B50\u5F39\u4E0A\u9650+12\uFF0C\u6362\u5F39\u65F6\u95F4\u5C0F\u5E45\u964D\u4F4E"
   "\u89E3\u9501\u6280\u80FD": {fileID: 1472737388}
+  "\u7EB9\u7406": {fileID: 0}
 --- !u!114 &1776155831
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24806,6 +24817,14 @@ PrefabInstance:
     - target: {fileID: 6504466392121118384, guid: c7a80348a1d5d3f40ab64a2e9dad83f1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969418466622359296, guid: c7a80348a1d5d3f40ab64a2e9dad83f1, type: 3}
+      propertyPath: "\u901F\u5EA6\u66F2\u7EBF.m_Curve.Array.data[1].time"
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8969418466622359296, guid: c7a80348a1d5d3f40ab64a2e9dad83f1, type: 3}
+      propertyPath: "\u901F\u5EA6\u66F2\u7EBF.m_Curve.Array.data[1].value"
+      value: -8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c7a80348a1d5d3f40ab64a2e9dad83f1, type: 3}
