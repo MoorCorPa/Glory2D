@@ -23,6 +23,7 @@ public class ToggleMap : MonoBehaviour
             else
             {
                 提示文字.gameObject.SetActive(false);
+                存档管理器.保存存档();
                 下一关();
             }
         }
