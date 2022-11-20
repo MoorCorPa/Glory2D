@@ -52,7 +52,7 @@ public class Gun : MonoBehaviour
     private InputControler 行为控制;
 
     [SerializeField] private GameObject 激光;
-    [SerializeField] private bool 激光模式 = false;
+    [SerializeField] public bool 激光模式 = false;
 
     private void OnEnable()
     {
