@@ -111,7 +111,7 @@ public class CanvasPanle : MonoBehaviour
                         Gun.instance.散射数量 = 3;
                         break;
                     case 4:
-                        Gun.instance.激光模式 = true;
+                        PlayerController.instance.激光模式 = true;
                         break;
                     case 5:
                         PlayerController.instance.开启攻击回血 = true;
