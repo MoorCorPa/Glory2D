@@ -52,7 +52,7 @@ public class Gun : MonoBehaviour
     private InputControler 行为控制;
 
     [SerializeField] private GameObject 激光;
-    [SerializeField] public bool 激光模式 = false;
+    [SerializeField] private bool 激光模式 = false;
 
     private void OnEnable()
     {
@@ -141,7 +141,7 @@ public class Gun : MonoBehaviour
         isColldown = false;
         //startTime = Time.time;
         //Instantiate(bullet, muzzle.position, muzzle.rotation);
-        if (激光模式)
+        if (激光模式 && PlayerController.instance.开启激光)
             激光.SetActive(true);
         else
             散射();
