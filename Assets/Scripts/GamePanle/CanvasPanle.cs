@@ -117,7 +117,7 @@ public class CanvasPanle : MonoBehaviour
                         PlayerController.instance.开启攻击回血 = true;
                         break;
                     case 6:
-                        Gun.instance.最大子弹数量 = 50;
+                        Gun.instance.最大子弹数量 = 36;
                         Gun.instance.换弹时间 = 0.5f;
                         break;
                     case 7:
