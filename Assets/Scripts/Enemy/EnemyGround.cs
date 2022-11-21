@@ -196,7 +196,6 @@ public class EnemyGround : Enemy
             }
         }
 
-        Debug.Log("戳啦，不在嘛");
         return false;
     }
 
@@ -207,11 +206,9 @@ public class EnemyGround : Enemy
 
         if (Physics2D.Raycast(transform.position, 方向, 空路射线长度, LayerMask.GetMask("Ground")))
         {
-            Debug.Log("空路段射线测试");
             return false;
         }
 
-        Debug.Log("戳啦，不空嘛");
         return true;
     }
 

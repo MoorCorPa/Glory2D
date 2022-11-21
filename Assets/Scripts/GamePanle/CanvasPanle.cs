@@ -94,50 +94,17 @@ public class CanvasPanle : MonoBehaviour
 
     public void 强化(武器强化 _武器强化)
     {
+        if (_武器强化.是否解锁)
+        {
+            执行强化(_武器强化.序号);
+            return;
+        }
         if (_武器强化.是否可强化)
         {
             if (玩家.水晶消耗(_武器强化.需要水晶))
             {
-                switch (_武器强化.序号)
-                {
-                    case 1:
-                        Gun.instance.最大子弹数量 = 24;
-                        Gun.instance.换弹时间 = 0.8f;
-                        break;
-                    case 2:
-                        Gun.instance.timeToColldown = 0.1f;
-                        break;
-                    case 3:
-                        Gun.instance.散射数量 = 3;
-                        break;
-                    case 4:
-                        PlayerController.instance.开启激光 = true;
-                        break;
-                    case 5:
-                        PlayerController.instance.开启攻击回血 = true;
-                        break;
-                    case 6:
-                        Gun.instance.最大子弹数量 = 50;
-                        Gun.instance.换弹时间 = 0.5f;
-                        break;
-                    case 7:
-                        Gun.instance.timeToColldown = 0.08f;
-                        break;
-                    case 8:
-                        Gun.instance.散射数量 = 5;
-                        break;
-                    case 9:
-                        激光控制.instance.攻击冷却 -= 0.05f;
-                        break;
-                    case 10:
-                        PlayerController.instance.攻击回血次数 /= 2;
-                        PlayerController.instance.开启攻击回血 = true;
-                        break;
-                    default:
-                        强化提示.GetComponent<强化提示>().提示文字内容("技能id错误");
-                        break;
-                }
-
+                执行强化(_武器强化.序号);
+                _武器强化.是否解锁 = true;
                 强化提示.GetComponent<强化提示>().提示文字内容("强化成功 !");
             }
             else
@@ -148,6 +115,49 @@ public class CanvasPanle : MonoBehaviour
         else
         {
             强化提示.GetComponent<强化提示>().提示文字内容(_武器强化.是否解锁 ? "当前强化已解锁" : "需要解锁上一强化");
+        }
+    }
+
+    public void 执行强化(int 序号)
+    {
+        switch (序号)
+        {
+            case 1:
+                Gun.instance.最大子弹数量 = 24;
+                Gun.instance.换弹时间 = 0.8f;
+                break;
+            case 2:
+                Gun.instance.timeToColldown = 0.1f;
+                break;
+            case 3:
+                Gun.instance.散射数量 = 3;
+                break;
+            case 4:
+                PlayerController.instance.开启激光 = true;
+                break;
+            case 5:
+                PlayerController.instance.开启攻击回血 = true;
+                break;
+            case 6:
+                Gun.instance.最大子弹数量 = 36;
+                Gun.instance.换弹时间 = 0.5f;
+                break;
+            case 7:
+                Gun.instance.timeToColldown = 0.08f;
+                break;
+            case 8:
+                Gun.instance.散射数量 = 5;
+                break;
+            case 9:
+                激光控制.instance.攻击冷却 -= 0.05f;
+                break;
+            case 10:
+                PlayerController.instance.攻击回血次数 /= 2;
+                PlayerController.instance.开启攻击回血 = true;
+                break;
+            default:
+                强化提示.GetComponent<强化提示>().提示文字内容("技能id错误");
+                break;
         }
     }
 
@@ -191,6 +201,10 @@ public class CanvasPanle : MonoBehaviour
                     {
                         list[i].序号 = j.序号;
                         list[i].是否解锁 = j.是否解锁;
+                        if (list[i].是否解锁)
+                        {
+                            强化(list[i]);
+                        }
                         break;
                     }
                 }
