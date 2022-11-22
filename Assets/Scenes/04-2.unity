@@ -27788,7 +27788,7 @@ PrefabInstance:
     - target: {fileID: 8969418466622359296, guid: c7a80348a1d5d3f40ab64a2e9dad83f1, type: 3}
       propertyPath: "\u5355\u9879\u5E73\u53F0"
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1802297641}
     - target: {fileID: 8969418466622359296, guid: c7a80348a1d5d3f40ab64a2e9dad83f1, type: 3}
       propertyPath: "\u5F00\u542F\u653B\u51FB\u56DE\u8840"
       value: 0
