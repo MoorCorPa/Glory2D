@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class BloodBar : MonoBehaviour
 {
-    private float 最大血量;
+    private float 最大血量 => (float) PlayerController.instance.最大血量;
     private float 当前血量 => PlayerController.instance.health;
     public float 血量中1像素长度;
     public float 血量中1像素宽度;
@@ -19,15 +19,16 @@ public class BloodBar : MonoBehaviour
     public GameObject 血量中2;
     public GameObject 血量尾;
 
-    private void Start()
+
+    public void Start()
     {
         //GetComponent<Image>().preferredWidth(maxHealth * 5);
-        最大血量 = (float) PlayerController.instance.最大血量;
-        血量中1.GetComponent<RectTransform>().sizeDelta = new Vector2((最大血量 - 2) * 血量中1像素长度, 血量中1像素宽度);
-        血量中2.GetComponent<RectTransform>().sizeDelta = new Vector2((最大血量 - 2) * 血量中2像素长度, 血量中2像素宽度);
-        GetComponent<RectTransform>().sizeDelta = new Vector2(
-            GetComponent<RectTransform>().rect.width + (最大血量 - 5) * 8,
-            GetComponent<RectTransform>().rect.height);
+        // 最大血量 = (float) PlayerController.instance.最大血量;
+        // 血量中1.GetComponent<RectTransform>().sizeDelta = new Vector2((最大血量 - 2) * 血量中1像素长度, 血量中1像素宽度);
+        // 血量中2.GetComponent<RectTransform>().sizeDelta = new Vector2((最大血量 - 2) * 血量中2像素长度, 血量中2像素宽度);
+        // GetComponent<RectTransform>().sizeDelta = new Vector2(
+        //     GetComponent<RectTransform>().rect.width + (最大血量 - 5) * 8,
+        //     GetComponent<RectTransform>().rect.height);
     }
 
     private void Update()
@@ -54,4 +55,5 @@ public class BloodBar : MonoBehaviour
         }
 
     }
+
 }
