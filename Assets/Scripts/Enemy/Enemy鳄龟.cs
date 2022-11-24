@@ -1,6 +1,4 @@
-﻿using System;
-using Unity.VisualScripting;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
@@ -52,7 +50,7 @@ public class Enemy鳄龟 : Enemy
     private bool 开始向玩家移动;
 
     private bool 是否需要判断跺脚;
-    
+
     private Cinemachine.CinemachineImpulseSource 抖动源;
 
     private Vector3 当前位置
@@ -155,7 +153,7 @@ public class Enemy鳄龟 : Enemy
             {
                 transform.localScale = new Vector3(当前位置.x - 玩家位置.x > 0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
                 转向等待计时 = 0;
-                    开始向玩家移动 = true;
+                开始向玩家移动 = true;
             }
         }
         else
@@ -167,6 +165,7 @@ public class Enemy鳄龟 : Enemy
 
     private void FixedUpdate()
     {
+        if (当前血量 <= 0) return;
         if (开始向玩家移动)
         {
             当前位置 = Vector2.MoveTowards(当前位置, new Vector3(玩家位置.x, 当前位置.y, 当前位置.z), 移动速度);
@@ -230,7 +229,14 @@ public class Enemy鳄龟 : Enemy
         else
         {
             刚体.velocity = new Vector2(0, 刚体.velocity.y);
-            //动画.Play("鳄龟死亡");
+            动画.Play("鳄龟死亡");
+
+
+            foreach (var i in 显示的背刺)
+            {
+                i.SetActive(false);
+            }
+
             血条框.SetActive(false);
         }
     }
