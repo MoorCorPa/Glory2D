@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -17,9 +13,6 @@ public class 掉落物 : MonoBehaviour
        丢();
     }
 
-    void Update()
-    {
-    }
     
     public void 丢()
     {
@@ -31,7 +24,7 @@ public class 掉落物 : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (!other.collider.CompareTag("掉落物")) 掉落物刚体.velocity = new Vector2();
+        if (!other.collider.CompareTag("掉落物")) 掉落物刚体.velocity = Vector2.zero;
         if (other.collider.CompareTag("Player"))
         {
             Destroy(gameObject);
