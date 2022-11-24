@@ -16,6 +16,8 @@ public class Enemy黄蜂 : Enemy
     [Min(0f)] public float 死亡消失透明度;
     [Min(0f)] public float 攻击间隔计时间隔;
     [Min(0f)] public float 墙体碰撞检测;
+    [Min(0f)] public int 最小掉落物数量;
+    [Min(0f)] public int 最大掉落物数量;
 
     public bool 是否远程;
 
@@ -190,12 +192,22 @@ public class Enemy黄蜂 : Enemy
         当前血量 -= 伤害;
         if (当前血量 > 0)
         {
+            if (当前血量 % 5 == 0)
+            {
+                Instantiate(掉落物, 当前位置, transform.rotation);
+            }
+
             纹理.color = new Color(0.99f, 0.3f, 0.3f, 1f);
             动画.SetTrigger("掉血");
             Invoke("恢复颜色", 受伤变色时间);
         }
         else
         {
+            for (int i = 0; i < Random.Range(最小掉落物数量, 最大掉落物数量); i++)
+            {
+                Instantiate(掉落物, 当前位置 + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0),
+                    transform.rotation);
+            }
             刚体.gravityScale = 1.5f;
             动画.SetTrigger("死亡");
         }
