@@ -85,7 +85,7 @@ public class EnemyGround : Enemy
                 LayerMask.GetMask("Player"));
             Debug.DrawLine(new Vector2(初始位置.x - 向左索敌的x轴, 当前位置.y), new Vector2(初始位置.x + 向右索敌的x轴, 当前位置.y),
                 Color.blue);
-            
+
             // var 检测范围射线 = Physics2D.Raycast(new Vector2(初始位置.x - 向左巡逻检测的x轴, 当前位置.y), transform.right,
             //     Vector2.Distance(new Vector2(初始位置.x - 向左巡逻检测的x轴, 当前位置.y), new Vector2(初始位置.x + 向右巡逻检测的x轴, 当前位置.y)),
             //     LayerMask.GetMask("Player"));
@@ -93,13 +93,14 @@ public class EnemyGround : Enemy
                 Color.yellow);
             Debug.DrawLine(当前位置, 随机位置, Color.green);
             与玩家距离 = Vector2.Distance(当前位置, 玩家位置);
-            var 射线 = Physics2D.Raycast(当前位置, 玩家位置 - 当前位置, Vector2.Distance(当前位置, 玩家位置), ~LayerMask.GetMask("Enemy") | ~LayerMask.GetMask("Player"));
+            var 射线 = Physics2D.Raycast(当前位置, 玩家位置 - 当前位置, Vector2.Distance(当前位置, 玩家位置),
+                ~LayerMask.GetMask("Enemy") | ~LayerMask.GetMask("Player"));
             Debug.DrawLine(当前位置, 射线.point, Color.red);
             攻击间隔计时 += Time.deltaTime;
             攻击僵直计时 += Time.deltaTime;
 
 
-            if (玩家在扇形范围() && ((射线?!射线.collider.CompareTag("地图碰撞区域"):true) || !是否远程))
+            if (玩家在扇形范围() && ((射线 ? !射线.collider.CompareTag("地图碰撞区域") : true) || !是否远程))
             {
                 if (攻击间隔 < 攻击间隔计时)
                 {
@@ -115,6 +116,7 @@ public class EnemyGround : Enemy
                             攻击僵直计时 = 0;
                             动画.SetTrigger("Attack");
                         }
+
                         攻击间隔计时 = 攻击前摇计时 = 0;
                         获取新位置();
                     }
@@ -124,7 +126,6 @@ public class EnemyGround : Enemy
                     if (攻击僵直计时 > 攻击僵直)
                     {
                         随机移动();
-
                     }
                 }
             }
@@ -160,10 +161,14 @@ public class EnemyGround : Enemy
             获取新位置();
         }
 
+        if (随机位置 == Vector3.zero)
+        {
+            获取新位置();
+        }
+
         if (Math.Abs(当前位置.y - 随机位置.y) < 0.1f)
         {
-
-            transform.localScale = new Vector3(当前位置.x - 随机位置.x>0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
+            transform.localScale = new Vector3(当前位置.x - 随机位置.x > 0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
             当前位置 = Vector2.MoveTowards(当前位置, 随机位置, 移动速度 * Time.deltaTime);
         }
         else
@@ -204,7 +209,7 @@ public class EnemyGround : Enemy
         Vector3 方向 = new Vector3(-transform.localScale.x, -1, 0);
         Debug.DrawLine(transform.position, transform.position + 方向.normalized * 空路射线长度, Color.yellow);
 
-        if (Physics2D.Raycast(transform.position, 方向, 空路射线长度, LayerMask.GetMask("Ground")))
+        if (Physics2D.Raycast(transform.position, 方向, 空路射线长度, LayerMask.GetMask("Ground", "GroundPlatform")))
         {
             return false;
         }
@@ -242,7 +247,6 @@ public class EnemyGround : Enemy
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-
         if (collision.CompareTag("Player"))
         {
             玩家是否在范围内 = true;
@@ -252,13 +256,13 @@ public class EnemyGround : Enemy
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-
         if (collision.CompareTag("Player"))
         {
             玩家是否在范围内 = false;
             Debug.Log("检测到玩家");
         }
     }
+
     //绘制
     private void OnDrawGizmosSelected()
     {
