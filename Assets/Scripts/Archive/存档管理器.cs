@@ -6,12 +6,16 @@ using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
 using UnityEditor;
 using Unity.VisualScripting;
+using System;
+using UnityEngine.Audio;
 
 public class 存档管理器
 {
 
     //保存在assets目录下
-    public static string 存档路径 = Application.streamingAssetsPath+"Archive.data";
+    public static string 存档路径 = Application.streamingAssetsPath + "/Archive.data";
+    public static string 音量路径 = Application.streamingAssetsPath + "/Volume.json";
+
     public static GameObject 强化树挡板;
 
     public static 存档 创建存档()
@@ -74,4 +78,43 @@ public class 存档管理器
             Debug.Log("妹有存档捏");
         }
     }
+
+    public static 音频 读取音量(AudioMixer 音量, AudioMixer 音效)
+    {
+        音频 data;
+        if (File.Exists(音量路径))
+        {
+            string str = File.ReadAllText(音量路径);
+            data = JsonUtility.FromJson<音频>(str);
+            音量.SetFloat("BGMAudioMixer", data.volume);
+            音效.SetFloat("BGMAudioMixer", data.sound);
+        }
+        else
+        {
+            data = new(1, 1);
+            File.Create(音量路径).Dispose();
+            File.WriteAllText(音量路径, JsonUtility.ToJson(data, true));
+        }
+
+        return data;
+    }
+
+    public static void 保存音量(float v, float s)
+    {
+        if (File.Exists(音量路径))
+        {
+            string str = File.ReadAllText(音量路径);
+            音频 data = JsonUtility.FromJson<音频>(str);
+            data.volume = v!= -100 ? v : data.volume;
+            data.sound = s!= -100 ? s : data.sound;
+            File.WriteAllText(音量路径, JsonUtility.ToJson(data, true));
+        }
+        else
+        {
+            音频 data = new(v!= -100 ? v : 1, s!= -100 ? v : 1);
+            File.Create(音量路径).Dispose();
+            File.WriteAllText(音量路径, JsonUtility.ToJson(data, true));
+        }
+    }
+
 }
