@@ -66,6 +66,7 @@ public class panle : MonoBehaviour
         if (File.Exists(存档管理器.存档路径))
         {
             File.Delete(存档管理器.存档路径);
+
         }
     }
 
