@@ -8425,8 +8425,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u97F3\u4E50": {fileID: 24100000, guid: beaa0570e435636439266e7cf6309186, type: 2}
   "\u97F3\u6548": {fileID: 24100000, guid: 9cfa5ebc4c4e6ff4aa8eba5ff4540cdc, type: 2}
-  "\u97F3\u4E50\u6761": {fileID: 0}
-  "\u97F3\u6548\u6761": {fileID: 0}
+  "\u97F3\u4E50\u6761": {fileID: 303233732293749607}
+  "\u97F3\u6548\u6761": {fileID: 303233733029314675}
 --- !u!1 &303233733613516024
 GameObject:
   m_ObjectHideFlags: 0
