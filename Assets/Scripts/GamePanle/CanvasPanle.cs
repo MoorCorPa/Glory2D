@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -14,6 +15,11 @@ public class CanvasPanle : MonoBehaviour
     public GameObject 强化面板;
     public GameObject 死亡页;
     public GameObject 强化树挡板;
+
+    public AudioMixer 音乐;
+    public AudioMixer 音效;
+    public GameObject 音乐条;
+    public GameObject 音效条;
 
     public TextMeshProUGUI 强化说明;
     public TextMeshProUGUI 需要水晶;
@@ -36,6 +42,7 @@ public class CanvasPanle : MonoBehaviour
     private void Start()
     {
         初始颜色 = 需要水晶.color;
+        存档管理器.读取音量(音乐, 音效);
     }
 
     public void 操作设置面板(bool 开关)
@@ -61,11 +68,13 @@ public class CanvasPanle : MonoBehaviour
 
     public void 开面板(GameObject 面板)
     {
+        Time.timeScale = 0;
         面板.SetActive(true);
     }
 
     public void 关面板(GameObject 面板)
     {
+        Time.timeScale = 1;
         面板.SetActive(false);
     }
 
@@ -209,6 +218,13 @@ public class CanvasPanle : MonoBehaviour
                     }
                 }
             }
+        }
+
+        if (File.Exists(存档管理器.音量路径))
+        {
+            音频 val = 存档管理器.读取音量(音乐, 音效);
+            音乐条.GetComponent<Slider>().value = val.volume;
+            音效条.GetComponent<Slider>().value = val.sound;
         }
     }
 }
