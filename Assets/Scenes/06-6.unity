@@ -5391,11 +5391,11 @@ PrefabInstance:
     - target: {fileID: 2138689230727848744, guid: 9efc9d062c10da2449724d12d6cc83d9, type: 3}
       propertyPath: "\u8840\u6761"
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 615210364}
     - target: {fileID: 2138689230727848744, guid: 9efc9d062c10da2449724d12d6cc83d9, type: 3}
       propertyPath: "\u8840\u6761\u6846"
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1675077655}
     - target: {fileID: 2138689230727848744, guid: 9efc9d062c10da2449724d12d6cc83d9, type: 3}
       propertyPath: "\u89C6\u91CE\u8DDD\u79BB"
       value: 2.1
@@ -50326,6 +50326,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9d690d7b38d137d4d97bb550698edb36, type: 3}
+--- !u!1 &615210364 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 303233732490414055, guid: 2f64171c3fdd1e0468a52f8d2bf4153f, type: 3}
+  m_PrefabInstance: {fileID: 1255708296}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &910485065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -64220,6 +64225,11 @@ MonoBehaviour:
   m_RequiresDepthTexture: 0
   m_RequiresColorTexture: 0
   m_Version: 2
+--- !u!1 &1675077655 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 303233733058955428, guid: 2f64171c3fdd1e0468a52f8d2bf4153f, type: 3}
+  m_PrefabInstance: {fileID: 1255708296}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1730592437
 GameObject:
   m_ObjectHideFlags: 0
