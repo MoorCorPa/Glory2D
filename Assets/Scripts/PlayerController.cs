@@ -85,10 +85,13 @@ public class PlayerController : MonoBehaviour
         //行为控制 = new InputControler();
         行为控制.Player.Movement.performed += Movement;
         行为控制.Player.Jump.performed += Jump;
+        行为控制.Player.Down.performed += ctx => 角色切换层();
+
         行为控制.Player.Movement.canceled += ctx => direction = 0;
 
         行为控制.Player.Movement.Enable();
         行为控制.Player.Jump.Enable();
+        行为控制.Player.Down.Enable();
     }
 
     private void Start()
@@ -144,7 +147,7 @@ public class PlayerController : MonoBehaviour
         触地检测();
         if (Keyboard.current.sKey.isPressed)
         {
-            角色切换层();
+            
         }
     }
 

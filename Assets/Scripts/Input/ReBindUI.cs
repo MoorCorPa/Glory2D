@@ -17,6 +17,8 @@ public class ReBindUI : MonoBehaviour
     private InputActionReference chmodReference;
     [SerializeField]
     private InputActionReference jumpReference;
+    [SerializeField]
+    private InputActionReference downReference;
 
     [SerializeField]
     private Button resetButton;
@@ -32,6 +34,7 @@ public class ReBindUI : MonoBehaviour
             KeySetter.加载绑定覆盖("Reload");
             KeySetter.加载绑定覆盖("Chmod");
             KeySetter.加载绑定覆盖("Jump");
+            KeySetter.加载绑定覆盖("Down");
             更新UI();
         }
 
@@ -79,6 +82,9 @@ public class ReBindUI : MonoBehaviour
             case "模式设置":
                 actionName = "Chmod";
                 break;
+            case "下设置":
+                actionName = "Down";
+                break;
             default:
                 break;
         }
@@ -92,6 +98,7 @@ public class ReBindUI : MonoBehaviour
         KeySetter.重置绑定("Reload");
         KeySetter.重置绑定("Jump");
         KeySetter.重置绑定("Chmod");
+        KeySetter.重置绑定("Down");
         更新UI();
     }
 
@@ -115,6 +122,9 @@ public class ReBindUI : MonoBehaviour
                     break;
                 case 5:
                     text = Application.isPlaying ? KeySetter.获取绑定名称("Chmod", 0) : chmodReference.action.GetBindingDisplayString(0);
+                    break;
+                case 6:
+                    text = Application.isPlaying ? KeySetter.获取绑定名称("Down", 0) : downReference.action.GetBindingDisplayString(0);
                     break;
                 default:
                     text = Application.isPlaying ? KeySetter.获取绑定名称("Movement", i+1) : moveReference.action.GetBindingDisplayString(i+1);

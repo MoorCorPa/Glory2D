@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class panle : MonoBehaviour
 {
     public GameObject settingPanle;
+    public GameObject 按键设置面板;
 
     private void Start()
     {
@@ -20,6 +21,17 @@ public class panle : MonoBehaviour
     {
         settingPanle.SetActive(true);
     }
+
+    public void 打开按键设置()
+    {
+        按键设置面板.SetActive(true);
+    }
+
+    public void 关闭按键设置()
+    {
+        按键设置面板.SetActive(false);
+    }
+
     public void 退出游戏()
     {
         Application.Quit();
