@@ -48,7 +48,7 @@ public class Gun : MonoBehaviour
     private float 射击切回瞄准时间计时;
     private float 换弹动画切换计时;
     private int 换弹指针序号;
-    
+
     private InputControler 行为控制;
 
     [SerializeField] private GameObject 激光;
@@ -58,7 +58,7 @@ public class Gun : MonoBehaviour
     {
         行为控制 = KeySetter.input;
         行为控制.Player.Fire.performed += ctx => 开火 = true;
-        行为控制.Player.Fire.canceled += ctx => 
+        行为控制.Player.Fire.canceled += ctx =>
         {
             开火 = false;
             激光.SetActive(false);
@@ -70,6 +70,7 @@ public class Gun : MonoBehaviour
         行为控制.Player.Reload.Enable();
         行为控制.Player.Chmod.Enable();
     }
+
     private void Awake()
     {
         instance = this;
@@ -83,7 +84,7 @@ public class Gun : MonoBehaviour
         当前子弹数量 = 最大子弹数量;
         换弹进度条缩放 = 换弹进度条.transform.localScale;
         正在射击 = false;
-        换弹指针序号= 0;
+        换弹指针序号 = 0;
     }
 
     private void Update()
@@ -102,8 +103,8 @@ public class Gun : MonoBehaviour
             }
             else if (是否正在换弹)
             {
-                换弹动画切换计时+= Time.deltaTime;
-                if (换弹动画切换计时>换弹动画切换时间)
+                换弹动画切换计时 += Time.deltaTime;
+                if (换弹动画切换计时 > 换弹动画切换时间)
                 {
                     Cursor.SetCursor(换弹指针[换弹指针序号], new Vector2(32, 32), CursorMode.Auto);
                     换弹指针序号++;
@@ -111,9 +112,9 @@ public class Gun : MonoBehaviour
                     {
                         换弹指针序号 = 0;
                     }
-                    换弹动画切换计时= 0;
-                }
 
+                    换弹动画切换计时 = 0;
+                }
             }
             else if (!正在射击)
             {
@@ -129,8 +130,15 @@ public class Gun : MonoBehaviour
                     正在射击 = false;
                 }
             }
-            
+
             检测子弹();
+        }
+        else
+        {
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                Cursor.SetCursor(默认指针, new Vector2(0, 0), CursorMode.Auto);
+            }
         }
     }
 
@@ -154,9 +162,10 @@ public class Gun : MonoBehaviour
         for (int i = 0; i < 散射数量; i++)
         {
             if (i % 2 == 1) 计数++;
-            var 偏移量 = muzzle.rotation.z + 计数 * (i % 2 == 0 ? Random.Range(0,最大散射偏移) : Random.Range(-最大散射偏移, 0));
-            var 子弹 = Instantiate(bullet, muzzle.position, new Quaternion(muzzle.rotation.x, muzzle.rotation.y, 偏移量, muzzle.rotation.w));
-            子弹.GetComponent<Rigidbody2D>().velocity *= Random.Range(1+ 最大速度偏移, 1- 最大速度偏移);
+            var 偏移量 = muzzle.rotation.z + 计数 * (i % 2 == 0 ? Random.Range(0, 最大散射偏移) : Random.Range(-最大散射偏移, 0));
+            var 子弹 = Instantiate(bullet, muzzle.position,
+                new Quaternion(muzzle.rotation.x, muzzle.rotation.y, 偏移量, muzzle.rotation.w));
+            子弹.GetComponent<Rigidbody2D>().velocity *= Random.Range(1 + 最大速度偏移, 1 - 最大速度偏移);
         }
     }
 
@@ -196,7 +205,7 @@ public class Gun : MonoBehaviour
             换弹();
         }
     }
-    
+
     public void 触发换弹(InputAction.CallbackContext context)
     {
         if (!是否正在换弹 && 最大子弹数量 > 当前子弹数量)
@@ -204,7 +213,7 @@ public class Gun : MonoBehaviour
             主动换弹 = true;
         }
     }
-    
+
     public void 换弹()
     {
         if (是否正在换弹 == false)
@@ -229,6 +238,4 @@ public class Gun : MonoBehaviour
             换弹进度条.SetActive(false);
         }
     }
-
-
 }
