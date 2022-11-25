@@ -16,27 +16,21 @@ public class 武器强化 : MonoBehaviour
     [SerializeField]
     private SpriteRenderer 纹理;
 
-    private void Start()
+    private void OnGUI()
     {
-        //纹理 = GetComponent<SpriteRenderer>();
-        //根据存档id查找解锁状态
-
+        Debug.Log("yes");
         if (!是否解锁)
         {
             if (解锁技能 != null)
             {
-                if (!解锁技能.GetComponent<武器强化>().是否解锁)
-                {
-                    是否可强化 = false;
-                    return;
-                }
+                是否可强化 = 解锁技能.GetComponent<武器强化>().是否解锁 ? true : false;
+                return;
             }
 
             是否可强化 = true;
             return;
         }
 
-        //纹理.color = Color.white / 2;
         是否可强化 = false;
     }
 }

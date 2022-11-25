@@ -43742,8 +43742,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u97F3\u4E50": {fileID: 24100000, guid: beaa0570e435636439266e7cf6309186, type: 2}
   "\u97F3\u6548": {fileID: 24100000, guid: 9cfa5ebc4c4e6ff4aa8eba5ff4540cdc, type: 2}
-  "\u97F3\u4E50\u6761": {fileID: 0}
-  "\u97F3\u6548\u6761": {fileID: 0}
+  "\u97F3\u4E50\u6761": {fileID: 489267288}
+  "\u97F3\u6548\u6761": {fileID: 1944755129}
 --- !u!114 &1440385146
 MonoBehaviour:
   m_ObjectHideFlags: 0
