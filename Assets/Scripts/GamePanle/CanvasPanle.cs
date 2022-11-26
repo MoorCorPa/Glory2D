@@ -36,13 +36,13 @@ public class CanvasPanle : MonoBehaviour
     private void Awake()
     {
         存档管理器.强化树挡板 = 强化树挡板;
-        读档();
     }
 
     private void Start()
     {
         初始颜色 = 需要水晶.color;
         存档管理器.读取音量(音乐, 音效);
+        读档();
     }
 
     public void 操作设置面板(bool 开关)
