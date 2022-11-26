@@ -74,7 +74,10 @@ public class CanvasPanle : MonoBehaviour
 
     public void 关面板(GameObject 面板)
     {
-        Time.timeScale = 1;
+        if (面板.name.Equals("强化树面板"))
+        {
+            Time.timeScale = 1;
+        }
         面板.SetActive(false);
     }
 
