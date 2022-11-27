@@ -67,6 +67,7 @@ public class PlayerController : MonoBehaviour
     private GameObject[] arms;
     private float direction;
     private bool isOnGround;
+    private bool isPressDown;
 
     private float 落地前速度;
 
@@ -85,9 +86,10 @@ public class PlayerController : MonoBehaviour
         //行为控制 = new InputControler();
         行为控制.Player.Movement.performed += Movement;
         行为控制.Player.Jump.performed += Jump;
-        行为控制.Player.Down.performed += ctx => 角色切换层();
+        行为控制.Player.Down.performed += ctx => isPressDown = true;
 
         行为控制.Player.Movement.canceled += ctx => direction = 0;
+        行为控制.Player.Down.canceled += ctx => isPressDown = false;
 
         行为控制.Player.Movement.Enable();
         行为控制.Player.Jump.Enable();
@@ -145,10 +147,7 @@ public class PlayerController : MonoBehaviour
         if (health < 0) health = 0;
 
         触地检测();
-        if (Keyboard.current.sKey.isPressed)
-        {
-            
-        }
+        角色切换层();
     }
 
     private void 跟随鼠标()
@@ -310,7 +309,7 @@ public class PlayerController : MonoBehaviour
 
     void 角色切换层()
     {
-        if (info != null && plRigi.velocity.y == 0)
+        if (info != null && plRigi.velocity.y == 0 && isPressDown)
         {
             if (info.gameObject.layer == LayerMask.NameToLayer("GroundPlatform") &
                 单项平台.GetComponent<PlatformEffector2D>().colliderMask == 初始单项平台)
