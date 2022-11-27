@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -149,7 +147,7 @@ public class EnemyGround : Enemy
             纹理.color = new Color32(初始颜色.a, 初始颜色.b, 初始颜色.g, (byte) 颜色透明度);
             if (颜色透明度 < 0)
             {
-                Destroy(gameObject);
+                销毁();
             }
         }
     }

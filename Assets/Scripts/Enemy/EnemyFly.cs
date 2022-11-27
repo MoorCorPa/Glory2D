@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -45,7 +41,7 @@ public class EnemyFly : Enemy
     private Vector3 缓存位置;
 
     private bool 是否启动;
-    
+
     private Vector3 当前位置
     {
         get => transform.position;
@@ -136,8 +132,8 @@ public class EnemyFly : Enemy
             纹理.color = new Color32(初始颜色.a, 初始颜色.b, 初始颜色.g, (byte) 颜色透明度);
             if (颜色透明度 < 死亡消失透明度)
             {
-                Destroy(gameObject);
-                Instantiate(掉落物, transform.position,transform.rotation);
+                销毁();
+                Instantiate(掉落物, transform.position, transform.rotation);
             }
         }
 
