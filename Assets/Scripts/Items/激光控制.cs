@@ -42,7 +42,10 @@ public class 激光控制 : MonoBehaviour
 
     void Start()
     {
-        
+        if (instance is null)
+        {
+            instance = this;
+        }
     }
       
     // Update is called once per frame

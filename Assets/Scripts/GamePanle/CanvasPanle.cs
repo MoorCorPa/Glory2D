@@ -15,6 +15,7 @@ public class CanvasPanle : MonoBehaviour
     public GameObject 强化面板;
     public GameObject 死亡页;
     public GameObject 强化树挡板;
+    public GameObject 强化树;
 
     public AudioMixer 音乐;
     public AudioMixer 音效;
@@ -30,6 +31,7 @@ public class CanvasPanle : MonoBehaviour
     private int 玩家血量 => PlayerController.instance.health;
     private int 水晶数量 => PlayerController.instance.水晶数量;
     private PlayerController 玩家 => PlayerController.instance;
+    public GameObject[] images;
 
     private Color32 初始颜色;
 
@@ -115,8 +117,8 @@ public class CanvasPanle : MonoBehaviour
         {
             if (玩家.水晶消耗(_武器强化.需要水晶))
             {
-                执行强化(_武器强化.序号);
                 _武器强化.是否解锁 = true;
+                执行强化(_武器强化.序号);
                 强化提示.GetComponent<强化提示>().提示文字内容("强化成功 !");
             }
             else
@@ -137,35 +139,45 @@ public class CanvasPanle : MonoBehaviour
             case 1:
                 Gun.instance.最大子弹数量 = 24;
                 Gun.instance.换弹时间 = 0.8f;
+                images[0].GetComponent<Image>().fillAmount = 0.45f;
                 break;
             case 2:
                 Gun.instance.timeToColldown = 0.1f;
+                images[1].GetComponent<Image>().fillAmount = 0.5f;
                 break;
             case 3:
                 Gun.instance.散射数量 = 3;
+                images[2].GetComponent<Image>().fillAmount = 0.5f;
                 break;
             case 4:
                 PlayerController.instance.开启激光 = true;
+                images[3].GetComponent<Image>().fillAmount = 0.55f;
                 break;
             case 5:
                 PlayerController.instance.开启攻击回血 = true;
+                images[4].GetComponent<Image>().fillAmount = 0.4f;
                 break;
             case 6:
                 Gun.instance.最大子弹数量 = 36;
                 Gun.instance.换弹时间 = 0.5f;
+                images[0].GetComponent<Image>().fillAmount = 1;
                 break;
             case 7:
                 Gun.instance.timeToColldown = 0.08f;
+                images[1].GetComponent<Image>().fillAmount = 1;
                 break;
             case 8:
                 Gun.instance.散射数量 = 5;
+                images[2].GetComponent<Image>().fillAmount = 1;
                 break;
             case 9:
                 激光控制.instance.攻击冷却 -= 0.05f;
+                images[3].GetComponent<Image>().fillAmount = 1;
                 break;
             case 10:
                 PlayerController.instance.攻击回血次数 /= 2;
                 PlayerController.instance.开启攻击回血 = true;
+                images[4].GetComponent<Image>().fillAmount = 1;
                 break;
             default:
                 强化提示.GetComponent<强化提示>().提示文字内容("技能id错误");
