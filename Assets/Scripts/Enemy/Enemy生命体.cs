@@ -1,127 +1,235 @@
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.Animations;
 using UnityEngine;
 
-public class EnemyÉúÃüÌå : Enemy
+public class Enemyç”Ÿå‘½ä½“ : Enemy
 {
-    [Min(0f)] public float ÊÜÉË±äÉ«Ê±¼ä;
+    [Min(0f)] public float å—ä¼¤å˜è‰²æ—¶é—´;
 
-    [Header("É¨ÃèÇøÓòÉèÖÃ")]
-    [Tooltip("É¨Ãè¹¥»÷ÇøÓò")]
+    [Header("æ‰«æåŒºåŸŸè®¾ç½®")]
+    [Tooltip("æ‰«ææ”»å‡»åŒºåŸŸ")]
     [Range(0.0f, 360.0f)]
-    public float ÊÓ½Ç·½Ïò;
+    public float è§†è§’æ–¹å‘;
 
-    [Range(0.0f, 360.0f)] public float ÊÓ½ÇFOV;
+    [Range(0.0f, 360.0f)] public float è§†è§’FOV;
 
-    [Min(0f)] public float ÊÓÒ°¾àÀë;
+    [Min(0f)] public float è§†é‡è·ç¦»;
 
-    public int µ±Ç°½×¶Î;
+    public int å½“å‰é˜¶æ®µ;
 
-    [Header("¸÷½×¶Î×´Ì¬»úÉèÖÃ")]
-    public AnimatorController[] ¶¯»­¿ØÖÆÆ÷;
+    [Header("å„é˜¶æ®µçŠ¶æ€æœºè®¾ç½®")]
+    public AnimatorController[] åŠ¨ç”»æ§åˆ¶å™¨;
 
-    private Rigidbody2D ¸ÕÌå;
-    private Animator ¶¯»­;
-    private SpriteRenderer ÎÆÀí;
-    private Color32 ³õÊ¼ÑÕÉ«;
+    private Rigidbody2D åˆšä½“;
+    private Animator åŠ¨ç”»;
+    private SpriteRenderer çº¹ç†;
+    private Color32 åˆå§‹é¢œè‰²;
 
-    private Vector3 Ëæ»úÎ»ÖÃ;
-    private Vector3 ³õÊ¼Ëõ·Å;
+    private Vector3 éšæœºä½ç½®;
+    private Vector3 åˆå§‹ç¼©æ”¾;
 
-    private Vector3 µ±Ç°Î»ÖÃ
+    private bool å¼€å§‹å‘ç©å®¶ç§»åŠ¨;
+    private bool æ”»å‡»å†·å´;
+
+    private Vector3 å½“å‰ä½ç½®
     {
         get => transform.position;
         set => transform.position = value;
     }
 
-    private Vector3 Íæ¼ÒÎ»ÖÃ => PlayerController.instance.transform.position;
+    private Vector3 ç©å®¶ä½ç½® => PlayerController.instance.transform.position;
 
-    private float ÓëÍæ¼Ò¾àÀë => Vector2.Distance(µ±Ç°Î»ÖÃ, Íæ¼ÒÎ»ÖÃ);
+    private float ä¸ç©å®¶è·ç¦» => Vector2.Distance(å½“å‰ä½ç½®, ç©å®¶ä½ç½®);
 
     void Start()
     {
-        ³õÊ¼Ëõ·Å = transform.localScale;
-        ¸ÕÌå = GetComponent<Rigidbody2D>();
-        ¶¯»­ = GetComponent<Animator>();
-        ÎÆÀí = GetComponent<SpriteRenderer>();
-        ³õÊ¼ÑÕÉ« = ÎÆÀí.color;
-        µ±Ç°ÑªÁ¿ = ×î´óÑªÁ¿;
-        µ±Ç°½×¶Î = 1;
+        åˆå§‹ç¼©æ”¾ = transform.localScale;
+        åˆšä½“ = GetComponent<Rigidbody2D>();
+        åŠ¨ç”» = GetComponent<Animator>();
+        çº¹ç† = GetComponent<SpriteRenderer>();
+        åˆå§‹é¢œè‰² = çº¹ç†.color;
+        å½“å‰è¡€é‡ = æœ€å¤§è¡€é‡;
+        å½“å‰é˜¶æ®µ = 1;
+        å¼€å§‹å‘ç©å®¶ç§»åŠ¨ = false;
+        æ”»å‡»å†·å´ = true;
     }
 
     void Update()
     {
-        if (µ±Ç°½×¶Î < 3 && µ±Ç°ÑªÁ¿ <= 10)
+        if (å½“å‰é˜¶æ®µ < 3 && å½“å‰è¡€é‡ <= 10)
         {
-            //´¥·¢ÇĞ»»×´Ì¬¶¯»­
-            ¶¯»­.SetTrigger("Ability");
+            //è§¦å‘åˆ‡æ¢çŠ¶æ€åŠ¨ç”»
+            åŠ¨ç”».SetTrigger("Ability");
             return;
         }
 
-        if (µ±Ç°½×¶Î is 3 && µ±Ç°ÑªÁ¿ is 0)
+        if (å½“å‰é˜¶æ®µ is 3 && å½“å‰è¡€é‡ is 0)
         {
-            ¶¯»­.SetTrigger("Death");
-            Ö´ĞĞËÀÍö();
+            åŠ¨ç”».SetTrigger("Death");
+            æ‰§è¡Œæ­»äº¡();
+            return;
+        }
+
+        if ((ç©å®¶åœ¨æ‰‡å½¢èŒƒå›´() || (Math.Abs(ç©å®¶ä½ç½®.x-å½“å‰ä½ç½®.x)<0.2 && Math.Abs(ç©å®¶ä½ç½®.y - å½“å‰ä½ç½®.y)<=0.2)) && æ”»å‡»å†·å´)
+        {
+            å¼€å§‹å‘ç©å®¶ç§»åŠ¨ = false;
+            
+            switch (å½“å‰é˜¶æ®µ)
+            {
+                case 1:
+                    åŠ¨ç”».SetTrigger("Attack " + (UnityEngine.Random.Range(0, 2) == 0 ? 2 : 3));
+                    break;
+                case 2:
+                    åŠ¨ç”».SetTrigger("Attack");
+                    break;
+                case 3:
+                    åŠ¨ç”».SetTrigger("Attack" + (UnityEngine.Random.Range(0, 2) == 0 ? "" : " 2"));
+                    break;
+                default:
+                    break;
+            }
+            æ”»å‡»å†·å´ = false;
+        }
+        else
+        {
+            å¼€å§‹å‘ç©å®¶ç§»åŠ¨ = true;
+            transform.localScale = new Vector3(å½“å‰ä½ç½®.x - ç©å®¶ä½ç½®.x < 0 ? åˆå§‹ç¼©æ”¾.x : -åˆå§‹ç¼©æ”¾.x, åˆå§‹ç¼©æ”¾.y, åˆå§‹ç¼©æ”¾.y);
         }
     }
 
-    void ÇĞ»»×´Ì¬()
+    private void FixedUpdate()
     {
-        ¶¯»­.runtimeAnimatorController = ¶¯»­¿ØÖÆÆ÷[µ±Ç°½×¶Î++];
-        µ±Ç°ÑªÁ¿ = ×î´óÑªÁ¿;
+        if (å½“å‰è¡€é‡ <= 0) return;
+        if (å¼€å§‹å‘ç©å®¶ç§»åŠ¨)
+        {
+            å½“å‰ä½ç½® = Vector2.MoveTowards(å½“å‰ä½ç½®, new Vector3(ç©å®¶ä½ç½®.x, å½“å‰ä½ç½®.y, å½“å‰ä½ç½®.z), ç§»åŠ¨é€Ÿåº¦);
+        }
     }
 
-    void Ö´ĞĞËÀÍö()
+    void æ”»å‡»å†·å´å®Œæˆ()
     {
-        ¶¯»­.runtimeAnimatorController = ¶¯»­¿ØÖÆÆ÷[0];
-        ¶¯»­.SetTrigger("Death");
+        æ”»å‡»å†·å´ = true;
     }
 
-    void Ïú»Ù()
+    void å°„å‡»()
+    {
+
+    }
+
+    void åˆ‡æ¢çŠ¶æ€()
+    {
+        åŠ¨ç”».runtimeAnimatorController = åŠ¨ç”»æ§åˆ¶å™¨[å½“å‰é˜¶æ®µ++];
+        å½“å‰è¡€é‡ = æœ€å¤§è¡€é‡;
+        switch (å½“å‰é˜¶æ®µ)
+        {
+            case 2:
+                è§†è§’æ–¹å‘ = 90;
+                è§†è§’FOV = 90;
+                æ”»å‡»åŠ› = 3;
+                break;
+            case 3:
+                æ¢å¤é»˜è®¤è§†é‡();
+                break;
+            default:
+                break;
+        }
+    }
+
+    void æ‰§è¡Œæ­»äº¡()
+    {
+        åŠ¨ç”».runtimeAnimatorController = åŠ¨ç”»æ§åˆ¶å™¨[0];
+        åŠ¨ç”».SetTrigger("Death");
+    }
+
+    void è¿‘æ”»å‡»ä¸­åˆ¤å®š()
+    {
+        if (å½“å‰é˜¶æ®µ is 3)
+        {
+            è§†è§’FOV = 360;
+            è§†é‡è·ç¦» = 0.8f;
+        }
+        if ((ç©å®¶åœ¨æ‰‡å½¢èŒƒå›´() || (Math.Abs(ç©å®¶ä½ç½®.x - å½“å‰ä½ç½®.x) <= 0.3 && Math.Abs(ç©å®¶ä½ç½®.y - å½“å‰ä½ç½®.y) <= 0.2)))
+        {
+            PlayerController.instance.TakeDamage(æ”»å‡»åŠ›);
+            æ¢å¤é»˜è®¤è§†é‡();
+        }
+    }
+
+    void æ¢å¤é»˜è®¤è§†é‡() {
+        è§†è§’æ–¹å‘ = 166;
+        è§†è§’FOV = 30;
+        è§†é‡è·ç¦» = 1;
+    }
+
+    private bool ç©å®¶åœ¨æ‰‡å½¢èŒƒå›´()
+    {
+        Vector2 æ­£å‰æ–¹å‘é‡ = transform.rotation * (transform.localScale.x > 0 ? Vector2.left : Vector2.right);
+        Vector3 v = Quaternion.Euler(0, 0, transform.localScale.x > 0 ? è§†è§’æ–¹å‘ : -è§†è§’æ–¹å‘) * æ­£å‰æ–¹å‘é‡;
+        Vector2 åˆ°ç©å®¶çš„å‘é‡ = ç©å®¶ä½ç½® - å½“å‰ä½ç½®;
+        // ä¸¤ä¸ªå‘é‡çš„å¤¹è§’
+        float å¤¹è§’ = Mathf.Acos(Vector2.Dot(v.normalized, åˆ°ç©å®¶çš„å‘é‡.normalized)) * Mathf.Rad2Deg;
+
+        if (ä¸ç©å®¶è·ç¦» < è§†é‡è·ç¦»)
+        {
+            if (å¤¹è§’ <= è§†è§’FOV * 0.5f)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    void é”€æ¯()
     {
         Destroy(gameObject);
     }
 
-    public override void µôÑª(int ÉËº¦)
+    public override void æ‰è¡€(int ä¼¤å®³)
     {
-        if (µ±Ç°½×¶Î<3 && µ±Ç°ÑªÁ¿ <= 10) return;
+        if (å½“å‰é˜¶æ®µ<3 && å½“å‰è¡€é‡ <= 10) return;
 
-        µ±Ç°ÑªÁ¿ -= ÉËº¦;
-        if (µ±Ç°ÑªÁ¿ > 0)
+        å½“å‰è¡€é‡ -= ä¼¤å®³;
+        if (å½“å‰è¡€é‡ > 0)
         {
-            if (µ±Ç°ÑªÁ¿ % 5 == 0)
+            if (å½“å‰è¡€é‡ % 5 == 0)
             {
-                Instantiate(µôÂäÎï, µ±Ç°Î»ÖÃ, transform.rotation);
+                Instantiate(æ‰è½ç‰©, å½“å‰ä½ç½®, transform.rotation);
             }
 
-            ÎÆÀí.color = new Color(0.99f, 0.3f, 0.3f, 1f);
-            ¶¯»­.SetTrigger("Hit");
-            Invoke("»Ö¸´ÑÕÉ«", ÊÜÉË±äÉ«Ê±¼ä);
+            çº¹ç†.color = new Color(0.99f, 0.3f, 0.3f, 1f);
+            Invoke("æ¢å¤é¢œè‰²", å—ä¼¤å˜è‰²æ—¶é—´);
         }
         else
         {
-            ¸ÕÌå.gravityScale = 1.5f;
-            ¶¯»­.SetTrigger("Death");
-            Ö´ĞĞËÀÍö();
+            åˆšä½“.gravityScale = 1.5f;
+            åŠ¨ç”».SetTrigger("Death");
+            æ‰§è¡Œæ­»äº¡();
         }
+    }
+
+    public void æ¢å¤é¢œè‰²()
+    {
+        çº¹ç†.color = åˆå§‹é¢œè‰²;
     }
 
     private void OnDrawGizmosSelected()
     {
-        var ºìÉ« = new Color(1.0f, 0, 0, 0.1f);
-        var À¶É« = new Color(0.1f, 0.2f, 0.9f, 0.1f);
+        var çº¢è‰² = new Color(1.0f, 0, 0, 0.1f);
+        var è“è‰² = new Color(0.1f, 0.2f, 0.9f, 0.1f);
 
-        // ¹¥»÷·¶Î§
+        // æ”»å‡»èŒƒå›´
         Vector3 forward = transform.localScale.x > 0 ? Vector2.left : Vector2.right;
-        forward = Quaternion.Euler(0, 0, transform.localScale.x > 0 ? ÊÓ½Ç·½Ïò : -ÊÓ½Ç·½Ïò) * forward;
+        forward = Quaternion.Euler(0, 0, transform.localScale.x > 0 ? è§†è§’æ–¹å‘ : -è§†è§’æ–¹å‘) * forward;
         if (GetComponent<SpriteRenderer>().flipX) forward.x = -forward.x;
 
-        Vector3 endpoint = transform.position + (Quaternion.Euler(0, 0, ÊÓ½ÇFOV * 0.5f) * forward);
+        Vector3 endpoint = transform.position + (Quaternion.Euler(0, 0, è§†è§’FOV * 0.5f) * forward);
 
-        Handles.color = ºìÉ«;
-        Handles.DrawSolidArc(transform.position, -Vector3.forward, (endpoint - transform.position).normalized, ÊÓ½ÇFOV,
-            ÊÓÒ°¾àÀë);
+        Handles.color = çº¢è‰²;
+        Handles.DrawSolidArc(transform.position, -Vector3.forward, (endpoint - transform.position).normalized, è§†è§’FOV,
+            è§†é‡è·ç¦»);
     }
 }

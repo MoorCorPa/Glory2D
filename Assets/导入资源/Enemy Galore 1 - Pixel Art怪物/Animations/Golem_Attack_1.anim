@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Golem_Attack_1
-  serializedVersion: 6
+  serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -38,7 +38,7 @@ AnimationClip:
     - time: 0.6666667
       value: {fileID: 7409871330099305326, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - time: 0.75
-      value: {fileID: 1573172041546509334, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
+      value: {fileID: -3444749343037057624, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - time: 0.8333333
       value: {fileID: -8763423666474432346, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - time: 0.9166667
@@ -73,7 +73,7 @@ AnimationClip:
     - {fileID: -3170989243384686883, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - {fileID: 23307982201231008, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - {fileID: 7409871330099305326, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
-    - {fileID: 1573172041546509334, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
+    - {fileID: -3444749343037057624, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - {fileID: -8763423666474432346, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - {fileID: -5982485274504649943, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
     - {fileID: -3993154694204302873, guid: e5a4c6877f7a1d74aac8a9fc1620e166, type: 3}
@@ -102,10 +102,17 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1
-    functionName: GolemEndAbility
+  - time: 0.8333333
+    functionName: "\u8FD1\u653B\u51FB\u4E2D\u5224\u5B9A"
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 4599791264091645056, guid: dce71f7422affbb43b2c377ced819661, type: 3}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1
+    functionName: "\u653B\u51FB\u51B7\u5374\u5B8C\u6210"
+    data: 
+    objectReferenceParameter: {fileID: 4599791264091645056, guid: dce71f7422affbb43b2c377ced819661, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

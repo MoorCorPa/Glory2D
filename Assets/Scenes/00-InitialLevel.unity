@@ -4357,6 +4357,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4599791264091645050, guid: dce71f7422affbb43b2c377ced819661, type: 3}
+      propertyPath: "\u89C6\u89D2FOV"
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599791264091645050, guid: dce71f7422affbb43b2c377ced819661, type: 3}
+      propertyPath: "\u79FB\u52A8\u901F\u5EA6"
+      value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599791264091645050, guid: dce71f7422affbb43b2c377ced819661, type: 3}
+      propertyPath: "\u89C6\u89D2\u65B9\u5411"
+      value: 166
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599791264091645050, guid: dce71f7422affbb43b2c377ced819661, type: 3}
+      propertyPath: "\u89C6\u91CE\u8DDD\u79BB"
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4599791264091645050, guid: dce71f7422affbb43b2c377ced819661, type: 3}
+      propertyPath: "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4"
+      value: 0.1
+      objectReference: {fileID: 0}
     - target: {fileID: 4599791264091645056, guid: dce71f7422affbb43b2c377ced819661, type: 3}
       propertyPath: m_Name
       value: "Enemy\u751F\u547D\u4F53"
