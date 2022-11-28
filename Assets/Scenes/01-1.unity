@@ -37610,7 +37610,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &325695353
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37815,7 +37815,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.533
+  m_FillAmount: 0.04
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -38754,7 +38754,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.533
+  m_FillAmount: 0.18
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -42064,7 +42064,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.533
+  m_FillAmount: 0.18
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -42628,7 +42628,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.533
+  m_FillAmount: 0.25
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -43733,6 +43733,7 @@ MonoBehaviour:
   "\u5F3A\u5316\u9762\u677F": {fileID: 783840549}
   "\u6B7B\u4EA1\u9875": {fileID: 183692676}
   "\u5F3A\u5316\u6811\u6321\u677F": {fileID: 674148133}
+  images: []
   "\u97F3\u4E50": {fileID: 24100000, guid: beaa0570e435636439266e7cf6309186, type: 2}
   "\u97F3\u6548": {fileID: 24100000, guid: 9cfa5ebc4c4e6ff4aa8eba5ff4540cdc, type: 2}
   "\u97F3\u4E50\u6761": {fileID: 489267288}
@@ -45850,7 +45851,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0.26
+  m_FillAmount: 0.05
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
