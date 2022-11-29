@@ -249,12 +249,12 @@ public class Enemy螃蟹 : Enemy
         if (当前血量 > 0)
         {
             纹理.color = new Color(0.99f, 0.3f, 0.3f, 1f);
-            动画.SetTrigger("掉血");
+            动画.SetTrigger("Hit");
             Invoke("恢复颜色", 受伤变色时间);
         }
         else
         {
-            动画.SetTrigger("死亡");
+            动画.SetTrigger("Death");
         }
     }
 
