@@ -54,7 +54,7 @@ public class CanvasPanle : MonoBehaviour
 
     public void 回到主菜单()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene("GameHome");
     }
 
     public void 重开()
