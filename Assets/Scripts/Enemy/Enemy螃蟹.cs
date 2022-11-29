@@ -100,7 +100,6 @@ public class Enemy螃蟹 : Enemy
             攻击间隔计时 += Time.deltaTime;
             攻击僵直计时 += Time.deltaTime;
 
-
             if (玩家在扇形范围() && ((射线 ? !射线.collider.CompareTag("地图碰撞区域") : true) || !是否远程))
             {
                 if (攻击间隔 < 攻击间隔计时)
@@ -116,7 +115,9 @@ public class Enemy螃蟹 : Enemy
                         else
                         {
                             攻击僵直计时 = 0;
-                            switch (Random.Range(0, 3))
+                            int val = Random.Range(0, 3);
+                            Debug.Log("我宣布个事：" + val);
+                            switch (val)
                             {
                                 case 0:
                                     动画.SetTrigger("Attack");
