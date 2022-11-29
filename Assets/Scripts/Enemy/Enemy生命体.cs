@@ -8,6 +8,9 @@ using UnityEngine;
 public class Enemy生命体 : Enemy
 {
     [Min(0f)] public float 受伤变色时间;
+    public float 射击冷却时间;
+    public GameObject 子弹;
+    public GameObject 胸口;
 
     [Header("扫描区域设置")]
     [Tooltip("扫描攻击区域")]
@@ -33,6 +36,9 @@ public class Enemy生命体 : Enemy
 
     private bool 开始向玩家移动;
     private bool 攻击冷却;
+
+    private float 射击冷却计时;
+
 
     private Vector3 当前位置
     {
@@ -73,6 +79,12 @@ public class Enemy生命体 : Enemy
             return;
         }
 
+        if (!玩家在扇形范围() && 射击冷却计时>=射击冷却时间 && 当前阶段 is 3)
+        {
+            transform.localScale = new Vector3(当前位置.x - 玩家位置.x < 0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
+            动画.SetTrigger("Attack 3");
+        }
+
         if ((玩家在扇形范围() || (Math.Abs(玩家位置.x-当前位置.x)<0.2 && Math.Abs(玩家位置.y - 当前位置.y)<=0.2)) && 攻击冷却)
         {
             开始向玩家移动 = false;
@@ -107,6 +119,11 @@ public class Enemy生命体 : Enemy
         {
             当前位置 = Vector2.MoveTowards(当前位置, new Vector3(玩家位置.x, 当前位置.y, 当前位置.z), 移动速度);
         }
+
+        if (射击冷却计时 <= 射击冷却时间)
+        {
+            射击冷却计时+=Time.deltaTime;
+        }
     }
 
     void 攻击冷却完成()
@@ -116,7 +133,8 @@ public class Enemy生命体 : Enemy
 
     void 射击()
     {
-
+        Instantiate(子弹, 胸口.transform.position, 胸口.transform.rotation);
+        射击冷却计时 = 0;
     }
 
     void 切换状态()
