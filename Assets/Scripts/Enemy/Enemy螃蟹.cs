@@ -23,8 +23,6 @@ public class Enemy螃蟹 : Enemy
 
     public bool 是否远程;
 
-    public bool 玩家是否在范围内;
-
     public GameObject 子弹;
 
     [Header("扫描区域设置")]
@@ -224,7 +222,7 @@ public class Enemy螃蟹 : Enemy
 
     public bool 前方路段为空()
     {
-        Vector3 方向 = new Vector3(-transform.localScale.x, -1, 0);
+        Vector3 方向 = new Vector3(transform.localScale.x, -1, 0);
         Debug.DrawLine(transform.position, transform.position + 方向.normalized * 空路射线长度, Color.yellow);
 
         if (Physics2D.Raycast(transform.position, 方向, 空路射线长度, LayerMask.GetMask("Ground", "GroundPlatform")))
@@ -237,7 +235,7 @@ public class Enemy螃蟹 : Enemy
 
     public void 判断是否击中玩家()
     {
-        if (玩家是否在范围内)
+        if (玩家在扇形范围())
         {
             PlayerController.instance.TakeDamage(攻击力);
         }
@@ -261,24 +259,6 @@ public class Enemy螃蟹 : Enemy
     public void 恢复颜色()
     {
         纹理.color = 初始颜色;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            玩家是否在范围内 = true;
-            // Debug.Log("检测到玩家");
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            玩家是否在范围内 = false;
-            Debug.Log("检测到玩家");
-        }
     }
 
     //绘制
