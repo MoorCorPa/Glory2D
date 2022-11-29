@@ -7,7 +7,7 @@ AnimationClip:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Rat_Attack
-  serializedVersion: 6
+  serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
   m_UseHighQualityCurve: 1
@@ -24,7 +24,7 @@ AnimationClip:
     - time: 0.083333336
       value: {fileID: 8580169393291790282, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
     - time: 0.16666667
-      value: {fileID: -5602548871143879945, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
+      value: {fileID: 4807302976523773726, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
     - time: 0.25
       value: {fileID: 8986176777830439530, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
     - time: 0.33333334
@@ -56,7 +56,7 @@ AnimationClip:
     pptrCurveMapping:
     - {fileID: 4807302976523773726, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
     - {fileID: 8580169393291790282, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
-    - {fileID: -5602548871143879945, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
+    - {fileID: 4807302976523773726, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
     - {fileID: 8986176777830439530, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
     - {fileID: 6484397934913687566, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
     - {fileID: -6722306106482004015, guid: 644b5e0fc2845cd42961d91d1151e072, type: 3}
@@ -86,4 +86,18 @@ AnimationClip:
   m_EulerEditorCurves: []
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0
+    functionName: 
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.25
+    functionName: "\u5224\u65AD\u662F\u5426\u51FB\u4E2D\u73A9\u5BB6"
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

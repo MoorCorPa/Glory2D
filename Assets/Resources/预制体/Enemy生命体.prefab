@@ -162,7 +162,7 @@ MonoBehaviour:
   "\u5F53\u524D\u8840\u91CF": 0
   "\u653B\u51FB\u529B": 2
   "\u79FB\u52A8\u901F\u5EA6": 0.03
-  "\u6389\u843D\u7269": {fileID: 0}
+  "\u6389\u843D\u7269": {fileID: 1252964317145410664, guid: cef4d6a291d2a164aaf904a3004c8281, type: 3}
   "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4": 0.1
   "\u5C04\u51FB\u51B7\u5374\u65F6\u95F4": 2
   "\u5B50\u5F39": {fileID: 4584677248205735998, guid: f9152e6ceab5a4d46bd80a7d3641e84e, type: 3}
