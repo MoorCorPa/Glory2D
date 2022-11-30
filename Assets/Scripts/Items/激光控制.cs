@@ -25,7 +25,8 @@ public class 激光控制 : MonoBehaviour
 
     private void Awake()
     {
-        instance = this; 
+        instance = this;
+        gameObject.SetActive(false);
         线渲染器 = GetComponentInChildren<LineRenderer>();
 
         线渲染器.material.color = 颜色 * 颜色强度;
