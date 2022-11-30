@@ -367,6 +367,8 @@ MonoBehaviour:
   "\u653B\u51FB\u8BA1\u6570": 0
   "\u653B\u51FB\u56DE\u8840\u6B21\u6570": 5
   "\u5F00\u542F\u653B\u51FB\u56DE\u8840": 1
+  "\u5F00\u542F\u6FC0\u5149": 0
+  "\u5355\u9879\u5E73\u53F0": {fileID: 0}
 --- !u!50 &4164239837244566855
 Rigidbody2D:
   serializedVersion: 4
@@ -20862,7 +20864,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6366772952348345699
 Transform:
   m_ObjectHideFlags: 0
