@@ -1,6 +1,5 @@
 ﻿using System;
 using UnityEditor;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class Enemy生命体 : Enemy
@@ -22,7 +21,7 @@ public class Enemy生命体 : Enemy
     public int 当前阶段;
 
     [Header("各阶段状态机设置")]
-    public AnimatorController[] 动画控制器;
+    public RuntimeAnimatorController[] 动画控制器;
 
     private Rigidbody2D 刚体;
     private Animator 动画;
