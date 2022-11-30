@@ -18,7 +18,6 @@ public class 掉落物 : MonoBehaviour
     {
         var 爆炸力 = Random.Range(最小爆炸力, 最大爆炸力);
         var 方向 = new Vector2(Random.Range(-1f, 1f), 1);
-        Debug.Log(方向);
         掉落物刚体.AddForce( 方向 *爆炸力, ForceMode2D.Impulse);
     }
 

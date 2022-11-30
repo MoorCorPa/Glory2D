@@ -1,79 +1,74 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 public class KeySetter : MonoBehaviour
 {
     public static InputControler input;
 
-    public static event Action °ó¶¨Íê³É;
-    public static event Action °ó¶¨È¡Ïû;
-    public static event Action<InputAction, int> °ó¶¨¿ªÊ¼;
+    public static event Action ç»‘å®šå®Œæˆ;
+    public static event Action ç»‘å®šå–æ¶ˆ;
+    public static event Action<InputAction, int> ç»‘å®šå¼€å§‹;
     private void Awake()
     {
         if (input == null)
             input = new InputControler();
     }
 
-    public static void ¿ªÆôÖØ°ó(string actionÃû×Ö,int °ó¶¨ÏÂ±ê, TMP_Text °´Å¥ÎÄ×Ö)
+    public static void å¼€å¯é‡ç»‘(string actionåå­—,int ç»‘å®šä¸‹æ ‡, TMP_Text æŒ‰é’®æ–‡å­—)
     {
-        InputAction action = input.asset.FindAction(actionÃû×Ö);
-        if (action == null || action.bindings.Count <= °ó¶¨ÏÂ±ê)
+        InputAction action = input.asset.FindAction(actionåå­—);
+        if (action == null || action.bindings.Count <= ç»‘å®šä¸‹æ ‡)
         {
-            Debug.Log("ÕÒ²»µ½action»ò°ó¶¨°´¼üÄó");
+            Debug.Log("æ‰¾ä¸åˆ°actionæˆ–ç»‘å®šæŒ‰é”®æ");
             return;
         }
 
-        Ö´ĞĞÖØ°ó(action, °ó¶¨ÏÂ±ê, °´Å¥ÎÄ×Ö);
+        æ‰§è¡Œé‡ç»‘(action, ç»‘å®šä¸‹æ ‡, æŒ‰é’®æ–‡å­—);
     }
 
-    private static void Ö´ĞĞÖØ°ó(InputAction ÖØ°óaction, int °ó¶¨ÏÂ±ê, TMP_Text °´Å¥ÎÄ×Ö)
+    private static void æ‰§è¡Œé‡ç»‘(InputAction é‡ç»‘action, int ç»‘å®šä¸‹æ ‡, TMP_Text æŒ‰é’®æ–‡å­—)
     {
-        if (ÖØ°óaction == null) return;
+        if (é‡ç»‘action == null) return;
 
-        °´Å¥ÎÄ×Ö.text = $"Çë°´¼ü";
+        æŒ‰é’®æ–‡å­—.text = $"è¯·æŒ‰é”®";
 
-        ÖØ°óaction.Disable();
+        é‡ç»‘action.Disable();
 
-        var ÖØ°ó = ÖØ°óaction.PerformInteractiveRebinding(°ó¶¨ÏÂ±ê);
-        ÖØ°ó.OnComplete(operation =>
+        var é‡ç»‘ = é‡ç»‘action.PerformInteractiveRebinding(ç»‘å®šä¸‹æ ‡);
+        é‡ç»‘.OnComplete(operation =>
         {
-            ÖØ°óaction.Enable();
+            é‡ç»‘action.Enable();
             operation.Dispose();
 
-            ±£´æ°ó¶¨¸²¸Ç(ÖØ°óaction);
-            °ó¶¨Íê³É?.Invoke();
+            ä¿å­˜ç»‘å®šè¦†ç›–(é‡ç»‘action);
+            ç»‘å®šå®Œæˆ?.Invoke();
         });
 
-        ÖØ°ó.OnCancel(operation =>
+        é‡ç»‘.OnCancel(operation =>
         {
-            ÖØ°óaction.Enable();
+            é‡ç»‘action.Enable();
             operation.Dispose();
-            °ó¶¨È¡Ïû?.Invoke();
+            ç»‘å®šå–æ¶ˆ?.Invoke();
         });
 
-        ÖØ°ó.WithCancelingThrough("<Keyboard>/Backspace");
+        é‡ç»‘.WithCancelingThrough("<Keyboard>/Backspace");
 
-        °ó¶¨¿ªÊ¼?.Invoke(ÖØ°óaction, °ó¶¨ÏÂ±ê);
-        ÖØ°ó.Start(); //ÕæÕıÆô¶¯ÖØ°ó½ø³Ì
+        ç»‘å®šå¼€å§‹?.Invoke(é‡ç»‘action, ç»‘å®šä¸‹æ ‡);
+        é‡ç»‘.Start(); //çœŸæ­£å¯åŠ¨é‡ç»‘è¿›ç¨‹
     }
 
-    public static string »ñÈ¡°ó¶¨Ãû³Æ(string actionÃû×Ö, int °ó¶¨ÏÂ±ê)
+    public static string è·å–ç»‘å®šåç§°(string actionåå­—, int ç»‘å®šä¸‹æ ‡)
     {
         if(input == null)
             input = new InputControler();
 
-        InputAction action = input.asset.FindAction(actionÃû×Ö);
-        return action.GetBindingDisplayString(°ó¶¨ÏÂ±ê);
+        InputAction action = input.asset.FindAction(actionåå­—);
+        return action.GetBindingDisplayString(ç»‘å®šä¸‹æ ‡);
     }
 
-    private static void ±£´æ°ó¶¨¸²¸Ç(InputAction action)
+    private static void ä¿å­˜ç»‘å®šè¦†ç›–(InputAction action)
     {
         for (int i = 0; i < action.bindings.Count; i++)
         {
@@ -81,7 +76,7 @@ public class KeySetter : MonoBehaviour
         }
     }
 
-    public static void ¼ÓÔØ°ó¶¨¸²¸Ç(string actionName)
+    public static void åŠ è½½ç»‘å®šè¦†ç›–(string actionName)
     {
         if(input == null)
             input=new InputControler();
@@ -95,13 +90,13 @@ public class KeySetter : MonoBehaviour
         }
     }
 
-    public static void ÖØÖÃ°ó¶¨(string actionName)
+    public static void é‡ç½®ç»‘å®š(string actionName)
     {
         InputAction action = input.asset.FindAction(actionName);
 
         if (action == null)
         {
-            Debug.Log("ÃÃÓĞÄó");
+            Debug.Log("å¦¹æœ‰æ");
             return;
         }
 

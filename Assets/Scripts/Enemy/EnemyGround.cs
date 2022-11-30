@@ -194,7 +194,6 @@ public class EnemyGround : Enemy
         {
             if (夹角 <= 视角FOV * 0.5f)
             {
-                Debug.Log("玩家出现在扇形范围内！");
                 return true;
             }
         }
@@ -248,7 +247,6 @@ public class EnemyGround : Enemy
         if (collision.CompareTag("Player"))
         {
             玩家是否在范围内 = true;
-            // Debug.Log("检测到玩家");
         }
     }
 
@@ -257,7 +255,6 @@ public class EnemyGround : Enemy
         if (collision.CompareTag("Player"))
         {
             玩家是否在范围内 = false;
-            Debug.Log("检测到玩家");
         }
     }
 

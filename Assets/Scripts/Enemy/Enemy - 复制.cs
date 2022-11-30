@@ -1,7 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;  
@@ -211,7 +207,6 @@ public abstract class Enemy123 : MonoBehaviour
     // 怪物掉血
     public void TakeDamage(int damage)
     {
-        Debug.Log("怪物掉血!!!");
         health -= damage;
         if (health <= 0)
         {
@@ -231,7 +226,6 @@ public abstract class Enemy123 : MonoBehaviour
 
     public void 怪物死亡()
     {
-        Debug.Log("怪物死亡!!!");
         animator.ResetTrigger("死亡");
         Destroy(gameObject);
     }

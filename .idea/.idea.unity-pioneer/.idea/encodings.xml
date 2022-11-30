@@ -3,6 +3,7 @@
   <component name="Encoding" addBOMForNewFiles="with BOM under Windows, with no BOM otherwise">
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyRNG.cs" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/Enemy/EnemyRemake.cs" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/Input/KeySetter.cs" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/PlayerController.cs" charset="UTF-8" />
   </component>
 </project>

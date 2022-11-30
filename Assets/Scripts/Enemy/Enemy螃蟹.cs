@@ -212,7 +212,6 @@ public class Enemy螃蟹 : Enemy
         {
             if (夹角 <= 视角FOV * 0.5f)
             {
-                Debug.Log("玩家出现在扇形范围内！");
                 return true;
             }
         }
