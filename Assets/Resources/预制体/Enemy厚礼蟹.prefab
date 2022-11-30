@@ -17,7 +17,7 @@ GameObject:
   m_Layer: 0
   m_Name: "Enemy\u539A\u793C\u87F9"
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -78,7 +78,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 6197056623017412966, guid: 25e3c3e2a286eee48bba19e8d339e062, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.28931418, g: 0.5, b: 0.24245283, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
