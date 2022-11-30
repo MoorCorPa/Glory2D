@@ -37,8 +37,8 @@ public class 强化提示 : MonoBehaviour
 
     public void 提示消失()
     {
-        透明度 -= 消失速度 * Time.deltaTime;
-        文字透明度 -= 消失速度 * Time.deltaTime;
+        透明度 -= 消失速度 * 0.003f;
+        文字透明度 -= 消失速度 * 0.003f;
         if (透明度 > 0)
         {
             图片.color = new Color32(初始颜色.r, 初始颜色.g, 初始颜色.b, (byte) 透明度);
