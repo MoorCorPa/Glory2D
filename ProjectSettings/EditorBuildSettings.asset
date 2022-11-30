@@ -12,41 +12,44 @@ EditorBuildSettings:
     path: Assets/Scenes/00-InitialLevel.unity
     guid: f9f2416bf11ff5b42b18a9ca147d274c
   - enabled: 1
+    path: Assets/Scenes/GameHome.unity
+    guid: 097d84f97f6799a4084ae3716d9e0a9e
+  - enabled: 1
     path: Assets/Scenes/01-1.unity
     guid: 33a3924b6b187d84e9389a90d34ee5bc
   - enabled: 1
     path: Assets/Scenes/01-2.unity
-    guid: 6babc81d96691d344aefc241947a4704
+    guid: ef29eb6b04c5b7841a3e011101852d26
   - enabled: 1
     path: Assets/Scenes/01-3.unity
-    guid: a3de2fa71ad869447ae5e7f004412d9c
+    guid: 6820dc8f25dbeb24a9498dd403b820d8
   - enabled: 1
     path: Assets/Scenes/01-4.unity
-    guid: 861043b5b2e1d8d42b592b175a83a9ee
+    guid: d0c6af39a8276ec44af9cab32aa73114
   - enabled: 1
     path: Assets/Scenes/01-5.unity
-    guid: 46a5ceaa87ee26144bff2a095adb6e4f
+    guid: c83a491356eacdf45b10fb101a5074b2
   - enabled: 1
     path: Assets/Scenes/01-6.unity
-    guid: 24fd56f430f96ad46b47dc25939e8ee8
+    guid: 2a16960b80fb54748adf5f0fb03512f7
   - enabled: 1
     path: Assets/Scenes/02-1.unity
-    guid: c553439c90d41984ebdb7bcee1379d26
+    guid: f80a76429657f6047808a8d3c7faa607
   - enabled: 1
     path: Assets/Scenes/02-2.unity
-    guid: 1d1b0f739afe4e14a9f51ac016d36090
+    guid: aff8c2a6b7df0904a8e9194c15a53b16
   - enabled: 1
     path: Assets/Scenes/02-3.unity
-    guid: d601922ee1230bb44b6b86965af292be
+    guid: 4e9105fe4834ea24684bd68421253ffd
   - enabled: 1
     path: Assets/Scenes/02-4.unity
-    guid: a14ee5f55f2775344be1877a8ee32fe9
+    guid: c4598814954d9864287ec5a2cd4a1fdc
   - enabled: 1
     path: Assets/Scenes/02-5.unity
-    guid: a4c638de4921900488e642addd521f51
+    guid: 4ce3df31a64c3d348a6b61be73387709
   - enabled: 1
     path: Assets/Scenes/02-6.unity
-    guid: 22af6244964c6f44baa15e33b47072fb
+    guid: 37a1cd6176950f14f801be0174cd4edf
   - enabled: 1
     path: Assets/Scenes/03-1.unity
     guid: 12c62f296ec3e58429f26cfb6f067096
@@ -58,7 +61,7 @@ EditorBuildSettings:
     guid: 0e923445ec210ad408e73f180841739b
   - enabled: 1
     path: Assets/Scenes/03-4.unity
-    guid: bf94cbf09cc7fe64585f6e9d9d263bed
+    guid: c48c6be6946652a46ac3117ff2555a72
   - enabled: 1
     path: Assets/Scenes/03-5.unity
     guid: e74a156b13f74864c9ac0b004950d619
