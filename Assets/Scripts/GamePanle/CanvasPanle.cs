@@ -54,7 +54,7 @@ public class CanvasPanle : MonoBehaviour
 
     public void 回到主菜单()
     {
-        SceneManager.LoadScene("GameHome");
+        SceneManager.LoadScene(2);
     }
 
     public void 重开()
@@ -141,7 +141,7 @@ public class CanvasPanle : MonoBehaviour
                 images[0].GetComponent<Image>().fillAmount = 0.45f;
                 break;
             case 2:
-                Gun.instance.timeToColldown = 0.1f;
+                Gun.instance.timeToColldown = 0.13f;
                 images[1].GetComponent<Image>().fillAmount = 0.5f;
                 break;
             case 3:
@@ -162,7 +162,7 @@ public class CanvasPanle : MonoBehaviour
                 images[0].GetComponent<Image>().fillAmount = 1;
                 break;
             case 7:
-                Gun.instance.timeToColldown = 0.08f;
+                Gun.instance.timeToColldown = 0.1f;
                 images[1].GetComponent<Image>().fillAmount = 1;
                 break;
             case 8:
@@ -170,7 +170,8 @@ public class CanvasPanle : MonoBehaviour
                 images[2].GetComponent<Image>().fillAmount = 1;
                 break;
             case 9:
-                激光控制.instance.攻击冷却 -= 0.05f;
+                激光控制.instance.伤害 = 5;
+                激光控制.instance.攻击冷却 = 0.01f;
                 images[3].GetComponent<Image>().fillAmount = 1;
                 break;
             case 10:
