@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -42,6 +43,11 @@ public class KeySetter : MonoBehaviour
             重绑action.Enable();
             operation.Dispose();
 
+            if (查重(重绑action, 绑定下标))
+            {
+                重绑action.RemoveBindingOverride(绑定下标);
+            }
+
             保存绑定覆盖(重绑action);
             绑定完成?.Invoke();
         });
@@ -54,9 +60,22 @@ public class KeySetter : MonoBehaviour
         });
 
         重绑.WithCancelingThrough("<Keyboard>/Backspace");
-
+        
         绑定开始?.Invoke(重绑action, 绑定下标);
         重绑.Start(); //真正启动重绑进程
+    }
+
+    private static bool 查重(InputAction 重绑action, int 绑定下标)
+    {
+        InputBinding 新绑定 = 重绑action.bindings[绑定下标];
+        foreach (var binding in 重绑action.actionMap.bindings)
+        {
+            if (binding.action == 新绑定.action)
+                continue;
+            if (binding.effectivePath == 新绑定.effectivePath)
+                return true;
+        }
+        return false;
     }
 
     public static string 获取绑定名称(string action名字, int 绑定下标)
