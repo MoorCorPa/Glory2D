@@ -200,11 +200,12 @@ public class Enemy生命体 : Enemy
 
         return false;
     }
-
-    void 销毁()
-    {
-        Destroy(gameObject);
-    }
+    
+    //主类有销毁
+    // void 销毁()
+    // {
+    //     Destroy(gameObject);
+    // }
 
     public override void 掉血(int 伤害)
     {

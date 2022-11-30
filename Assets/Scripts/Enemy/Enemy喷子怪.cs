@@ -27,8 +27,6 @@ public class Enemy喷子怪 : Enemy
     public GameObject 血条框;
     public GameObject 血条;
 
-    private float 攻击间隔计时;
-    private float 攻击前摇计时;
     private float 攻击僵直计时;
     private float 颜色透明度;
 
@@ -64,7 +62,6 @@ public class Enemy喷子怪 : Enemy
         初始颜色 = 纹理.color;
         颜色透明度 = 初始颜色.r;
         当前血量 = 最大血量;
-        攻击间隔计时 = 0;
         缓存位置 = 当前位置;
         InvokeRepeating("播放攻击", 0, 攻击间隔);
         攻击僵直计时 = 攻击僵直;
