@@ -142,7 +142,7 @@ public class CanvasPanle : MonoBehaviour
                 break;
             case 2:
                 Gun.instance.timeToColldown = 0.13f;
-                激光控制.instance.伤害 += 1;
+                激光控制.instance.攻击冷却 = 0.2f;
                 images[1].GetComponent<Image>().fillAmount = 0.5f;
                 break;
             case 3:
@@ -164,7 +164,7 @@ public class CanvasPanle : MonoBehaviour
                 break;
             case 7:
                 Gun.instance.timeToColldown = 0.1f;
-                激光控制.instance.伤害 += 2;
+                激光控制.instance.攻击冷却 = 0.1f;
                 images[1].GetComponent<Image>().fillAmount = 1;
                 break;
             case 8:
@@ -172,8 +172,7 @@ public class CanvasPanle : MonoBehaviour
                 images[2].GetComponent<Image>().fillAmount = 1;
                 break;
             case 9:
-                激光控制.instance.伤害 += 2;
-                激光控制.instance.攻击冷却 = 0.2f;
+                激光控制.instance.伤害 = 5;
                 images[3].GetComponent<Image>().fillAmount = 1;
                 break;
             case 10:

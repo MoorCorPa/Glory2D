@@ -30,8 +30,8 @@ Transform:
   m_GameObject: {fileID: 2847082544377617351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1, y: -2.4, z: 0}
-  m_LocalScale: {x: -2, y: 2, z: 2}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: -1.5, y: 1.5, z: 1.5}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -101,7 +101,7 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.19}
+  m_Offset: {x: 0.03, y: -0.2}
   m_Size: {x: 0.2, y: 0.11}
   m_Direction: 1
 --- !u!50 &2847082544377617348
@@ -175,7 +175,7 @@ MonoBehaviour:
   "\u7A7A\u8DEF\u5C04\u7EBF\u957F\u5EA6": 1.5
   "\u662F\u5426\u8FDC\u7A0B": 0
   "\u5B50\u5F39": {fileID: 0}
-  "\u89C6\u89D2\u65B9\u5411": 200
-  "\u89C6\u89D2FOV": 96
-  "\u89C6\u91CE\u8DDD\u79BB": 0.7
-  "\u7D22\u654C\u534A\u5F84": 3
+  "\u89C6\u89D2\u65B9\u5411": 327
+  "\u89C6\u89D2FOV": 76
+  "\u89C6\u91CE\u8DDD\u79BB": 0.6
+  "\u7D22\u654C\u534A\u5F84": 1

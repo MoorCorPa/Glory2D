@@ -20895,8 +20895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92bf7661c3de22f4b8ff6eb37bbfbf90, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "\u4F24\u5BB3": 1
-  "\u653B\u51FB\u51B7\u5374": 0.22
+  "\u4F24\u5BB3": 2
+  "\u653B\u51FB\u51B7\u5374": 0.3
   "\u989C\u8272": {r: 0.08627451, g: 0.3137255, b: 0.9607843, a: 1}
   "\u989C\u8272\u5F3A\u5EA6": 1.5
   "\u6700\u5927\u957F\u5EA6": 100
