@@ -25,6 +25,11 @@ public class ReBindUI : MonoBehaviour
 
     private void OnEnable()
     {
+        加载绑定();
+    }
+    public void 加载绑定()
+    {
+
         resetButton.onClick.AddListener(() => 重置绑定());
 
         if (moveReference != null)
