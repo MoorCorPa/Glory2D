@@ -232,6 +232,7 @@ public class Enemy生命体 : Enemy
         纹理.color = 初始颜色;
     }
 
+#if UNITY_Editor
     private void OnDrawGizmosSelected()
     {
         var 红色 = new Color(1.0f, 0, 0, 0.1f);
@@ -248,4 +249,5 @@ public class Enemy生命体 : Enemy
         Handles.DrawSolidArc(transform.position, -Vector3.forward, (endpoint - transform.position).normalized, 视角FOV,
             视野距离);
     }
+#endif
 }

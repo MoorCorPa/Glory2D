@@ -237,6 +237,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("是否触地", 是否触地);
     }
 
+#if UNITY_Editor
     private void OnDrawGizmosSelected()
     {
         var 红色 = new Color(1.0f, 0, 0, 0.1f);
@@ -245,6 +246,7 @@ public class PlayerController : MonoBehaviour
         Handles.color = 红色;
         Handles.DrawSolidDisc(脚底.position, Vector3.back, 脚底检测范围);
     }
+#endif
 
     // 人物掉血
     public void TakeDamage(int damage)

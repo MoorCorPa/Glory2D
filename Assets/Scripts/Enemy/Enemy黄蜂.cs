@@ -219,6 +219,7 @@ public class Enemy黄蜂 : Enemy
     }
 
 
+#if UNITY_Editor
     //绘制
     private void OnDrawGizmosSelected()
     {
@@ -241,4 +242,5 @@ public class Enemy黄蜂 : Enemy
         Handles.color = 蓝色;
         Handles.DrawSolidDisc(当前位置, Vector3.back, 墙体碰撞检测);
     }
+#endif
 }

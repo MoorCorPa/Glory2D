@@ -262,6 +262,7 @@ public class Enemy鳄龟 : Enemy
         }
     }
 
+#if UNITY_Editor
     //绘制
     private void OnDrawGizmosSelected()
     {
@@ -279,4 +280,5 @@ public class Enemy鳄龟 : Enemy
         Handles.DrawSolidArc(transform.position, -Vector3.forward, (endpoint - transform.position).normalized, 视角FOV,
             视野距离);
     }
+#endif
 }

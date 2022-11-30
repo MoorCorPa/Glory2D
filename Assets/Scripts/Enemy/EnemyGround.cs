@@ -257,7 +257,7 @@ public class EnemyGround : Enemy
             玩家是否在范围内 = false;
         }
     }
-
+#if UNITY_Editor
     //绘制
     private void OnDrawGizmosSelected()
     {
@@ -283,4 +283,5 @@ public class EnemyGround : Enemy
         // Handles.DrawSolidRectangleWithOutline(
         //     new Rect(初始位置.x - 可移动x轴 + 可移动x轴偏移 * 2, 初始位置.y - 可移动y轴 + 可移动y轴偏移 * 2, 可移动x轴 * 2, 可移动y轴 * 2), 绿色, 蓝色);
     }
+#endif
 }

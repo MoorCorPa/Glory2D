@@ -260,6 +260,7 @@ public class Enemy螃蟹 : Enemy
         纹理.color = 初始颜色;
     }
 
+#if UNITY_Editor
     //绘制
     private void OnDrawGizmosSelected()
     {
@@ -285,4 +286,5 @@ public class Enemy螃蟹 : Enemy
         // Handles.DrawSolidRectangleWithOutline(
         //     new Rect(初始位置.x - 可移动x轴 + 可移动x轴偏移 * 2, 初始位置.y - 可移动y轴 + 可移动y轴偏移 * 2, 可移动x轴 * 2, 可移动y轴 * 2), 绿色, 蓝色);
     }
+#endif
 }

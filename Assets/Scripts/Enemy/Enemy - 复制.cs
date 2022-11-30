@@ -303,7 +303,7 @@ public abstract class Enemy123 : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")) isNearPlayer = false;
     }
-
+#if UNITY_Editor
     //绘制
     private void OnDrawGizmosSelected()
     {
@@ -322,4 +322,5 @@ public abstract class Enemy123 : MonoBehaviour
         Handles.color = new Color(1.0f, 0, 0, 0.1f);
         Handles.DrawSolidDisc(transform.position, Vector3.back, Mathf.Sqrt(perceptionRadius));
     }
+#endif
 }

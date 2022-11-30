@@ -202,7 +202,7 @@ public class EnemyFly : Enemy
         //     随机位置 = 获取可移动范围内随机坐标();
         // }
     }
-
+#if UNITY_Editor
     //绘制
     private void OnDrawGizmosSelected()
     {
@@ -225,4 +225,5 @@ public class EnemyFly : Enemy
         Handles.color = 蓝色;
         Handles.DrawSolidDisc(当前位置, Vector3.back, 墙体碰撞检测);
     }
+#endif
 }
