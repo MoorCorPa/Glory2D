@@ -45,6 +45,10 @@ public class panle : MonoBehaviour
     {
         panel.SetActive(false);
     }
+    public void 打开窗口(GameObject panel)
+    {
+        panel.SetActive(true);
+    }
 
     public void 继续游戏()
     {

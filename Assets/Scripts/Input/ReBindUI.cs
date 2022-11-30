@@ -91,7 +91,7 @@ public class ReBindUI : MonoBehaviour
         KeySetter.开启重绑(actionName, 下标, 按钮文字);
     }
 
-    private void 重置绑定()
+    public void 重置绑定()
     {
         KeySetter.重置绑定("Movement");
         KeySetter.重置绑定("Fire");
