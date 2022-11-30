@@ -6,8 +6,8 @@ using UnityEngine;
 public class 激光控制 : MonoBehaviour
 {
     public static 激光控制 instance;
-    public int 伤害 = 3;   
-    public float 攻击冷却 = 0.2f;
+    public int 伤害 = 1;   
+    public float 攻击冷却 = 0.3f;
 
     private float 攻击冷却计时 = 0;
 
