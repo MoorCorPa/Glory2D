@@ -5612,7 +5612,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 994723894}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.203, y: 4.839, z: 0}
+  m_LocalPosition: {x: -1.52, y: 0.62, z: 0}
   m_LocalScale: {x: 3.2153854, y: 3.621384, z: 4.1508546}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -76964,7 +76964,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746005799}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.247, y: -0.277, z: 0}
+  m_LocalPosition: {x: -2.32, y: 0.78, z: 0}
   m_LocalScale: {x: 1.8454033, y: 1.8977404, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -79669,7 +79669,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1652943491524551839}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: -4.495, z: -1}
+  m_LocalPosition: {x: -0.57, y: -3.1774998, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -80568,7 +80568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ConfineMode: 0
   m_BoundingVolume: {fileID: 0}
-  m_BoundingShape2D: {fileID: 0}
+  m_BoundingShape2D: {fileID: 1063450148}
   m_ConfineScreenEdges: 1
   m_Damping: 0
 --- !u!4 &5963891634786180897
@@ -80579,7 +80579,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5963891634786180899}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9, y: -4.495, z: -1}
+  m_LocalPosition: {x: -0.57, y: -4.45, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -100335,7 +100335,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2452092630926575746}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -9, y: -4.495, z: 0}
+  m_LocalPosition: {x: -0.57, y: -4.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

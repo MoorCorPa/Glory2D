@@ -306,6 +306,10 @@ PrefabInstance:
       value: "Enemy\u8F6F\u6CE5\u602A (6)"
       objectReference: {fileID: 0}
     - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: "\u7D22\u654C\u534A\u5F84"
+      value: 4.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: "\u5411\u53F3\u7D22\u654C\u7684x\u8F74"
       value: 3.43
       objectReference: {fileID: 0}
@@ -2750,6 +2754,10 @@ PrefabInstance:
     - target: {fileID: 157689246031541267, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: m_Name
       value: "Enemy\u8F6F\u6CE5\u602A (9)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: "\u7D22\u654C\u534A\u5F84"
+      value: 4.02
       objectReference: {fileID: 0}
     - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: "\u5411\u53F3\u7D22\u654C\u7684x\u8F74"
@@ -5974,6 +5982,10 @@ PrefabInstance:
       value: "Enemy\u8F6F\u6CE5\u602A (4)"
       objectReference: {fileID: 0}
     - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: "\u7D22\u654C\u534A\u5F84"
+      value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: "\u5411\u53F3\u7D22\u654C\u7684x\u8F74"
       value: 1.78
       objectReference: {fileID: 0}
@@ -6795,6 +6807,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Enemy\u8F6F\u6CE5\u602A (5)"
       objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: "\u7D22\u654C\u534A\u5F84"
+      value: 1.24
+      objectReference: {fileID: 0}
     - target: {fileID: 157689246031541279, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: m_RootOrder
       value: 15
@@ -6927,6 +6943,10 @@ PrefabInstance:
     - target: {fileID: 157689246031541267, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: m_Name
       value: "Enemy\u8F6F\u6CE5\u602A (7)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: "\u7D22\u654C\u534A\u5F84"
+      value: 6.29
       objectReference: {fileID: 0}
     - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: "\u5411\u53F3\u7D22\u654C\u7684x\u8F74"
@@ -34760,6 +34780,10 @@ PrefabInstance:
     - target: {fileID: 157689246031541267, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: m_Name
       value: "Enemy\u8F6F\u6CE5\u602A (8)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: "\u7D22\u654C\u534A\u5F84"
+      value: 3.29
       objectReference: {fileID: 0}
     - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: "\u5411\u53F3\u7D22\u654C\u7684x\u8F74"
