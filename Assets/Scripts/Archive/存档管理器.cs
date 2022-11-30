@@ -1,12 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
 using UnityEditor;
-using Unity.VisualScripting;
-using System;
 using UnityEngine.Audio;
 
 public class 存档管理器
@@ -37,7 +34,7 @@ public class 存档管理器
         return save;
     }
 
-    [MenuItem("存档管理器/存档")]
+   // [MenuItem("存档管理器/存档")]
     public static void 保存存档()
     {
         存档 save = 创建存档();
@@ -59,7 +56,7 @@ public class 存档管理器
         }
     }
 
-    [MenuItem("存档管理器/读档")]
+    //[MenuItem("存档管理器/读档")]
     public static void 读取存档()
     {
         if (File.Exists(存档路径))

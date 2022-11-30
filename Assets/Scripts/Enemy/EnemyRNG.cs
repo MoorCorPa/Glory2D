@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-
-public class EnemyRNG : EnemyGround
+﻿public class EnemyRNG : EnemyGround
 {
     //Ray2D ray;
 
