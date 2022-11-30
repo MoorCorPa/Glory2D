@@ -202,7 +202,7 @@ public class EnemyFly : Enemy
         //     随机位置 = 获取可移动范围内随机坐标();
         // }
     }
-#if UNITY_Editor
+#if UNITY_EDITOR
     //绘制
     private void OnDrawGizmosSelected()
     {

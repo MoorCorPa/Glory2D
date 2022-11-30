@@ -262,7 +262,7 @@ public class Enemy鳄龟 : Enemy
         }
     }
 
-#if UNITY_Editor
+#if UNITY_EDITOR
     //绘制
     private void OnDrawGizmosSelected()
     {

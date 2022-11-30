@@ -260,7 +260,7 @@ public class Enemy螃蟹 : Enemy
         纹理.color = 初始颜色;
     }
 
-#if UNITY_Editor
+#if UNITY_EDITOR
     //绘制
     private void OnDrawGizmosSelected()
     {

@@ -303,7 +303,7 @@ public abstract class Enemy123 : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player")) isNearPlayer = false;
     }
-#if UNITY_Editor
+#if UNITY_EDITOR
     //绘制
     private void OnDrawGizmosSelected()
     {

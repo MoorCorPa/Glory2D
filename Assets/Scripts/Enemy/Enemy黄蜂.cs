@@ -219,7 +219,7 @@ public class Enemy黄蜂 : Enemy
     }
 
 
-#if UNITY_Editor
+#if UNITY_EDITOR
     //绘制
     private void OnDrawGizmosSelected()
     {

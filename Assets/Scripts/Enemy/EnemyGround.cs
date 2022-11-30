@@ -127,7 +127,7 @@ public class EnemyGround : Enemy
                     }
                 }
             }
-            else if (索敌范围射线 && (与玩家距离 < 索敌半径) && 攻击间隔 < 攻击间隔计时 && Mathf.Abs(玩家位置.x - 当前位置.x) > 0.3f)
+            else if (索敌范围射线 && (与玩家距离 < 索敌半径) && (攻击间隔 < 攻击间隔计时) && Mathf.Abs(玩家位置.x - 当前位置.x) > 0.3f)
             {
                 transform.localScale = new Vector3(当前位置.x - 玩家位置.x > 0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
                 当前位置 = Vector2.MoveTowards(当前位置, new Vector3(玩家位置.x, 当前位置.y, 当前位置.z), 移动速度 * Time.deltaTime);
@@ -257,7 +257,7 @@ public class EnemyGround : Enemy
             玩家是否在范围内 = false;
         }
     }
-#if UNITY_Editor
+#if UNITY_EDITOR
     //绘制
     private void OnDrawGizmosSelected()
     {

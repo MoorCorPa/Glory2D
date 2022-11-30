@@ -237,7 +237,7 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("是否触地", 是否触地);
     }
 
-#if UNITY_Editor
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         var 红色 = new Color(1.0f, 0, 0, 0.1f);
