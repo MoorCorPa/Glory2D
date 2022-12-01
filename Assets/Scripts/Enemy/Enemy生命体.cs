@@ -6,6 +6,7 @@ public class Enemy生命体 : Enemy
 {
     [Min(0f)] public float 受伤变色时间;
     public float 射击冷却时间;
+    public float 僵直冷却时间;
     public GameObject 子弹;
     public GameObject 胸口;
 
@@ -35,6 +36,7 @@ public class Enemy生命体 : Enemy
     private bool 攻击冷却;
 
     private float 射击冷却计时;
+    private float 攻击僵直计时;
 
 
     private Vector3 当前位置
@@ -82,7 +84,7 @@ public class Enemy生命体 : Enemy
             动画.SetTrigger("Attack 3");
         }
 
-        if ((玩家在扇形范围() || (Math.Abs(玩家位置.x-当前位置.x)<0.2 && Math.Abs(玩家位置.y - 当前位置.y)<=0.2)) && 攻击冷却)
+        if ((玩家在扇形范围() || (Math.Abs(玩家位置.x-当前位置.x)<0.2 && Math.Abs(玩家位置.y - 当前位置.y)<=0.2)) && 攻击冷却 && 攻击僵直计时 >= 僵直冷却时间)
         {
             开始向玩家移动 = false;
             
@@ -101,18 +103,22 @@ public class Enemy生命体 : Enemy
                     break;
             }
             攻击冷却 = false;
+            攻击僵直计时 = 0;
         }
         else
         {
-            开始向玩家移动 = true;
-            transform.localScale = new Vector3(当前位置.x - 玩家位置.x < 0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
+            if (攻击僵直计时>=僵直冷却时间)
+            {
+                开始向玩家移动 = true;
+                transform.localScale = new Vector3(当前位置.x - 玩家位置.x < 0 ? 初始缩放.x : -初始缩放.x, 初始缩放.y, 初始缩放.y);
+            }
         }
     }
 
     private void FixedUpdate()
     {
         if (当前血量 <= 0) return;
-        if (开始向玩家移动)
+        if (开始向玩家移动 && 攻击僵直计时 >= 僵直冷却时间)
         {
             当前位置 = Vector2.MoveTowards(当前位置, new Vector3(玩家位置.x, 当前位置.y, 当前位置.z), 移动速度);
         }
@@ -121,11 +127,16 @@ public class Enemy生命体 : Enemy
         {
             射击冷却计时+=Time.deltaTime;
         }
+        if (攻击僵直计时 <= 僵直冷却时间)
+        {
+            攻击僵直计时 += Time.deltaTime;
+        }
     }
 
     void 攻击冷却完成()
     {
         攻击冷却 = true;
+        开始向玩家移动 = true;
     }
 
     void 射击()
