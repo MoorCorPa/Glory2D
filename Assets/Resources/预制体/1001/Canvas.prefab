@@ -1763,8 +1763,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   "\u8BBE\u7F6E\u9762\u677F": {fileID: 6118186675930992011}
+  "\u5F3A\u5316\u9762\u677F": {fileID: 0}
   "\u6B7B\u4EA1\u9875": {fileID: 6118186675616957498}
+  "\u5F3A\u5316\u6811\u6321\u677F": {fileID: 0}
+  images: []
+  "\u97F3\u4E50": {fileID: 0}
+  "\u97F3\u6548": {fileID: 0}
+  "\u97F3\u4E50\u6761": {fileID: 0}
+  "\u97F3\u6548\u6761": {fileID: 0}
+  "\u5F3A\u5316\u8BF4\u660E": {fileID: 0}
+  "\u9700\u8981\u6C34\u6676": {fileID: 0}
+  "\u5F3A\u5316\u6309\u94AE": {fileID: 0}
   "\u6C34\u6676\u663E\u793A\u6570\u91CF": {fileID: 0}
+  "\u5F3A\u5316\u63D0\u793A": {fileID: 0}
 --- !u!1 &6118186675924920023
 GameObject:
   m_ObjectHideFlags: 0
@@ -4860,6 +4871,10 @@ PrefabInstance:
     - target: {fileID: 1121399084343549099, guid: 11b86c90928ddfa4abb505fc8246b25e, type: 3}
       propertyPath: m_Name
       value: "\u6309\u952E\u8BBE\u7F6E\u9762\u677F"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1121399084343549099, guid: 11b86c90928ddfa4abb505fc8246b25e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5374790464223048861, guid: 11b86c90928ddfa4abb505fc8246b25e, type: 3}
       propertyPath: m_Pivot.x

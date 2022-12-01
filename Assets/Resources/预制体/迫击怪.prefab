@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8265731309839839824}
   - component: {fileID: 8265731309839839825}
   - component: {fileID: 8265731309839839826}
-  m_Layer: 12
+  m_Layer: 17
   m_Name: "\u8FEB\u51FB\u602A"
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -138,6 +138,8 @@ MonoBehaviour:
   "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4": 0.2
   "\u5899\u4F53\u68C0\u6D4B\u5C04\u7EBF\u957F\u5EA6": 1.1
   "\u5B50\u5F39": {fileID: 5414663449866977601, guid: 0f2e3bb471eaf8646b8064075fd0fd28, type: 3}
+  "\u8840\u6761\u6846": {fileID: 0}
+  "\u8840\u6761": {fileID: 0}
   "\u70AE\u53E3": {fileID: 8265731310109981819}
   target: {fileID: 0}
   point: {fileID: 0}
@@ -220,7 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8265731310109981819}
-  m_Layer: 12
+  m_Layer: 17
   m_Name: "\u70AE\u53E3"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
