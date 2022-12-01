@@ -20784,7 +20784,7 @@ Tilemap:
     second:
       serializedVersion: 2
       m_TileIndex: 18
-      m_TileSpriteIndex: 22
+      m_TileSpriteIndex: 24
       m_TileMatrixIndex: 3
       m_TileColorIndex: 0
       m_TileObjectToInstantiateIndex: 65535
@@ -42603,12 +42603,12 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 12
     m_Data: {fileID: 647695928, guid: b2f8f50598ecf6044aec1c099c5f5583, type: 3}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   - m_RefCount: 1
     m_Data: {fileID: 21300056, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
-  - m_RefCount: 0
-    m_Data: {fileID: 0}
   - m_RefCount: 35
     m_Data: {fileID: -1525055961, guid: b2f8f50598ecf6044aec1c099c5f5583, type: 3}
   - m_RefCount: 23
@@ -43063,6 +43063,18 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 28696551924695895, guid: e43e41c45b8fa2141b75693459e5e876, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1026099514157251224, guid: e43e41c45b8fa2141b75693459e5e876, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 8702212691006969262, guid: 26f9110c7976d674b9a427db9f98df3e, type: 2}
+    - target: {fileID: 1026099514157251224, guid: e43e41c45b8fa2141b75693459e5e876, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1316811436872981599, guid: e43e41c45b8fa2141b75693459e5e876, type: 3}
       propertyPath: m_Name
       value: Player
@@ -68382,9 +68394,29 @@ PrefabInstance:
       propertyPath: "\u8840\u6761\u6846"
       value: 
       objectReference: {fileID: 1336031692}
+    - target: {fileID: 8265731309839839824, guid: c961872121578b3469ecb243df875112, type: 3}
+      propertyPath: "\u6700\u5927\u6389\u843D\u7269\u6570\u91CF"
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265731309839839824, guid: c961872121578b3469ecb243df875112, type: 3}
+      propertyPath: "\u6700\u5C0F\u6389\u843D\u7269\u6570\u91CF"
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8265731309839839836, guid: c961872121578b3469ecb243df875112, type: 3}
       propertyPath: m_Name
       value: "\u8FEB\u51FB\u602A"
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265731309839839836, guid: c961872121578b3469ecb243df875112, type: 3}
+      propertyPath: m_Layer
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265731309839839838, guid: c961872121578b3469ecb243df875112, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265731309839839838, guid: c961872121578b3469ecb243df875112, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1214552893
       objectReference: {fileID: 0}
     - target: {fileID: 8265731309839839839, guid: c961872121578b3469ecb243df875112, type: 3}
       propertyPath: m_RootOrder
@@ -68429,6 +68461,14 @@ PrefabInstance:
     - target: {fileID: 8265731309839839839, guid: c961872121578b3469ecb243df875112, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265731310109981818, guid: c961872121578b3469ecb243df875112, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265731310109981818, guid: c961872121578b3469ecb243df875112, type: 3}
+      propertyPath: m_TagString
+      value: "\u653B\u51FB\u8303\u56F4"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c961872121578b3469ecb243df875112, type: 3}

@@ -168,7 +168,7 @@ public class CanvasPanle : MonoBehaviour
                 images[1].GetComponent<Image>().fillAmount = 1;
                 break;
             case 8:
-                Gun.instance.散射数量 = 5;
+                Gun.instance.散射数量 = 4;
                 images[2].GetComponent<Image>().fillAmount = 1;
                 break;
             case 9:

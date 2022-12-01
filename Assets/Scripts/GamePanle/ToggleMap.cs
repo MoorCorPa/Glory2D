@@ -24,18 +24,16 @@ public class ToggleMap : MonoBehaviour
                 }
             }
 
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 1 &&
-                GameObject.FindGameObjectsWithTag("Enemy")[0].layer == LayerMask.GetMask("BOSS"))
-                if (GameObject.FindGameObjectsWithTag("Enemy")[0].GetComponent<Enemy>().当前血量 > 0)
-                {
-                    return;
-                }
+
             if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
             {
                 foreach (var i in GameObject.FindGameObjectsWithTag("Enemy"))
                 {
                     if (i.GetComponent<Enemy>().当前血量 > 0)
                     {
+                        if (sceneName.Equals("终章")|| sceneName.Equals("02-1") || sceneName.Equals("03-1") || sceneName.Equals("04-1"))
+                            return;
+
                         提示文字.gameObject.SetActive(true);
                         Invoke("关闭提示", 3);
                         return;
