@@ -68395,6 +68395,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1336031692}
     - target: {fileID: 8265731309839839824, guid: c961872121578b3469ecb243df875112, type: 3}
+      propertyPath: "\u6700\u5927\u8840\u91CF"
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265731309839839824, guid: c961872121578b3469ecb243df875112, type: 3}
       propertyPath: "\u6700\u5927\u6389\u843D\u7269\u6570\u91CF"
       value: 12
       objectReference: {fileID: 0}

@@ -570,6 +570,8 @@ CompositeCollider2D:
       - X: -25468750
         Y: 44687500
     - - X: 70000000
+        Y: 37343752
+      - X: 70000000
         Y: 37500000
       - X: 45000000
         Y: 37500000
@@ -577,7 +579,7 @@ CompositeCollider2D:
         Y: 37343752
       - X: 45781248
         Y: 37187500
-      - X: 70000000
+      - X: 69531248
         Y: 37187500
     - - X: -57500000
         Y: 32343750
@@ -592,12 +594,16 @@ CompositeCollider2D:
       - X: -57968752
         Y: 32187500
     - - X: 45000000
-        Y: 25000000
-      - X: 25000000
-        Y: 25000000
-      - X: 25000000
-        Y: 24687500
+        Y: 24843750
       - X: 45000000
+        Y: 25000000
+      - X: 25000000
+        Y: 25000000
+      - X: 25000000
+        Y: 24843750
+      - X: 25781250
+        Y: 24687500
+      - X: 44531248
         Y: 24687500
     - - X: -47500000
         Y: 9843750
@@ -663,21 +669,24 @@ CompositeCollider2D:
       - {x: -5.5, y: 4.4843755}
       - {x: -5.4218755, y: 4.46875}
       - {x: -2.546875, y: 4.46875}
-    - - {x: 7, y: 3.75}
+    - - {x: 7, y: 3.7343752}
+      - {x: 7, y: 3.75}
       - {x: 4.5, y: 3.75}
       - {x: 4.5, y: 3.7343752}
       - {x: 4.578125, y: 3.71875}
-      - {x: 7, y: 3.71875}
+      - {x: 6.953125, y: 3.71875}
     - - {x: -5.75, y: 3.234375}
       - {x: -5.75, y: 3.25}
       - {x: -7.25, y: 3.25}
       - {x: -7.25, y: 3.234375}
       - {x: -7.1718755, y: 3.21875}
       - {x: -5.7968755, y: 3.21875}
-    - - {x: 4.5, y: 2.5}
+    - - {x: 4.5, y: 2.484375}
+      - {x: 4.5, y: 2.5}
       - {x: 2.5, y: 2.5}
-      - {x: 2.5, y: 2.46875}
-      - {x: 4.5, y: 2.46875}
+      - {x: 2.5, y: 2.484375}
+      - {x: 2.578125, y: 2.46875}
+      - {x: 4.453125, y: 2.46875}
     - - {x: -4.75, y: 0.984375}
       - {x: -4.75, y: 1}
       - {x: -6.25, y: 1}
@@ -1096,8 +1105,8 @@ Tilemap:
   - first: {x: 10, y: 9, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 29
-      m_TileSpriteIndex: 29
+      m_TileIndex: 26
+      m_TileSpriteIndex: 25
       m_TileMatrixIndex: 1
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -1166,8 +1175,8 @@ Tilemap:
   - first: {x: 17, y: 9, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 29
-      m_TileSpriteIndex: 29
+      m_TileIndex: 27
+      m_TileSpriteIndex: 26
       m_TileMatrixIndex: 1
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -1326,8 +1335,8 @@ Tilemap:
   - first: {x: 27, y: 14, z: 0}
     second:
       serializedVersion: 2
-      m_TileIndex: 29
-      m_TileSpriteIndex: 29
+      m_TileIndex: 27
+      m_TileSpriteIndex: 26
       m_TileMatrixIndex: 1
       m_TileColorIndex: 1
       m_TileObjectToInstantiateIndex: 65535
@@ -1507,13 +1516,13 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: 7543ce5931ab3fd47a8269eed8e02b63, type: 2}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 7
+  - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: 81d12e0dc62875e40b322ea1316260b6, type: 2}
-  - m_RefCount: 6
+  - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: 5120b7d207f5a1242a80024c1b0c8ceb, type: 2}
   - m_RefCount: 7
     m_Data: {fileID: 11400000, guid: 7bd0ff39cea8cf3409b26d29fd95d9d8, type: 2}
-  - m_RefCount: 44
+  - m_RefCount: 41
     m_Data: {fileID: 11400000, guid: 577bb80bcdc6eef4dace97b7bb4b5a6a, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 0
@@ -1566,15 +1575,15 @@ Tilemap:
     m_Data: {fileID: 0}
   - m_RefCount: 0
     m_Data: {fileID: 0}
-  - m_RefCount: 7
+  - m_RefCount: 8
     m_Data: {fileID: 21300208, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
-  - m_RefCount: 6
+  - m_RefCount: 8
     m_Data: {fileID: 21300214, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
   - m_RefCount: 7
     m_Data: {fileID: 21300210, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: -1723216307, guid: b2f8f50598ecf6044aec1c099c5f5583, type: 3}
-  - m_RefCount: 44
+  - m_RefCount: 41
     m_Data: {fileID: 21300212, guid: 894640e3f9d838a4499398609b715c7f, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 0
