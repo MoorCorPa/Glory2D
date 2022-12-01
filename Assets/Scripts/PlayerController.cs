@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEditor;
@@ -78,6 +79,7 @@ public class PlayerController : MonoBehaviour
         行为控制 = KeySetter.input;
         //行为控制 = new InputControler();
         行为控制.Player.Movement.performed += Movement;
+        行为控制.Player.Gamepad.performed += Movement;
         行为控制.Player.Jump.performed += Jump;
         行为控制.Player.Down.performed += ctx => isPressDown = true;
 
@@ -145,7 +147,7 @@ public class PlayerController : MonoBehaviour
 
     private void 跟随鼠标()
     {
-        if (Camera.main is not null)
+        if (Camera.main is not null && !是否手柄控制)
         {
             var mosPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - new Vector3(0, -0.05f, 0);
             flag = mosPos.x > plRigi.position.x ? 1 : -1;
@@ -163,13 +165,52 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-
         /*foreach (var a in arms)
         {
             Vector3 display = Camera.main.WorldToScreenPoint(a.transform.position);
             Vector2 vector = Input.mousePosition - display;
             a.transform.up = vector;
         }*/
+    }
+
+    private bool 是否手柄控制 = false;
+
+    private Vector3 当前鼠标位置;
+
+    private void LateUpdate()
+    {
+        if (是否手柄控制)
+        {
+            if (当前鼠标位置 != Input.mousePosition)
+            {
+                取消手柄控制();
+            }
+            当前鼠标位置 = Input.mousePosition;
+        }
+    }
+
+    public void 取消手柄控制()
+    {
+        是否手柄控制 = false;
+    }
+
+    public void 手柄控制(InputAction.CallbackContext context)
+    {
+        Vector2 val = context.ReadValue<Vector2>().normalized;
+        if (val == Vector2.zero)
+            return;
+        是否手柄控制 = true;
+
+        flag = val.x > 0 ? 1 : -1;
+        信息.transform.localScale = new Vector3(flag * 信息初始缩放.x, 信息初始缩放.y, 信息初始缩放.z);
+        transform.localScale = new Vector3(flag, 1, 1);
+        信息.transform.localScale = new Vector3(flag * 信息初始缩放.x, 信息初始缩放.y, 信息初始缩放.z);
+        float 夹角 = Mathf.Acos(Vector2.Dot(Vector2.right * flag, val)) * Mathf.Rad2Deg;
+
+        foreach (var a in arms)
+        {
+            a.transform.eulerAngles = new Vector3(0, 0, val.y > 0 ? 夹角 : -夹角) * flag;
+        }
     }
 
     private void Jump(InputAction.CallbackContext context)
@@ -206,7 +247,8 @@ public class PlayerController : MonoBehaviour
     {
         info = Physics2D.OverlapCircle(脚底.position, 脚底检测范围, LayerMask.GetMask("Ground", "GroundPlatform"));
 
-        if (info != null && Mathf.Abs(plRigi.velocity.y) < 1f && 单项平台.GetComponent<PlatformEffector2D>().colliderMask == 初始单项平台)
+        if (info != null && Mathf.Abs(plRigi.velocity.y) < 1f &&
+            单项平台.GetComponent<PlatformEffector2D>().colliderMask == 初始单项平台)
         {
             if (!是否触地)
             {

@@ -80,6 +80,24 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Gamepad"",
+                    ""type"": ""Value"",
+                    ""id"": ""6888a255-864b-4afd-aeb0-e6dce413300e"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""GamepadGun"",
+                    ""type"": ""Value"",
+                    ""id"": ""47367c8e-f765-45a6-9fec-cb202af0df7b"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -129,8 +147,30 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""3316de31-1e12-4c3b-a606-8e76071731d6"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Fire"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""c3d2e078-753c-4c53-b792-0ae9ea0bf10d"",
                     ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c75563f2-6d26-4d32-ac56-b850e18a50ef"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -151,8 +191,30 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""49a62446-909a-4916-a268-b3570c7ab7eb"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Chmod"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""80403182-06d5-42e8-bbed-c351a75dbb86"",
                     ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9257904a-2a6e-4bcb-9ac5-d82ba16690ae"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -170,6 +232,39 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                     ""action"": ""Down"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3e58b149-d552-4e05-a32d-3d762e1011b1"",
+                    ""path"": ""<Gamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Down"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7da894d5-3bcf-4668-b7cd-fac8c1c82b9c"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Gamepad"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""494a3510-a86f-4c58-8a4c-b05e746deb31"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""GamepadGun"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -184,6 +279,8 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
         m_Player_Chmod = m_Player.FindAction("Chmod", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_Down = m_Player.FindAction("Down", throwIfNotFound: true);
+        m_Player_Gamepad = m_Player.FindAction("Gamepad", throwIfNotFound: true);
+        m_Player_GamepadGun = m_Player.FindAction("GamepadGun", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -249,6 +346,8 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Chmod;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_Down;
+    private readonly InputAction m_Player_Gamepad;
+    private readonly InputAction m_Player_GamepadGun;
     public struct PlayerActions
     {
         private @InputControler m_Wrapper;
@@ -259,6 +358,8 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
         public InputAction @Chmod => m_Wrapper.m_Player_Chmod;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @Down => m_Wrapper.m_Player_Down;
+        public InputAction @Gamepad => m_Wrapper.m_Player_Gamepad;
+        public InputAction @GamepadGun => m_Wrapper.m_Player_GamepadGun;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -286,6 +387,12 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                 @Down.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDown;
                 @Down.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDown;
                 @Down.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnDown;
+                @Gamepad.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamepad;
+                @Gamepad.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamepad;
+                @Gamepad.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamepad;
+                @GamepadGun.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamepadGun;
+                @GamepadGun.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamepadGun;
+                @GamepadGun.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnGamepadGun;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -308,6 +415,12 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
                 @Down.started += instance.OnDown;
                 @Down.performed += instance.OnDown;
                 @Down.canceled += instance.OnDown;
+                @Gamepad.started += instance.OnGamepad;
+                @Gamepad.performed += instance.OnGamepad;
+                @Gamepad.canceled += instance.OnGamepad;
+                @GamepadGun.started += instance.OnGamepadGun;
+                @GamepadGun.performed += instance.OnGamepadGun;
+                @GamepadGun.canceled += instance.OnGamepadGun;
             }
         }
     }
@@ -320,5 +433,7 @@ public partial class @InputControler : IInputActionCollection2, IDisposable
         void OnChmod(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnDown(InputAction.CallbackContext context);
+        void OnGamepad(InputAction.CallbackContext context);
+        void OnGamepadGun(InputAction.CallbackContext context);
     }
 }
