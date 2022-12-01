@@ -23,6 +23,8 @@ public class ToggleMap : MonoBehaviour
                     return;
                 }
             }
+
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 1) return;
             if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
             {
                 foreach (var i in GameObject.FindGameObjectsWithTag("Enemy"))
@@ -34,6 +36,7 @@ public class ToggleMap : MonoBehaviour
                         return;
                     }
                 }
+
                 提示文字.gameObject.SetActive(false);
                 存档管理器.保存存档();
             }
