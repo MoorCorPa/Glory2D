@@ -141,7 +141,7 @@ public class CanvasPanle : MonoBehaviour
                 images[0].GetComponent<Image>().fillAmount = 0.45f;
                 break;
             case 2:
-                Gun.instance.timeToColldown = 0.13f;
+                Gun.instance.timeToColldown = 0.17f;
                 激光控制.instance.攻击冷却 = 0.2f;
                 images[1].GetComponent<Image>().fillAmount = 0.5f;
                 break;

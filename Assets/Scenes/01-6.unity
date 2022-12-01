@@ -76339,7 +76339,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5786925014613158795, guid: 04cb941774dd372409b875f53a760d98, type: 3}
       propertyPath: "\u6700\u5927\u8840\u91CF"
-      value: 80
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 5786925014613158795, guid: 04cb941774dd372409b875f53a760d98, type: 3}
       propertyPath: "\u6700\u5927\u6389\u843D\u7269\u6570\u91CF"

@@ -154,7 +154,7 @@ public class Enemy生命体 : Enemy
             case 2:
                 视角方向 = 90;
                 视角FOV = 90;
-                攻击力 = 3;
+                攻击力 = 2;
                 break;
             case 3:
                 恢复默认视野();
@@ -222,7 +222,7 @@ public class Enemy生命体 : Enemy
         当前血量 -= 伤害;
         if (当前血量 > 0)
         {
-            if (当前血量 % 5 == 0)
+            if (当前血量 % 10 == 0)
             {
                 Instantiate(掉落物, 当前位置, transform.rotation);
             }

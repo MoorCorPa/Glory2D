@@ -192,10 +192,12 @@ public class Enemy黄蜂 : Enemy
         当前血量 -= 伤害;
         if (当前血量 > 0)
         {
+            /*
             if (当前血量 % 5 == 0)
             {
                 Instantiate(掉落物, 当前位置, transform.rotation);
             }
+            */
 
             纹理.color = new Color(0.99f, 0.3f, 0.3f, 1f);
             动画.SetTrigger("掉血");

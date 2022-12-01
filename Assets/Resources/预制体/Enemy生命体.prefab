@@ -160,8 +160,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   "\u6700\u5927\u8840\u91CF": 200
   "\u5F53\u524D\u8840\u91CF": 0
-  "\u653B\u51FB\u529B": 2
-  "\u79FB\u52A8\u901F\u5EA6": 0.03
+  "\u653B\u51FB\u529B": 1
+  "\u79FB\u52A8\u901F\u5EA6": 0.05
   "\u6389\u843D\u7269": {fileID: 1252964317145410664, guid: cef4d6a291d2a164aaf904a3004c8281, type: 3}
   "\u53D7\u4F24\u53D8\u8272\u65F6\u95F4": 0.1
   "\u5C04\u51FB\u51B7\u5374\u65F6\u95F4": 2

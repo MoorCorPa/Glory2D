@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aed471d943fe4419be6b005caabe1560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "\u5B50\u5F39\u98DE\u884C\u901F\u5EA6": 15
-  "\u5B50\u5F39\u4F24\u5BB3": 3
-  "\u5B50\u5F39\u9500\u6BC1\u65F6\u95F4": 0.5
+  "\u5B50\u5F39\u98DE\u884C\u901F\u5EA6": 8
+  "\u5B50\u5F39\u4F24\u5BB3": 1
+  "\u5B50\u5F39\u9500\u6BC1\u65F6\u95F4": 1
   "\u5B50\u5F39\u521A\u4F53": {fileID: 0}
   "\u662F\u5426\u89E6\u53D1": 0
   "\u7236\u8282\u70B9": {fileID: 0}
