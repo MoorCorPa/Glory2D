@@ -8,11 +8,13 @@ public class KeySetter : MonoBehaviour
 {
     public static InputControler input;
 
+    public static bool 可以更新;
     public static event Action 绑定完成;
     public static event Action 绑定取消;
     public static event Action<InputAction, int> 绑定开始;
     private void Awake()
     {
+        可以更新 = false;
         if (input == null)
             input = new InputControler();
     }
@@ -49,6 +51,7 @@ public class KeySetter : MonoBehaviour
             }
 
             保存绑定覆盖(重绑action);
+            可以更新 = true;
             绑定完成?.Invoke();
         });
 
@@ -56,6 +59,7 @@ public class KeySetter : MonoBehaviour
         {
             重绑action.Enable();
             operation.Dispose();
+            可以更新 = true;
             绑定取消?.Invoke();
         });
 

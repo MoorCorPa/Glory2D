@@ -27,6 +27,14 @@ public class ReBindUI : MonoBehaviour
     {
         加载绑定();
     }
+
+    void Update(){
+       if(KeySetter.可以更新){
+            更新UI();
+            KeySetter.可以更新 = false;
+       } 
+    }
+
     public void 加载绑定()
     {
 
@@ -43,14 +51,14 @@ public class ReBindUI : MonoBehaviour
             更新UI();
         }
 
-        KeySetter.绑定完成 += 更新UI;
-        KeySetter.绑定取消 += 更新UI;
+        //KeySetter.绑定完成 += 更新UI;
+        //KeySetter.绑定取消 += 更新UI;
     }
 
     private void OnDisable()
     {
-        KeySetter.绑定完成 -= 更新UI;
-        KeySetter.绑定取消 -= 更新UI;
+        //KeySetter.绑定完成 -= 更新UI;
+        //KeySetter.绑定取消 -= 更新UI;
     }
 
     private void OnValidate()
