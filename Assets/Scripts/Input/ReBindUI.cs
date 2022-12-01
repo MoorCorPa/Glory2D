@@ -49,8 +49,8 @@ public class ReBindUI : MonoBehaviour
 
     private void OnDisable()
     {
-        KeySetter.绑定完成 += 更新UI;
-        KeySetter.绑定取消 += 更新UI;
+        KeySetter.绑定完成 -= 更新UI;
+        KeySetter.绑定取消 -= 更新UI;
     }
 
     private void OnValidate()
