@@ -24,7 +24,9 @@ public class ToggleMap : MonoBehaviour
                 }
             }
 
-            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 1) return;
+            if (GameObject.FindGameObjectsWithTag("Enemy").Length == 1 &&
+                GameObject.FindGameObjectsWithTag("Enemy")[0].layer == LayerMask.GetMask("BOSS"))
+                return;
             if (GameObject.FindGameObjectsWithTag("Enemy").Length > 0)
             {
                 foreach (var i in GameObject.FindGameObjectsWithTag("Enemy"))
