@@ -224,13 +224,12 @@ public class Enemy鳄龟 : Enemy
             Invoke("恢复颜色", 受伤变色时间);
 
             血条.GetComponent<Image>().fillAmount = (float) 当前血量 / (float) 最大血量;
-            if (血条.GetComponent<Image>().fillAmount < 0.5f)
+            if (血条.GetComponent<Image>().fillAmount < 0.5f )
             {
                 血条框.GetComponentInChildren<Animator>().SetBool("狂暴", true);
 
-                移动速度 += 0.006f;
-                攻击间隔 -= 0.3f;
-
+                移动速度 = 0.022f;
+                攻击间隔 = 1.9f;
 
             }
         }
