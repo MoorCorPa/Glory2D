@@ -32,6 +32,7 @@ public class CanvasPanle : MonoBehaviour
     private int 玩家血量 => PlayerController.instance.health;
     private int 水晶数量 => PlayerController.instance.水晶数量;
     private PlayerController 玩家 => PlayerController.instance;
+    public TextMeshProUGUI 关卡显示;
 
     private Color32 初始颜色;
 
@@ -42,9 +43,11 @@ public class CanvasPanle : MonoBehaviour
 
     private void Start()
     {
+        关卡显示.text = SceneManager.GetActiveScene().ToString();
         初始颜色 = 需要水晶.color;
         存档管理器.读取音量(音乐, 音效);
         读档();
+
     }
 
     public void 操作设置面板(bool 开关)
