@@ -148,8 +148,12 @@ public class Enemy黄蜂 : Enemy
             纹理.color = new Color32(初始颜色.a, 初始颜色.b, 初始颜色.g, (byte) 颜色透明度);
             if (颜色透明度 < 死亡消失透明度)
             {
-                Destroy(gameObject);
-                Instantiate(掉落物, transform.position, transform.rotation);
+          /*      for (int i = 0; i < Random.Range(最小掉落物数量, 最大掉落物数量); i++)
+                {
+                    Instantiate(掉落物, 当前位置 + new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(-0.2f, 0.2f), 0),
+                        transform.rotation);
+                }*/
+                销毁();
             }
         }
 

@@ -27182,6 +27182,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1495740623883934888, guid: 9a5f4b4997f4d75438ed55b404d8742c, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1076200118}
     - target: {fileID: 1495740623883934891, guid: 9a5f4b4997f4d75438ed55b404d8742c, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -37961,6 +37965,11 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!20 &1076200118 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3364272926302595893, guid: b791401090e86ea4f830048cbd7a969d, type: 3}
+  m_PrefabInstance: {fileID: 480399560}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1147736600 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1495740623491404188, guid: 9a5f4b4997f4d75438ed55b404d8742c, type: 3}

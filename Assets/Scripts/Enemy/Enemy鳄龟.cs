@@ -228,7 +228,7 @@ public class Enemy鳄龟 : Enemy
             {
                 血条框.GetComponentInChildren<Animator>().SetBool("狂暴", true);
 
-                移动速度 += 0.06f;
+                移动速度 += 0.006f;
                 攻击间隔 -= 0.3f;
 
 
