@@ -357,6 +357,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Enemy\u8F6F\u6CE5\u602A (12)"
       objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541267, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: "\u7D22\u654C\u534A\u5F84"
       value: 2.11
@@ -33123,6 +33127,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Enemy\u8F6F\u6CE5\u602A (11)"
       objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541267, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: "\u7D22\u654C\u534A\u5F84"
       value: 1.12
@@ -33714,6 +33722,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "Enemy\u8F6F\u6CE5\u602A (15)"
       objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541267, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: "\u5F53\u524D\u8840\u91CF"
       value: 10
@@ -33794,6 +33806,10 @@ PrefabInstance:
     - target: {fileID: 157689246031541267, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: m_Name
       value: "Enemy\u8F6F\u6CE5\u602A (13)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541267, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: "\u7D22\u654C\u534A\u5F84"
@@ -59375,6 +59391,10 @@ PrefabInstance:
     - target: {fileID: 157689246031541267, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: m_Name
       value: "Enemy\u8F6F\u6CE5\u602A (10)"
+      objectReference: {fileID: 0}
+    - target: {fileID: 157689246031541267, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 157689246031541277, guid: 7eabe2262a5ed0b46b593d94d23e4f21, type: 3}
       propertyPath: "\u7D22\u654C\u534A\u5F84"
