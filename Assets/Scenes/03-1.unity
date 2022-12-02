@@ -27444,6 +27444,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2847082544377617350, guid: b3c124d0e82e9d647a9695900c609fd5, type: 3}
+      propertyPath: m_SpriteSortPoint
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2847082544377617351, guid: b3c124d0e82e9d647a9695900c609fd5, type: 3}
       propertyPath: m_Name
       value: "Enemy\u8001\u9F20"
@@ -27708,6 +27712,14 @@ PrefabInstance:
     - target: {fileID: 2847082544377617349, guid: b3c124d0e82e9d647a9695900c609fd5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847082544377617350, guid: b3c124d0e82e9d647a9695900c609fd5, type: 3}
+      propertyPath: m_SortingLayer
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2847082544377617350, guid: b3c124d0e82e9d647a9695900c609fd5, type: 3}
+      propertyPath: m_SortingLayerID
+      value: 1214552893
       objectReference: {fileID: 0}
     - target: {fileID: 2847082544377617351, guid: b3c124d0e82e9d647a9695900c609fd5, type: 3}
       propertyPath: m_Name

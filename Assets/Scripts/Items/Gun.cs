@@ -152,7 +152,8 @@ public class Gun : MonoBehaviour
         if (激光模式 && PlayerController.instance.开启激光)
             激光.SetActive(true);
         else
-            散射();
+            if(!激光.activeSelf)
+                散射();
     }
 
     public void 散射()

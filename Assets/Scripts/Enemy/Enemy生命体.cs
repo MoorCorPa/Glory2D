@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy生命体 : Enemy
 {
@@ -35,6 +36,9 @@ public class Enemy生命体 : Enemy
     private bool 开始向玩家移动;
     private bool 攻击冷却;
 
+    public GameObject 血条框;
+    public GameObject 血条;
+
     private float 射击冷却计时;
     private float 攻击僵直计时;
 
@@ -58,6 +62,8 @@ public class Enemy生命体 : Enemy
         初始颜色 = 纹理.color;
         当前血量 = 最大血量;
         当前阶段 = 1;
+        血条框.SetActive(true);
+        血条.GetComponent<Image>().fillAmount = 1;
         开始向玩家移动 = false;
         攻击冷却 = true;
     }
@@ -229,6 +235,8 @@ public class Enemy生命体 : Enemy
 
             纹理.color = new Color(0.99f, 0.3f, 0.3f, 1f);
             Invoke("恢复颜色", 受伤变色时间);
+            
+            血条.GetComponent<Image>().fillAmount = (float)当前血量 / (float)最大血量;
         }
         else
         {

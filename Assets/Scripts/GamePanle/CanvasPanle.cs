@@ -142,24 +142,29 @@ public class CanvasPanle : MonoBehaviour
             case 1:
                 Gun.instance.最大子弹数量 = 24;
                 Gun.instance.换弹时间 = 0.8f;
-                images[0].GetComponent<Image>().fillAmount = 0.45f;
+                if (images[0].GetComponent<Image>().fillAmount!=1)
+                    images[0].GetComponent<Image>().fillAmount = 0.45f;
                 break;
             case 2:
                 Gun.instance.timeToColldown = 0.17f;
                 激光控制.instance.攻击冷却 = 0.2f;
-                images[1].GetComponent<Image>().fillAmount = 0.5f;
+                if (images[1].GetComponent<Image>().fillAmount != 1)
+                    images[1].GetComponent<Image>().fillAmount = 0.5f;
                 break;
             case 3:
                 Gun.instance.散射数量 = 3;
-                images[2].GetComponent<Image>().fillAmount = 0.5f;
+                if (images[2].GetComponent<Image>().fillAmount != 1)
+                    images[2].GetComponent<Image>().fillAmount = 0.5f;
                 break;
             case 4:
                 PlayerController.instance.开启激光 = true;
-                images[3].GetComponent<Image>().fillAmount = 0.55f;
+                if (images[3].GetComponent<Image>().fillAmount != 1)
+                    images[3].GetComponent<Image>().fillAmount = 0.55f;
                 break;
             case 5:
                 PlayerController.instance.开启攻击回血 = true;
-                images[4].GetComponent<Image>().fillAmount = 0.4f;
+                if (images[4].GetComponent<Image>().fillAmount != 1)
+                    images[4].GetComponent<Image>().fillAmount = 0.4f;
                 break;
             case 6:
                 Gun.instance.最大子弹数量 = 36;
@@ -167,7 +172,7 @@ public class CanvasPanle : MonoBehaviour
                 images[0].GetComponent<Image>().fillAmount = 1;
                 break;
             case 7:
-                Gun.instance.timeToColldown = 0.1f;
+                Gun.instance.timeToColldown = 0.13f;
                 激光控制.instance.攻击冷却 = 0.1f;
                 images[1].GetComponent<Image>().fillAmount = 1;
                 break;

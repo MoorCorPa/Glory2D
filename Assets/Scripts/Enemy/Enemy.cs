@@ -15,7 +15,7 @@ public abstract class Enemy : MonoBehaviour
 
     public void 销毁()
     {
+        Instantiate(掉落物, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        Instantiate(掉落物, transform.position, transform.rotation);
     }
 }
