@@ -16,7 +16,7 @@ public class ToggleMap : MonoBehaviour
             {
                 if (sceneName.Equals("终章"))
                 {
-                    提示文字.gameObject.GetComponent<TMP_Text>().text = "游戏结束，感谢游玩；游戏将在3秒后返回";
+                    提示文字.gameObject.GetComponent<TMP_Text>().text = "游戏结束，感谢游玩。游戏将在3秒后返回";
                     提示文字.gameObject.SetActive(true);
                     Invoke("关闭提示", 3);
                     Invoke("返回主页", 3);
