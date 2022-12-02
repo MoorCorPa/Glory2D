@@ -155,6 +155,7 @@ public class Enemy喷子怪 : Enemy
                 血条框.GetComponentInChildren<Animator>().SetBool("狂暴", true);
                 移动速度 = 1.8f;
                 攻击间隔 = 3;
+                攻击前摇 = 0.7f;
             }
         }
         else

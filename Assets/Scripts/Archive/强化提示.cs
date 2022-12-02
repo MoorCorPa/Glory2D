@@ -7,6 +7,7 @@ public class 强化提示 : MonoBehaviour
 {
     public TextMeshProUGUI 提示文字;
     public float 消失速度;
+    public GameObject 强化提示框;
     private Color32 初始颜色;
     private Color32 文字初始颜色;
     private Image 图片;
@@ -33,12 +34,14 @@ public class 强化提示 : MonoBehaviour
         透明度 = 初始颜色.a;
         文字透明度 = 初始颜色.a;
         gameObject.SetActive(true);
+        if (文字.Equals("强化成功 !"))
+            强化提示框.SetActive(false);
     }
 
     public void 提示消失()
     {
-        透明度 -= 消失速度 * 0.003f;
-        文字透明度 -= 消失速度 * 0.003f;
+        透明度 -= 消失速度 * 0.015f;
+        文字透明度 -= 消失速度 * 0.015f;
         if (透明度 > 0)
         {
             图片.color = new Color32(初始颜色.r, 初始颜色.g, 初始颜色.b, (byte) 透明度);

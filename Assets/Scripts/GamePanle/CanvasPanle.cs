@@ -105,12 +105,18 @@ public class CanvasPanle : MonoBehaviour
 
         需要水晶.text = _武器强化.需要水晶.ToString();
         强化面板.SetActive(true);
-
+        强化按钮.onClick.RemoveAllListeners();
         强化按钮.onClick.AddListener(delegate { 强化(_武器强化); });
     }
 
     public void 强化(武器强化 _武器强化)
     {
+        Debug.Log(_武器强化.是否可强化);
+        if (_武器强化.是否解锁 && !_武器强化.是否可强化)
+        {
+            强化提示.GetComponent<强化提示>().提示文字内容("当前强化已解锁");
+            return;
+        }
         if (_武器强化.是否解锁)
         {
             执行强化(_武器强化.序号);
@@ -131,7 +137,7 @@ public class CanvasPanle : MonoBehaviour
         }
         else
         {
-            强化提示.GetComponent<强化提示>().提示文字内容(_武器强化.是否解锁 ? "当前强化已解锁" : "需要解锁上一强化");
+            强化提示.GetComponent<强化提示>().提示文字内容("需要解锁上一强化");
         }
     }
 
