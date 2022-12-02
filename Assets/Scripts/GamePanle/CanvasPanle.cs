@@ -43,7 +43,7 @@ public class CanvasPanle : MonoBehaviour
 
     private void Start()
     {
-        关卡显示.text = SceneManager.GetActiveScene().ToString();
+        关卡显示.text = SceneManager.GetActiveScene().name;
         初始颜色 = 需要水晶.color;
         存档管理器.读取音量(音乐, 音效);
         读档();
